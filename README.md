@@ -9,7 +9,7 @@
 
 ## Projects
 
-[![NDS](https://img.shields.io/badge/DesignSystem-NDS-AD1D1D?style=for-the-badge)](pdf-ds.qpi.digital)
+[![KNDS](https://img.shields.io/badge/Design-KNDS-AD1D1D?style=for-the-badge)](https://github.com/knoblab/KNDS)
 
 ## Contact
 - GitHub: [@knoblab](https://github.com/knoblab)
