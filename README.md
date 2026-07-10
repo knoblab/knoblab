@@ -22,7 +22,7 @@ graph LR
 
 ## Projects & Experiments
 
-- `PDF-DS` : Core Web Design System [(https://img.shields.io/badge/Repository-232B2B?style=flat-square&logo=github&logoColor=white)](https://pdf-ds.qpi.digital/)
+- `PDF-DS` : Core Web Design System [WebPage](https://pdf-ds.qpi.digital/)
 
 ## Contact
 - GitHub: [@knoblab](https://github.com/knoblab)
