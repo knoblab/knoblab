@@ -2,8 +2,19 @@
 
 > Personal development namespace and experimental laboratory for web engineering.
 
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/knoblab)
+[![Web](https://img.shields.io/badge/Web-Preparing...-555555?style=for-the-badge)](#)
+
+---
+
 ## Overview
 `knoblab`은 개인 웹 개발 프로젝트를 통합하고 기록하기 위한 네임스페이스이자 활동명입니다.
+
+```mermaid
+graph LR
+    Root([knoblab])
+
+```
 
 ## Core History
 **PDF-DS (Web Design System)**
@@ -11,8 +22,8 @@
 
 ## Projects & Experiments
 
-- `PDF-DS` : Core Web Design System (디자인 시스템 레포지토리 링크)
+- `PDF-DS` : Core Web Design System [(https://img.shields.io/badge/Repository-232B2B?style=flat-square&logo=github&logoColor=white)](https://pdf-ds.qpi.digital/)
 
 ## Contact
-- GitHub: @knoblab
-- Web: 준비중 
+- GitHub: [@knoblab](https://github.com/knoblab)
+- Web: 준비중
