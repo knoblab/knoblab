@@ -61,5 +61,4 @@ window.ArrowUpRight = ArrowUpRight;
 window.Check = Check;
 window.Code2 = Code2;
 
-export { Sun, Moon, ArrowRight, ArrowUpRight, Check, Code2 };
 

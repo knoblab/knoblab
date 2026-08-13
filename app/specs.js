@@ -1,4 +1,4 @@
-export default function Specs({ darkMode, palette }) {
+function Specs({ darkMode, palette }) {
   const specRows = [
     { key: 'Role / Expertise', val: 'Creative Front-end Engineer & Interactive Web Developer' },
     { key: 'Core Frameworks', val: 'React 19, TypeScript, Next.js, Tailwind CSS' },
@@ -40,4 +40,5 @@ export default function Specs({ darkMode, palette }) {
 }
 
 window.Specs = Specs;
+
 

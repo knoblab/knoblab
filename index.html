@@ -32,13 +32,14 @@
 <body>
 <div id="root"></div>
 
-<!-- Babel standalone이 ES 모듈 구문을 안전하게 변환할 수 있도록 data-type="module" 지정 -->
-<script type="text/babel" data-type="module" src="app/icons.js"></script>
-<script type="text/babel" data-type="module" src="app/overview.js"></script>
-<script type="text/babel" data-type="module" src="app/projects.js"></script>
-<script type="text/babel" data-type="module" src="app/specs.js"></script>
-<script type="text/babel" data-type="module" src="app/contact.js"></script>
-<script type="text/babel" data-type="module" src="app.js"></script>
+<!-- Babel standalone이 순서대로 변환 및 실행하도록 불러오기 -->
+<script type="text/babel" src="app/icons.js"></script>
+<script type="text/babel" src="app/overview.js"></script>
+<script type="text/babel" src="app/projects.js"></script>
+<script type="text/babel" src="app/specs.js"></script>
+<script type="text/babel" src="app/contact.js"></script>
+<script type="text/babel" src="app.js"></script>
 </body>
 </html>
+
 

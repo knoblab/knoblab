@@ -1,23 +1,18 @@
-import { Sun, Moon, ArrowRight, Check } from './app/icons.js';
-import Overview from './app/overview.js';
-import Projects from './app/projects.js';
-import Specs from './app/specs.js';
-import Contact from './app/contact.js';
-
 const { useState } = React;
-
-const SunIcon = typeof Sun !== 'undefined' ? Sun : window.Sun;
-const MoonIcon = typeof Moon !== 'undefined' ? Moon : window.Moon;
-const ArrowRightIcon = typeof ArrowRight !== 'undefined' ? ArrowRight : window.ArrowRight;
-const CheckIcon = typeof Check !== 'undefined' ? Check : window.Check;
-
-const OverviewComp = typeof Overview !== 'undefined' ? Overview : window.Overview;
-const ProjectsComp = typeof Projects !== 'undefined' ? Projects : window.Projects;
-const SpecsComp = typeof Specs !== 'undefined' ? Specs : window.Specs;
-const ContactComp = typeof Contact !== 'undefined' ? Contact : window.Contact;
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+
+  const { Sun, Moon, ArrowRight, Check, Overview, Projects, Specs, Contact } = window;
+  const SunIcon = Sun || (() => null);
+  const MoonIcon = Moon || (() => null);
+  const ArrowRightIcon = ArrowRight || (() => null);
+  const CheckIcon = Check || (() => null);
+  const OverviewComp = Overview || (() => null);
+  const ProjectsComp = Projects || (() => null);
+  const SpecsComp = Specs || (() => null);
+  const ContactComp = Contact || (() => null);
+
 
   const palette = {
     black: '#2B2B2E',

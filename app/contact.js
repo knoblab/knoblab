@@ -1,8 +1,6 @@
-import { ArrowUpRight } from './icons.js';
+function Contact({ darkMode, palette }) {
+  const { ArrowUpRight } = window;
 
-const ArrowUpRightComp = typeof ArrowUpRight !== 'undefined' ? ArrowUpRight : window.ArrowUpRight;
-
-export default function Contact({ darkMode, palette }) {
   return (
     <section id="contact" className="relative z-20 py-20 border-t" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -80,7 +78,7 @@ export default function Contact({ darkMode, palette }) {
                 }}
               >
                 <span>Send Message</span>
-                <ArrowUpRightComp size={14} />
+                {ArrowUpRight && <ArrowUpRight size={14} />}
               </button>
             </form>
           </div>
@@ -93,4 +91,5 @@ export default function Contact({ darkMode, palette }) {
 }
 
 window.Contact = Contact;
+
 
