@@ -1,4 +1,3 @@
---- START OF FILE app.js ---
 const { useState } = React;
 
 /* ----- 간단한 lucide 스타일 아이콘 (SVG, lucide-react 대체) ----- */
@@ -567,4 +566,3 @@ function App() {
 /* ----- Render ----- */
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
---- END OF FILE app.js ---
