@@ -76,7 +76,7 @@ function App() {
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300 selection:bg-[#556042] selection:text-[#F7F6F2]"
+      className="min-h-screen transition-colors duration-300 selection:bg-[#556042] selection:text-[#F7F6F2] font-sans"
       style={{
         backgroundColor: darkMode ? palette.black : palette.white,
         color: darkMode ? palette.white : palette.black,
