@@ -5,8 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>knoblab — Interactive Web & UI Engineering</title>
 
-<!-- Tailwind CDN -->
+<!-- Web Fonts Direct Links (IBM Plex Sans, IBM Plex Mono, Pretendard) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+<!-- Tailwind CDN & Config -->
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"IBM Plex Sans"', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'monospace'],
+        }
+      }
+    }
+  }
+</script>
 
 <!-- React / ReactDOM / Babel -->
 <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
