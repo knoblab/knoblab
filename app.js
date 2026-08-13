@@ -1,3 +1,4 @@
+--- START OF FILE app.js ---
 const { useState } = React;
 
 /* ----- 간단한 lucide 스타일 아이콘 (SVG, lucide-react 대체) ----- */
@@ -79,8 +80,7 @@ function App() {
       className="min-h-screen transition-colors duration-300 selection:bg-[#556042] selection:text-[#F7F6F2] font-sans"
       style={{
         backgroundColor: darkMode ? palette.black : palette.white,
-        color: darkMode ? palette.white : palette.black,
-        fontFamily: `'IBM Plex Sans', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif`
+        color: darkMode ? palette.white : palette.black
       }}
     >
       {/* --- MINIMAL HEADER --- */}
@@ -567,3 +567,4 @@ function App() {
 /* ----- Render ----- */
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
+--- END OF FILE app.js ---
