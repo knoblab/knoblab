@@ -27,12 +27,13 @@ function App() {
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300 selection:bg-[#F7F6F2] selection:text-[#556042] font-sans"
+      className="min-h-screen transition-colors duration-300 selection:bg-[#556042] selection:text-[#F7F6F2] font-sans"
       style={{
         backgroundColor: darkMode ? palette.black : palette.white,
         color: darkMode ? palette.white : palette.black
       }}
     >
+
 
       {/* HEADER */}
       <header

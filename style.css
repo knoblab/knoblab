@@ -27,9 +27,10 @@ input, textarea, button, select {
   background-size: 100% 12px;
 }
 
-/* Text Selection Style */
+/* Text Selection Style (Default: #556042 drag background, white text) */
 ::selection {
-  background-color: #F7F6F2;
-  color: #556042;
+  background-color: #556042;
+  color: #F7F6F2;
 }
+
 
