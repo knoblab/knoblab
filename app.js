@@ -91,7 +91,7 @@ function App() {
         }}
       >
         <a href="#" className="flex items-center gap-3 font-semibold text-base tracking-tight">
-          <img src="img/logo.svg" alt="knoblab logo" className="w-3.5 h-3.5" />
+          <img src="img/logo.svg" alt="knoblab logo" className="w-6 h-6" />
           <span>knoblab</span>
         </a>
 
@@ -342,8 +342,9 @@ function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
 
             {/* Highlight Card with #556042 Accent */}
+            {/* 이 카드에만 드래그(선택) 영역 배경색을 라이트모드 배경인 #F7F6F2로, 글자를 #556042로 반전시키는 클래스 추가 */}
             <div
-              className="lg:col-span-5 p-8 md:p-10 flex flex-col justify-between text-white"
+              className="lg:col-span-5 p-8 md:p-10 flex flex-col justify-between text-white selection:bg-[#F7F6F2] selection:text-[#556042]"
               style={{ backgroundColor: palette.highlight }}
             >
               <div>
