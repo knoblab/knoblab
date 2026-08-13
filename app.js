@@ -72,8 +72,35 @@ function App() {
 
 
       {/* HERO SECTION */}
-      <section className="relative py-20 md:py-28 px-6 md:px-12 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
-        <div className="max-w-7xl mx-auto">
+      <section 
+        className="relative px-6 md:px-12 border-b overflow-hidden" 
+        style={{ 
+          borderColor: darkMode ? palette.grey9 : palette.grey1,
+          backgroundColor: darkMode ? palette.black : palette.white 
+        }}
+      >
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none"
+          style={{ 
+            backgroundImage: `url('img/hero.jpg')`,
+            opacity: darkMode ? 0.15 : 0.35
+          }}
+        />
+
+        {/* Side Fade Overlay */}
+        <div 
+          className="absolute inset-0 z-10 pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(to right, 
+              ${darkMode ? palette.black : palette.white} 0%, 
+              transparent 15%, 
+              transparent 85%, 
+              ${darkMode ? palette.black : palette.white} 100%)`
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto w-full aspect-[16/10] min-h-[400px] flex items-center relative z-20">
           <div className="max-w-2xl">
             <div
               className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-mono-custom tracking-wider"
@@ -84,22 +111,21 @@ function App() {
               }}
             >
               <span className="w-1.5 h-1.5" style={{ backgroundColor: palette.highlight }}></span>
-              Web Developer & Creative Technologist
+              Knoblab
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight leading-snug mb-6">
-              Interactive Web & <br />
-              UI Engineering
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight leading-snug mb-6">
+              Tuning the Web to Your Frequency.
             </h1>
 
-            <p className="text-sm sm:text-base font-light leading-relaxed max-w-lg mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-              스톡홀름 디자인 랩의 미학처럼 불필요한 레이어를 제거하고, 픽셀의 정밀함과 인터랙티브 미니멀리즘에 집중하는 프론트엔드 웹 포트폴리오입니다.
+            <p className="text-sm sm:text-base font-normal leading-relaxed max-w-lg mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+              0과 1, 흑과 백이라는 이분법을 넘어, 노브를 섬세하게 돌리듯 사용자의 취향과 환경에 가장 완벽하게 맞춘 연속적인 웹 경험을 제공해요.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 text-xs font-mono-custom">
               <a
                 href="#projects"
-                className="px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90 flex items-center gap-2"
+                className="px-6 py-3 font-medium text-white transition-opacity hover:opacity-90 flex items-center gap-2"
                 style={{ backgroundColor: palette.highlight }}
               >
                 <span>Explore Projects</span>

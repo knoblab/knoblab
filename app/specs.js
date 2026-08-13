@@ -16,7 +16,7 @@ function Specs({ darkMode, palette }) {
           <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
             03 // Marking System & Specifications
           </span>
-          <h2 className="text-2xl sm:text-3xl font-light tracking-tight">Developer Data Sheet</h2>
+          <h2 className="text-2xl sm:text-3xl font-normal tracking-tight">Developer Data Sheet</h2>
         </div>
 
         <div

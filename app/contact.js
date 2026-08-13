@@ -11,8 +11,8 @@ function Contact({ darkMode, palette }) {
             <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
               04 // Inquire
             </span>
-            <h2 className="text-2xl sm:text-4xl font-light tracking-tight mb-4">Let's Build Together</h2>
-            <p className="text-sm leading-relaxed font-light mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+            <h2 className="text-2xl sm:text-4xl font-normal tracking-tight mb-4">Let's Build Together</h2>
+            <p className="text-sm leading-relaxed font-normal mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
               웹 프로젝트 협업, 프론트엔드 개발 의뢰, 또는 미니멀 UI 인터랙션 설계 관련 문의를 위한 커뮤니케이션 채널입니다.
             </p>
 
@@ -72,7 +72,7 @@ function Contact({ darkMode, palette }) {
               </div>
               <button
                 type="submit"
-                className="w-full py-3.5 font-mono-custom font-semibold tracking-wider transition-opacity hover:opacity-90 flex items-center justify-center gap-2 text-white"
+                className="w-full py-3.5 font-mono-custom font-medium tracking-wider transition-opacity hover:opacity-90 flex items-center justify-center gap-2 text-white"
                 style={{
                   backgroundColor: palette.highlight
                 }}
