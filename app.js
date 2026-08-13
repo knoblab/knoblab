@@ -72,24 +72,24 @@ function App() {
 
 
       {/* HERO SECTION */}
-      <section 
-        className="relative px-6 md:px-12 border-b overflow-hidden" 
-        style={{ 
+      <section
+        className="relative px-6 md:px-12 border-b overflow-hidden"
+        style={{
           borderColor: darkMode ? palette.grey9 : palette.grey1,
-          backgroundColor: darkMode ? palette.black : palette.white 
+          backgroundColor: darkMode ? palette.black : palette.white
         }}
       >
         {/* Background Image */}
-        <div 
+        <div
           className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none"
-          style={{ 
-            backgroundImage: `url('img/hero.jpg')`,
+          style={{
+            backgroundImage: `url('img/hero.webp')`,
             opacity: darkMode ? 0.15 : 0.35
           }}
         />
 
         {/* Side Fade Overlay */}
-        <div 
+        <div
           className="absolute inset-0 z-10 pointer-events-none"
           style={{
             backgroundImage: `linear-gradient(to right, 
@@ -103,14 +103,9 @@ function App() {
         <div className="max-w-7xl mx-auto w-full aspect-[16/10] min-h-[400px] flex items-center relative z-20">
           <div className="max-w-2xl">
             <div
-              className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-mono-custom tracking-wider"
-              style={{
-                border: `1px solid ${darkMode ? palette.grey9 : palette.grey1}`,
-                color: darkMode ? palette.grey3 : palette.grey9,
-                backgroundColor: darkMode ? `${palette.grey11}80` : `${palette.grey1}80`
-              }}
+              className="text-xl sm:text-2xl font-medium font-mono-custom tracking-wider mb-3"
+              style={{ color: palette.highlight }}
             >
-              <span className="w-1.5 h-1.5" style={{ backgroundColor: palette.highlight }}></span>
               Knoblab
             </div>
 
@@ -167,11 +162,11 @@ function App() {
                 <span className="text-xs font-mono-custom block mb-2 opacity-80">ACCENT COLOR</span>
                 <h3 className="text-2xl sm:text-3xl font-light tracking-tight mb-4">knoblab Craftsmanship</h3>
                 <p className="text-xs leading-relaxed font-light opacity-90">
-                  시그니처 올리브 그린(#556042) 포인트 컬러처럼 핵심 기능과 가치에만 정밀하게 주목하도록 구현된 개발 방법론입니다.
+                  시그니처 머그워트 그린(#556042) 포인트 컬러처럼 핵심 기능과 가치에만 정밀하게 주목하도록 구현된 개발 방법론입니다.
                 </p>
               </div>
               <div className="pt-8 font-mono-custom text-xs">
-                <span>SWEDISH OLIVE #556042</span>
+                <span>MUGWORT GREEN #556042</span>
               </div>
             </div>
 
@@ -200,7 +195,7 @@ function App() {
               </div>
 
               <div className="mt-6 pt-5 border-t font-mono-custom text-xs" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1, color: palette.grey7 }}>
-                STOCKHOLM DESIGN LAB INSPIRATION
+                Knoblab Design Team
               </div>
             </div>
           </div>
@@ -267,7 +262,7 @@ function App() {
           >
             <div className="flex items-center gap-2">
               <span className="w-2 h-2" style={{ backgroundColor: palette.highlight }}></span>
-              <span>knoblab © 2026. Inspired by Stockholm Design Lab & Polestar Brand Identity.</span>
+              <span>knoblab © 2026. Inspired by Polestar Brand Identity.</span>
             </div>
             <div>Seoul, Korea</div>
           </div>

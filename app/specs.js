@@ -4,7 +4,7 @@ function Specs({ darkMode, palette }) {
     { key: 'Core Frameworks', val: 'React 19, TypeScript, Next.js, Tailwind CSS' },
     { key: 'Graphics & Motion', val: 'HTML5 Canvas, CSS Micro Interactions, WebGL, Framer Motion' },
     { key: 'Typography System', val: 'IBM Plex Sans (Latin) × Pretendard (Korean)' },
-    { key: 'Official Color Tokens', val: 'White (#F7F6F2), Black (#2B2B2E), Highlight Olive (#556042)' },
+    { key: 'Official Color Tokens', val: 'White (#F7F6F2), Black (#2B2B2E), Highlight Mugwort (#556042)' },
     { key: 'Design Philosophy', val: 'Minimalism, Precision Marking Grid, Zero Decorative Noise' }
   ];
 

@@ -68,7 +68,7 @@ function Projects({ darkMode, palette }) {
                 <span>PROJECT_02</span>
                 <span>TYPESCRIPT / TAILWIND</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-normal mb-3">Scandinavian Design Token UI</h3>
+              <h3 className="text-xl sm:text-2xl font-normal mb-3">Design Token UI</h3>
               <p className="text-xs leading-relaxed font-normal mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
                 미니멀리즘과 재사용성이 결합된 컴포넌트 시스템 구축
               </p>
