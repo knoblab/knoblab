@@ -6,6 +6,16 @@ import Contact from './app/contact.js';
 
 const { useState } = React;
 
+const SunIcon = typeof Sun !== 'undefined' ? Sun : window.Sun;
+const MoonIcon = typeof Moon !== 'undefined' ? Moon : window.Moon;
+const ArrowRightIcon = typeof ArrowRight !== 'undefined' ? ArrowRight : window.ArrowRight;
+const CheckIcon = typeof Check !== 'undefined' ? Check : window.Check;
+
+const OverviewComp = typeof Overview !== 'undefined' ? Overview : window.Overview;
+const ProjectsComp = typeof Projects !== 'undefined' ? Projects : window.Projects;
+const SpecsComp = typeof Specs !== 'undefined' ? Specs : window.Specs;
+const ContactComp = typeof Contact !== 'undefined' ? Contact : window.Contact;
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -54,11 +64,12 @@ function App() {
             className="transition-colors flex items-center gap-2 text-xs font-mono-custom hover:opacity-80"
             style={{ color: darkMode ? palette.grey3 : palette.black }}
           >
-            {darkMode ? <Sun size={14} /> : <Moon size={14} />}
+            {darkMode ? <SunIcon size={14} /> : <MoonIcon size={14} />}
             <span>{darkMode ? 'Light' : 'Dark'}</span>
           </button>
         </div>
       </header>
+
 
       {/* HERO SECTION */}
       <section className="relative py-20 md:py-28 px-6 md:px-12 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
@@ -92,7 +103,7 @@ function App() {
                 style={{ backgroundColor: palette.highlight }}
               >
                 <span>Explore Projects</span>
-                <ArrowRight size={14} />
+                <ArrowRightIcon size={14} />
               </a>
               <a
                 href="#contact"
@@ -110,13 +121,13 @@ function App() {
       </section>
 
       {/* 01. OVERVIEW */}
-      <Overview darkMode={darkMode} palette={palette} />
+      <OverviewComp darkMode={darkMode} palette={palette} />
 
       {/* 02. PROJECTS */}
-      <Projects darkMode={darkMode} palette={palette} />
+      <ProjectsComp darkMode={darkMode} palette={palette} />
 
       {/* 03. SPECS */}
-      <Specs darkMode={darkMode} palette={palette} />
+      <SpecsComp darkMode={darkMode} palette={palette} />
 
       {/* HIGHLIGHT CARD & PRINCIPLES */}
       <section className="relative z-20 py-20" style={{ backgroundColor: darkMode ? palette.black : palette.white }}>
@@ -148,15 +159,15 @@ function App() {
 
                 <div className="space-y-3.5 text-xs font-light" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
                   <div className="flex gap-3 items-start">
-                    <Check size={16} className="mt-0.5 shrink-0" style={{ color: palette.highlight }} />
+                    <CheckIcon size={16} className="mt-0.5 shrink-0" style={{ color: palette.highlight }} />
                     <span><strong>Pure:</strong> 시각적 소음과 무의미한 장식을 제거하고 인터랙션 본질에 집중합니다.</span>
                   </div>
                   <div className="flex gap-3 items-start">
-                    <Check size={16} className="mt-0.5 shrink-0" style={{ color: palette.highlight }} />
+                    <CheckIcon size={16} className="mt-0.5 shrink-0" style={{ color: palette.highlight }} />
                     <span><strong>Progressive:</strong> 최신 웹 표준 기술과 반응형 성능 구조를 신속하게 도입합니다.</span>
                   </div>
                   <div className="flex gap-3 items-start">
-                    <Check size={16} className="mt-0.5 shrink-0" style={{ color: palette.highlight }} />
+                    <CheckIcon size={16} className="mt-0.5 shrink-0" style={{ color: palette.highlight }} />
                     <span><strong>Performance:</strong> 모든 인터랙션에서 프레임 저하 없는 쾌적함을 보장합니다.</span>
                   </div>
                 </div>
@@ -171,7 +182,8 @@ function App() {
       </section>
 
       {/* 04. CONTACT */}
-      <Contact darkMode={darkMode} palette={palette} />
+      <ContactComp darkMode={darkMode} palette={palette} />
+
 
       {/* FOOTER */}
       <footer

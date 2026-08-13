@@ -38,3 +38,6 @@ export default function Specs({ darkMode, palette }) {
     </section>
   );
 }
+
+window.Specs = Specs;
+

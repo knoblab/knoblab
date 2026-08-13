@@ -1,5 +1,8 @@
 import { ArrowRight, Code2 } from './icons.js';
 
+const ArrowRightComp = typeof ArrowRight !== 'undefined' ? ArrowRight : window.ArrowRight;
+const Code2Comp = typeof Code2 !== 'undefined' ? Code2 : window.Code2;
+
 export default function Projects({ darkMode, palette }) {
   return (
     <section id="projects" className="relative z-20 py-20" style={{ backgroundColor: darkMode ? palette.black : palette.white }}>
@@ -39,7 +42,7 @@ export default function Projects({ darkMode, palette }) {
             </div>
 
             <div className="my-4 p-5 border flex items-center justify-center font-mono-custom text-xs" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3 }}>
-              <Code2 size={24} className="mr-3" style={{ color: palette.highlight }} />
+              <Code2Comp size={24} className="mr-3" style={{ color: palette.highlight }} />
               <span>INTERACTIVE MODULE ARCHITECTURE</span>
             </div>
 
@@ -50,7 +53,7 @@ export default function Projects({ darkMode, palette }) {
             >
               <div className="inline-flex items-center gap-2 transform group-hover:translate-x-2 transition-transform duration-300">
                 <span>Learn more</span>
-                <ArrowRight size={14} style={{ color: palette.highlight }} />
+                <ArrowRightComp size={14} style={{ color: palette.highlight }} />
               </div>
             </a>
           </div>
@@ -90,7 +93,7 @@ export default function Projects({ darkMode, palette }) {
             >
               <div className="inline-flex items-center gap-2 transform group-hover:translate-x-2 transition-transform duration-300">
                 <span>Learn more</span>
-                <ArrowRight size={14} style={{ color: palette.highlight }} />
+                <ArrowRightComp size={14} style={{ color: palette.highlight }} />
               </div>
             </a>
           </div>
@@ -101,3 +104,6 @@ export default function Projects({ darkMode, palette }) {
     </section>
   );
 }
+
+window.Projects = Projects;
+

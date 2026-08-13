@@ -1,5 +1,7 @@
 import { ArrowRight } from './icons.js';
 
+const ArrowRightComp = typeof ArrowRight !== 'undefined' ? ArrowRight : window.ArrowRight;
+
 export default function Overview({ darkMode, palette }) {
   const capabilities = [
     { title: 'Interactive Web & Application Development', desc: 'React, TypeScript, Canvas 기반의 초정밀 웹 인터랙션 개발' },
@@ -30,7 +32,7 @@ export default function Overview({ darkMode, palette }) {
                 </p>
               </div>
               <div className="mt-3 md:mt-0 flex items-center gap-2 text-lg font-light">
-                <ArrowRight size={22} className="transform group-hover:translate-x-2 transition-transform duration-300" style={{ color: palette.highlight }} />
+                <ArrowRightComp size={22} className="transform group-hover:translate-x-2 transition-transform duration-300" style={{ color: palette.highlight }} />
               </div>
             </a>
           ))}
@@ -39,3 +41,6 @@ export default function Overview({ darkMode, palette }) {
     </section>
   );
 }
+
+window.Overview = Overview;
+
