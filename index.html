@@ -32,7 +32,12 @@
 <body>
 <div id="root"></div>
 
-<!-- Babel standalone 모듈 진입점 설정 -->
-<script type="text/babel" data-type="module" src="app.js"></script>
+<!-- Babel standalone이 순서대로 변환할 수 있도록 불러오기 -->
+<script type="text/babel" src="app/icons.js"></script>
+<script type="text/babel" src="app/overview.js"></script>
+<script type="text/babel" src="app/projects.js"></script>
+<script type="text/babel" src="app/specs.js"></script>
+<script type="text/babel" src="app/contact.js"></script>
+<script type="text/babel" src="app.js"></script>
 </body>
 </html>
