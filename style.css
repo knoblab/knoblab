@@ -26,3 +26,10 @@ input, textarea, button, select {
   background-image: linear-gradient(to bottom, rgba(136, 135, 131, 0.15) 1px, transparent 1px);
   background-size: 100% 12px;
 }
+
+/* Text Selection Style */
+::selection {
+  background-color: #F7F6F2;
+  color: #556042;
+}
+

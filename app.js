@@ -27,43 +27,47 @@ function App() {
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300 selection:bg-[#556042] selection:text-[#F7F6F2] font-sans"
+      className="min-h-screen transition-colors duration-300 selection:bg-[#F7F6F2] selection:text-[#556042] font-sans"
       style={{
         backgroundColor: darkMode ? palette.black : palette.white,
         color: darkMode ? palette.white : palette.black
       }}
     >
+
       {/* HEADER */}
       <header
-        className="sticky top-0 left-0 w-full z-50 px-6 md:px-12 py-4 flex justify-between items-center select-none backdrop-blur-md"
+        className="sticky top-0 left-0 w-full z-50 px-6 md:px-12 py-4 select-none backdrop-blur-md"
         style={{
           borderBottom: `1px solid ${darkMode ? palette.grey9 : palette.grey1}`,
           backgroundColor: darkMode ? `${palette.black}EE` : `${palette.white}EE`
         }}
       >
-        <a href="#" className="flex items-center gap-3 font-semibold text-base tracking-tight">
-          <img src="img/logo.svg" alt="knoblab logo" className="w-6 h-6" />
-          <span>knoblab</span>
-        </a>
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <a href="#" className="flex items-center gap-3 font-semibold text-base tracking-tight">
+            <img src="img/logo.svg" alt="knoblab logo" className="w-6 h-6" />
+            <span>knoblab</span>
+          </a>
 
-        <div className="flex items-center gap-6">
-          <nav className="hidden md:flex items-center gap-8 text-xs font-mono-custom">
-            <a href="#overview" className="hover:opacity-70 transition-opacity">Overview</a>
-            <a href="#projects" className="hover:opacity-70 transition-opacity">Projects</a>
-            <a href="#specifications" className="hover:opacity-70 transition-opacity">Specs</a>
-            <a href="#contact" className="hover:opacity-70 transition-opacity">Contact</a>
-          </nav>
+          <div className="flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-8 text-xs font-mono-custom">
+              <a href="#overview" className="hover:opacity-70 transition-opacity">Overview</a>
+              <a href="#projects" className="hover:opacity-70 transition-opacity">Projects</a>
+              <a href="#specifications" className="hover:opacity-70 transition-opacity">Specs</a>
+              <a href="#contact" className="hover:opacity-70 transition-opacity">Contact</a>
+            </nav>
 
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="transition-colors flex items-center gap-2 text-xs font-mono-custom hover:opacity-80"
-            style={{ color: darkMode ? palette.grey3 : palette.black }}
-          >
-            {darkMode ? <SunIcon size={14} /> : <MoonIcon size={14} />}
-            <span>{darkMode ? 'Light' : 'Dark'}</span>
-          </button>
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="transition-colors flex items-center gap-2 text-xs font-mono-custom hover:opacity-80"
+              style={{ color: darkMode ? palette.grey3 : palette.black }}
+            >
+              {darkMode ? <SunIcon size={14} /> : <MoonIcon size={14} />}
+              <span>{darkMode ? 'Light' : 'Dark'}</span>
+            </button>
+          </div>
         </div>
       </header>
+
 
 
       {/* HERO SECTION */}
