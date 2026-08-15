@@ -262,7 +262,7 @@ function App() {
           >
             <div className="flex items-center gap-2">
               <span className="w-2 h-2" style={{ backgroundColor: palette.highlight }}></span>
-              <span>knoblab © 2026. Inspired by Polestar Brand Identity.</span>
+              <span>knoblab © 2026.</span>
             </div>
             <div>Seoul, Korea</div>
           </div>
