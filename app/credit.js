@@ -4,7 +4,7 @@ function Credit({ darkMode, palette }) {
   const techCredits = [
     { name: 'React 18', desc: '컴포넌트 기반 UI 렌더링 엔진', role: 'UI Framework' },
     { name: 'Tailwind CSS', desc: '유틸리티 우선 스타일링 시스템', role: 'Styling' },
-    { name: 'IBM Plex & Pretendard', desc: '다국어 타이포그래피', role: 'Typography' },
+    { name: 'IBM Plex Sans & Pretendard', desc: '다국어 타이포그래피', role: 'Typography' },
     { name: 'Babel Standalone', desc: 'JSX 컴파일러', role: 'Compiler' }
   ];
 

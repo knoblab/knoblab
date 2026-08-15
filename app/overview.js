@@ -1,9 +1,9 @@
 function Overview({ darkMode, palette }) {
   const ArrowRight = window.ArrowRight;
   const capabilities = [
-    { title: 'Web Application Development', desc: 'React, TypeScript, Canvas 기반의 웹 인터랙션 개발' },
-    { title: 'Design System & Component Architecture', desc: '재사용성과 확장성이 결합된 컴포넌트 시스템 설계' },
-    { title: 'Performance Optimization', desc: '웹 페이지 성능 최적화 및 인터랙션 구현' }
+    { title: 'Web Application Development', desc: 'React, TypeScript, Canvas 기반의 웹 인터랙션 개발', link: '#projects' },
+    { title: 'Design System & Component Architecture', desc: '재사용성과 확장성이 결합된 컴포넌트 시스템 설계', link: '#design' },
+    { title: 'Performance Optimization', desc: '웹 페이지 성능 최적화 및 인터랙션 구현', link: '#specifications' }
   ];
 
   return (
@@ -17,7 +17,7 @@ function Overview({ darkMode, palette }) {
           {capabilities.map((item, index) => (
             <a
               key={index}
-              href="#projects"
+              href={item.link}
               className="group py-6 flex flex-col md:flex-row md:items-center justify-between transition-colors hover:opacity-80 cursor-pointer"
             >
               <div>

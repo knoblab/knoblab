@@ -77,21 +77,24 @@ function Projects({ darkMode, palette }) {
             </div>
 
             <div className="my-4 p-5 border flex items-center justify-center font-mono-custom text-xs" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3 }}>
-              <div className="flex gap-2 items-center">
-                <span className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: palette.black }}></span>
-                <span className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: palette.grey7 }}></span>
-                <span className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: palette.white }}></span>
-                <span className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: palette.highlight }}></span>
+              <div className="flex gap-2 items-center flex-wrap justify-center">
+                <span className="w-3.5 h-3.5 rounded-full" title="Dancheong Red (#A33A31)" style={{ backgroundColor: "#A33A31" }}></span>
+                <span className="w-3.5 h-3.5 rounded-full" title="Ripe Persimmon (#C65D2B)" style={{ backgroundColor: "#C65D2B" }}></span>
+                <span className="w-3.5 h-3.5 rounded-full" title="Canola Yellow (#E0A93B)" style={{ backgroundColor: "#E0A93B" }}></span>
+                <span className="w-3.5 h-3.5 rounded-full" title="Mugwort Green (#556042)" style={{ backgroundColor: "#556042" }}></span>
+                <span className="w-3.5 h-3.5 rounded-full" title="Celadon Blue (#45707A)" style={{ backgroundColor: "#45707A" }}></span>
+                <span className="w-3.5 h-3.5 rounded-full" title="Indigo Blue (#1F3A52)" style={{ backgroundColor: "#1F3A52" }}></span>
+                <span className="w-3.5 h-3.5 rounded-full" title="Gromwell Violet (#5C3C58)" style={{ backgroundColor: "#5C3C58" }}></span>
               </div>
             </div>
 
             <a
-              href="#credit"
+              href="#design"
               className="group inline-flex items-center gap-2 text-xs font-mono-custom mt-4 hover:opacity-80 transition-opacity"
               style={{ color: darkMode ? palette.white : palette.black }}
             >
               <div className="inline-flex items-center gap-2 transform group-hover:translate-x-2 transition-transform duration-300">
-                <span>Learn more</span>
+                <span>View KUDS Spec</span>
                 {ArrowRight && <ArrowRight size={14} style={{ color: palette.highlight }} />}
               </div>
             </a>
@@ -125,18 +128,29 @@ function Projects({ darkMode, palette }) {
               </div>
             </div>
 
-            <a
-              href="https://github.com/knoblab/KDDS"
-              target="_blank"
-              rel="noreferrer"
-              className="group inline-flex items-center gap-2 text-xs font-mono-custom mt-4 hover:opacity-80 transition-opacity"
-              style={{ color: darkMode ? palette.white : palette.black }}
-            >
-              <div className="inline-flex items-center gap-2 transform group-hover:translate-x-2 transition-transform duration-300">
-                <span>GitHub</span>
-                {ArrowRight && <ArrowRight size={14} style={{ color: palette.highlight }} />}
-              </div>
-            </a>
+            <div className="flex items-center gap-6 mt-4">
+              <a
+                href="https://pdf-ds.qpi.digital/"
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-2 text-xs font-mono-custom hover:opacity-80 transition-opacity"
+                style={{ color: darkMode ? palette.white : palette.black }}
+              >
+                <div className="inline-flex items-center gap-2 transform group-hover:translate-x-2 transition-transform duration-300">
+                  <span>Visit Docs (KDDS)</span>
+                  {ArrowRight && <ArrowRight size={14} style={{ color: "#AD101D" }} />}
+                </div>
+              </a>
+              <a
+                href="https://github.com/knoblab/KDDS"
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs font-mono-custom opacity-70 hover:opacity-100 transition-opacity"
+                style={{ color: darkMode ? palette.grey3 : palette.grey9 }}
+              >
+                GitHub
+              </a>
+            </div>
           </div>
 
         </div>
