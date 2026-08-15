@@ -138,7 +138,7 @@ function App() {
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight leading-snug mb-6">
-                  Tuning the Web to Your Frequency.
+                  Tuning the Web<br></br>to Your Frequency.
                 </h1>
 
                 <p className="text-sm sm:text-base font-normal leading-relaxed max-w-lg mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
