@@ -128,7 +128,7 @@ function Design({ darkMode, palette }) {
             Knoblab Universal Design System
           </h1>
           <p className="text-base sm:text-lg font-normal leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-            아날로그 계측 기기의 물리적 촉각성과 정밀 데이터시트의 선형 구조를 디지털 인터페이스로 구현한 knoblab의 핵심 디자인 시스템입니다.
+            물리적 촉각성과 데이터시트의 선형 구조를 디지털 인터페이스로 구현한 knoblab의 핵심 디자인 시스템입니다.
           </p>
         </div>
 
@@ -149,7 +149,7 @@ function Design({ darkMode, palette }) {
 
           {/* Interactive Dual Panel: Large Preview Card + 7-Heritage Selector */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
-            
+
             {/* Left/Main: Large Active Color Display Card */}
             <div
               className="lg:col-span-6 p-8 md:p-12 flex flex-col justify-between text-white transition-all duration-300 relative overflow-hidden"
@@ -338,7 +338,7 @@ function Design({ darkMode, palette }) {
           </div>
 
           <div className="divide-y border-t border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
-            
+
             {/* Specimen Row 1: Wordmark */}
             <div className="py-10 md:py-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
               <div className="md:col-span-3 text-xs font-mono-custom" style={{ color: palette.grey7 }}>
@@ -468,7 +468,7 @@ function Design({ darkMode, palette }) {
                 <div>
                   <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.highlight }}>400 Regular // Body Paragraph</span>
                   <div className="text-base sm:text-lg font-normal leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                    노브를 섬세하게 돌리듯 사용자의 환경에 최적화된 연속적인 웹 인터랙션을 제공합니다.
+                    노브를 섬세하게 돌리듯 사용자의 환경에 최적화된 웹 인터랙션을 제공합니다.
                   </div>
                 </div>
                 <div>
@@ -496,36 +496,57 @@ function Design({ darkMode, palette }) {
               <h2 className="text-2xl sm:text-4xl font-normal tracking-tight">Hairline & Marking Grid</h2>
             </div>
             <p className="text-xs font-mono-custom mt-3 md:mt-0 max-w-xs" style={{ color: palette.grey7 }}>
-              장식적 요소를 배제한 엄격한 1px 보더 구조
+              장식용 그림자를 배제한 1px 보더와 정밀 눈금 시스템
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Card 1: Marking Grid Pattern */}
-            <div
-              className="p-8 md:p-10 border marking-grid-bg flex flex-col justify-between"
-              style={{
-                borderColor: darkMode ? palette.grey9 : palette.grey1,
-                backgroundColor: darkMode ? palette.black : palette.white
-              }}
-            >
-              <div>
-                <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-                  SURFACE PATTERN
-                </span>
-                <h3 className="text-xl sm:text-2xl font-normal mb-3">12px Marking Grid</h3>
-                <p className="text-xs leading-relaxed mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                  CSS linear-gradient를 활용한 12px 간격의 수평 헤어라인 배경으로 모눈종이나 계측기 화면의 질감을 구현합니다.
-                </p>
+          {/* 1. Large Marking Grid Showcase */}
+          <div
+            className="p-8 md:p-12 border marking-grid-bg mb-8 relative overflow-hidden"
+            style={{
+              borderColor: darkMode ? palette.grey9 : palette.grey1,
+              backgroundColor: darkMode ? palette.black : palette.white
+            }}
+          >
+            <div className="max-w-3xl">
+              <div className="flex items-center gap-3 text-xs font-mono-custom mb-4" style={{ color: palette.highlight }}>
+                <span>SURFACE SYSTEM // 01</span>
+                <span>//</span>
+                <span>12PX CONTINUOUS HAIRLINE GRID</span>
               </div>
+              <h3 className="text-2xl sm:text-3xl font-normal tracking-tight mb-4">
+                12px Linear Marking Grid
+              </h3>
+              <p className="text-sm font-normal leading-relaxed mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                모눈종이와 오실로스코프 화면의 정밀 눈금에서 영감을 받았습니다. 12px 간격으로 1px 헤어라인을 연속 전개하여 모호한 장식 대신 물리적인 측정 공간감을 형성합니다.
+              </p>
 
-              <div className="pt-6 border-t font-mono-custom text-xs flex justify-between items-center" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3, color: palette.grey7 }}>
-                <span>Pattern: Linear Gradient</span>
-                <span style={{ color: palette.highlight }}>12px Pitch</span>
+              {/* Grid Telemetry Spec Table */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t font-mono-custom text-xs" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3 }}>
+                <div>
+                  <span className="opacity-70 block text-[10px]" style={{ color: palette.grey7 }}>GRID PITCH</span>
+                  <span className="font-medium" style={{ color: palette.highlight }}>12.00 px</span>
+                </div>
+                <div>
+                  <span className="opacity-70 block text-[10px]" style={{ color: palette.grey7 }}>LINE WEIGHT</span>
+                  <span className="font-medium">1.00 px Solid</span>
+                </div>
+                <div>
+                  <span className="opacity-70 block text-[10px]" style={{ color: palette.grey7 }}>OPACITY</span>
+                  <span className="font-medium">15% Alpha (0.15)</span>
+                </div>
+                <div>
+                  <span className="opacity-70 block text-[10px]" style={{ color: palette.grey7 }}>REPETITION</span>
+                  <span className="font-medium">Continuous Y-Axis</span>
+                </div>
               </div>
             </div>
+          </div>
 
-            {/* Card 2: Interactive Tactile Primitives */}
+          {/* 2. Dual Column: Hairline Hierarchy & Datasheet Container Specs */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+            {/* Card A: 1px Hairline Border Hierarchy */}
             <div
               className="p-8 md:p-10 border flex flex-col justify-between"
               style={{
@@ -535,42 +556,170 @@ function Design({ darkMode, palette }) {
             >
               <div>
                 <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-                  CONTROL PRIMITIVES
+                  BORDER HIERARCHY // 02
                 </span>
-                <h3 className="text-xl sm:text-2xl font-normal mb-3">Tactile Triggers</h3>
+                <h3 className="text-xl sm:text-2xl font-normal mb-3">1px Hairline Boundary</h3>
                 <p className="text-xs leading-relaxed mb-6" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                  그림자 없이 명확한 1px 경계선과 상태 전환 피드백을 제공하는 조작 컴포넌트입니다.
+                  인위적인 드롭 섀도우(Drop Shadow)를 일체 사용하지 않고, 오직 1px의 명확한 테두리와 분할선으로 모든 공간과 데이터의 위계를 구분합니다.
                 </p>
 
-                <div className="flex flex-wrap gap-4 items-center mb-6">
-                  <button
-                    className="px-6 py-3 font-medium text-white transition-opacity hover:opacity-90 flex items-center gap-2 text-xs font-mono-custom"
-                    style={{ backgroundColor: palette.highlight }}
-                  >
-                    <span>Primary Action</span>
-                    <ArrowRightIcon size={14} />
-                  </button>
-                  <button
-                    className="px-6 py-3 border transition-colors hover:opacity-80 text-xs font-mono-custom"
-                    style={{
-                      borderColor: darkMode ? palette.grey9 : palette.grey3,
-                      color: darkMode ? palette.white : palette.black
-                    }}
-                  >
-                    Outlined Button
-                  </button>
+                <div className="space-y-3 font-mono-custom text-xs">
+                  <div className="p-3 border flex justify-between items-center" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3, backgroundColor: darkMode ? palette.black : palette.white }}>
+                    <span>01 // Outer Container Boundary</span>
+                    <span className="text-[11px]" style={{ color: palette.grey7 }}>1px solid (grey1 / grey9)</span>
+                  </div>
+                  <div className="p-3 border flex justify-between items-center" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3, backgroundColor: darkMode ? palette.black : palette.white }}>
+                    <span>02 // Internal Divide Line</span>
+                    <span className="text-[11px]" style={{ color: palette.grey7 }}>divide-y (grey1 / grey9)</span>
+                  </div>
+                  <div className="p-3 border flex justify-between items-center" style={{ borderColor: palette.highlight, backgroundColor: darkMode ? '#262F1F' : '#EFF5EC' }}>
+                    <span style={{ color: palette.highlight }}>03 // Active Focus & Hover</span>
+                    <span className="text-[11px]" style={{ color: palette.highlight }}>1px solid #556042</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="pt-6 border-t font-mono-custom text-xs flex justify-between items-center" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3 }}>
-                <span className="flex items-center gap-2" style={{ color: palette.highlight }}>
-                  <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: palette.highlight }}></span>
-                  Active Telemetry
+              <div className="mt-8 pt-5 border-t font-mono-custom text-xs flex justify-between items-center" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3, color: palette.grey7 }}>
+                <span>Shadow Policy: Zero Elevation (0px)</span>
+                <span>Boundary: Strict Hairline</span>
+              </div>
+            </div>
+
+            {/* Card B: Interactive Control Triggers & Telemetry */}
+            <div
+              className="p-8 md:p-10 border flex flex-col justify-between"
+              style={{
+                borderColor: darkMode ? palette.grey9 : palette.grey1,
+                backgroundColor: darkMode ? palette.grey11 : palette.grey1
+              }}
+            >
+              <div>
+                <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
+                  CONTROL PRIMITIVES // 03
                 </span>
-                <span style={{ color: palette.grey7 }}>Border: 1px Solid</span>
+                <h3 className="text-xl sm:text-2xl font-normal mb-3">Tactile Control Triggers</h3>
+                <p className="text-xs leading-relaxed mb-6" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                  아날로그 물리 스위치를 누르는 듯한 즉각적이고 명확한 피드백을 전달하는 핵심 컴포넌트 프리미티브입니다.
+                </p>
+
+                {/* Live Button & Chip Triggers */}
+                <div className="space-y-4">
+                  <div className="flex flex-wrap gap-3 items-center">
+                    <button
+                      className="px-6 py-3 font-medium text-white transition-opacity hover:opacity-90 flex items-center gap-2 text-xs font-mono-custom"
+                      style={{ backgroundColor: palette.highlight }}
+                    >
+                      <span>Primary Action</span>
+                      <ArrowRightIcon size={14} />
+                    </button>
+                    <button
+                      className="px-6 py-3 border transition-colors hover:opacity-80 text-xs font-mono-custom"
+                      style={{
+                        borderColor: darkMode ? palette.grey9 : palette.grey3,
+                        backgroundColor: darkMode ? palette.black : palette.white,
+                        color: darkMode ? palette.white : palette.black
+                      }}
+                    >
+                      Outlined Control
+                    </button>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 items-center pt-2">
+                    <span
+                      className="px-3 py-1.5 border text-[11px] font-mono-custom flex items-center gap-2"
+                      style={{
+                        borderColor: darkMode ? palette.grey9 : palette.grey3,
+                        backgroundColor: darkMode ? palette.black : palette.white
+                      }}
+                    >
+                      <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: palette.highlight }}></span>
+                      <span>SYSTEM_READY: OK</span>
+                    </span>
+
+                    <span
+                      className="px-3 py-1.5 border text-[11px] font-mono-custom"
+                      style={{
+                        borderColor: darkMode ? palette.grey9 : palette.grey3,
+                        color: palette.highlight
+                      }}
+                    >
+                      SPEC_TAG: KUDS-v1.4
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-5 border-t font-mono-custom text-xs flex justify-between items-center" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3 }}>
+                <span className="flex items-center gap-2" style={{ color: palette.highlight }}>
+                  <CheckIcon size={14} />
+                  <span>Interactive Primitive Live</span>
+                </span>
+                <span style={{ color: palette.grey7 }}>Transition: 300ms</span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* 3. Modular Datasheet Card Architecture Full-Width Specimen */}
+          <div
+            className="p-8 md:p-10 border"
+            style={{
+              borderColor: darkMode ? palette.grey9 : palette.grey1,
+              backgroundColor: darkMode ? palette.grey11 : palette.grey1
+            }}
+          >
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+              <div>
+                <span className="text-xs font-mono-custom block mb-1" style={{ color: palette.highlight }}>
+                  MODULAR CONTAINER SPECIFICATION // 04
+                </span>
+                <h3 className="text-xl sm:text-2xl font-normal">Datasheet Module Architecture</h3>
+              </div>
+              <p className="text-xs max-w-md font-sans" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                헤더 인덱스, 데이터 슬롯, 텔레메트리 파라미터, 하단 링크가 하나의 규격화된 블록으로 결합되는 컨테이너 설계 원칙입니다.
+              </p>
+            </div>
+
+            {/* Inner Live Container Preview */}
+            <div
+              className="p-6 md:p-8 border"
+              style={{
+                borderColor: darkMode ? palette.grey9 : palette.grey3,
+                backgroundColor: darkMode ? palette.black : palette.white
+              }}
+            >
+              <div className="flex justify-between items-center text-xs font-mono-custom pb-3 mb-5 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
+                <span className="font-semibold" style={{ color: palette.highlight }}>MODULE // 04_SPEC_ARCHITECTURE</span>
+                <span style={{ color: palette.grey7 }}>EN-ISO-2026 // STANDARDIZED</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div>
+                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.grey7 }}>PADDING RATIO</span>
+                  <div className="text-sm font-medium">p-8 md:p-10 (Strict Proportions)</div>
+                </div>
+                <div>
+                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.grey7 }}>RADIUS TOKEN</span>
+                  <div className="text-sm font-medium">rounded-none (0px Sharp Corner)</div>
+                </div>
+                <div>
+                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.grey7 }}>ALIGNMENT</span>
+                  <div className="text-sm font-medium">justify-between Linear Flow</div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t flex flex-col sm:flex-row justify-between items-center gap-3 text-xs font-mono-custom" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
+                <span style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                  Verified KUDS Layout Token System
+                </span>
+                <span className="flex items-center gap-1" style={{ color: palette.highlight }}>
+                  <CheckIcon size={14} />
+                  <span>Layout Specification Validated</span>
+                </span>
               </div>
             </div>
           </div>
+
         </section>
 
 
