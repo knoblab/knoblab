@@ -97,6 +97,48 @@ function Projects({ darkMode, palette }) {
             </a>
           </div>
 
+          {/* Card 3 */}
+          <div
+            className="p-8 md:p-10 flex flex-col justify-between"
+            style={{
+              backgroundColor: darkMode ? palette.grey11 : palette.grey1,
+              border: `1px solid ${darkMode ? palette.grey9 : palette.grey3}`
+            }}
+          >
+            <div>
+              <div className="flex justify-between items-center text-xs font-mono-custom mb-6" style={{ color: palette.grey7 }}>
+                <span>PROJECT_03</span>
+                <span>Design System</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-normal mb-3">KDDS</h3>
+              <p className="text-xs leading-relaxed font-normal mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                Knoblab Docs Design System - 하드웨어의 조작감과 촉각적 피드백, 그리고 명확한 문서 정보 설계를 디지털 UI로 옮긴 Web Docs CSS 디자인 토큰 & 컴파일러 엔진입니다.
+              </p>
+            </div>
+
+            <div className="my-4 p-5 border flex items-center justify-center font-mono-custom text-xs" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3 }}>
+              <div className="flex gap-2 items-center">
+                <span className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: "#09090B" }}></span>
+                <span className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: "#A1A1AA" }}></span>
+                <span className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: "#ffffff" }}></span>
+                <span className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: "#AD101D" }}></span>
+              </div>
+            </div>
+
+            <a
+              href="https://github.com/knoblab/KDDS"
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex items-center gap-2 text-xs font-mono-custom mt-4 hover:opacity-80 transition-opacity"
+              style={{ color: darkMode ? palette.white : palette.black }}
+            >
+              <div className="inline-flex items-center gap-2 transform group-hover:translate-x-2 transition-transform duration-300">
+                <span>GitHub</span>
+                {ArrowRight && <ArrowRight size={14} style={{ color: palette.highlight }} />}
+              </div>
+            </a>
+          </div>
+
         </div>
 
       </div>
