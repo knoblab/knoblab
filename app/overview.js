@@ -3,7 +3,7 @@ function Overview({ darkMode, palette }) {
   const capabilities = [
     { title: 'Web Application Development', desc: 'React, TypeScript, Canvas 기반의 웹 인터랙션 개발', link: '#projects' },
     { title: 'Design System & Component Architecture', desc: '재사용성과 확장성이 결합된 컴포넌트 시스템 설계', link: '#design' },
-    { title: 'Performance Optimization', desc: '웹 페이지 성능 최적화 및 인터랙션 구현', link: '#specifications' }
+    { title: 'Performance Optimisation', desc: '웹 페이지 성능 최적화 및 인터랙션 구현', link: '#specifications' }
   ];
 
   return (

@@ -69,7 +69,7 @@ function Design({ darkMode, palette }) {
   // Default to Mugwort Green (#556042)
   const [selectedColor, setSelectedColor] = React.useState(heritageAccents[3]);
 
-  const surfaceGrays = [
+  const surfaceGreys = [
     { name: 'Base White', hex: '#F7F6F2', role: 'Light Surface' },
     { name: 'Base Black', hex: '#2B2B2E', role: 'Dark Surface' },
     { name: 'Grey 1', hex: '#E7E6E1', role: 'Border Light' },
@@ -133,12 +133,12 @@ function Design({ darkMode, palette }) {
         </div>
 
 
-        {/* SECTION 01: COLOR SYSTEM */}
+        {/* SECTION 01: COLOUR SYSTEM */}
         <section className="mb-28">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
               <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-                01 // Color Tokens
+                01 // Colour Tokens
               </span>
               <h2 className="text-2xl sm:text-4xl font-normal tracking-tight">Chromatic Architecture</h2>
             </div>
@@ -150,7 +150,7 @@ function Design({ darkMode, palette }) {
           {/* Interactive Dual Panel: Large Preview Card + 7-Heritage Selector */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
 
-            {/* Left/Main: Large Active Color Display Card */}
+            {/* Left/Main: Large Active Colour Display Card */}
             <div
               className="lg:col-span-6 p-8 md:p-12 flex flex-col justify-between text-white transition-all duration-300 relative overflow-hidden"
               style={{
@@ -160,8 +160,8 @@ function Design({ darkMode, palette }) {
             >
               <div>
                 <div className="flex justify-between items-center text-xs font-mono-custom mb-6 opacity-80">
-                  <span>{selectedColor.isBase ? 'BASE ANCHOR COLOR' : 'HERITAGE ACCENT TONE'}</span>
-                  <span>KUDS-COLOR</span>
+                  <span>{selectedColor.isBase ? 'BASE ANCHOR COLOUR' : 'HERITAGE ACCENT TONE'}</span>
+                  <span>KUDS-COLOUR</span>
                 </div>
 
                 <h3 className="text-3xl sm:text-4xl font-light tracking-tight mb-2">
@@ -178,7 +178,7 @@ function Design({ darkMode, palette }) {
 
               <div className="pt-8 border-t border-white/20 flex flex-wrap justify-between items-center gap-4 text-xs font-mono-custom">
                 <div>
-                  <span className="opacity-70 block text-[10px]">COLOR CODE</span>
+                  <span className="opacity-70 block text-[10px]">COLOUR CODE</span>
                   <span className="text-sm font-medium">{selectedColor.hex}</span>
                 </div>
 
@@ -201,7 +201,7 @@ function Design({ darkMode, palette }) {
               </div>
             </div>
 
-            {/* Right: 7-Heritage Colors Selector List */}
+            {/* Right: 7-Heritage Colours Selector List */}
             <div
               className="lg:col-span-6 p-6 md:p-8 border flex flex-col justify-between"
               style={{
@@ -275,7 +275,7 @@ function Design({ darkMode, palette }) {
 
           </div>
 
-          {/* Grayscale & Surface Scale */}
+          {/* Greyscale & Surface Scale */}
           <div
             className="p-8 md:p-10 border"
             style={{
@@ -288,7 +288,7 @@ function Design({ darkMode, palette }) {
                 <span className="text-xs font-mono-custom block mb-1" style={{ color: palette.highlight }}>
                   SURFACE & NEUTRAL SCALE
                 </span>
-                <h3 className="text-xl sm:text-2xl font-light">Off-Neutral Grayscale Palette</h3>
+                <h3 className="text-xl sm:text-2xl font-light">Off-Neutral Greyscale Palette</h3>
               </div>
               <p className="text-xs max-w-md" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
                 순백색과 완전한 블랙을 배제하고, 아날로그 장비 하우징의 질감을 구현하는 단계별 무채색 스펙트럼입니다.
@@ -296,7 +296,7 @@ function Design({ darkMode, palette }) {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
-              {surfaceGrays.map((item, idx) => {
+              {surfaceGreys.map((item, idx) => {
                 const isCopied = copiedInfo?.hex === item.hex;
                 return (
                   <div
@@ -690,7 +690,7 @@ function Design({ darkMode, palette }) {
             >
               <div className="flex justify-between items-center text-xs font-mono-custom pb-3 mb-5 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
                 <span className="font-semibold" style={{ color: palette.highlight }}>MODULE // 04_SPEC_ARCHITECTURE</span>
-                <span style={{ color: palette.grey7 }}>EN-ISO-2026 // STANDARDIZED</span>
+                <span style={{ color: palette.grey7 }}>EN-ISO-2026 // STANDARDISED</span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">

@@ -25,7 +25,7 @@ function Specs({ darkMode, palette }) {
             style={{ backgroundColor: palette.highlight }}
           >
             <div>
-              <span className="text-xs font-mono-custom block mb-2 opacity-80">ACCENT COLOR & SPECTRUM</span>
+              <span className="text-xs font-mono-custom block mb-2 opacity-80">ACCENT COLOUR & SPECTRUM</span>
               <h3 className="text-2xl sm:text-3xl font-light tracking-tight mb-4">knoblab Craftsmanship</h3>
               <p className="text-xs leading-relaxed font-light opacity-90">
                 시그니처 머그워트 그린(#556042)을 기저로 7가지 헤리티지 톤 스펙트럼과 함께 핵심 기능과 가치에 집중하는 개발 방법론입니다.
