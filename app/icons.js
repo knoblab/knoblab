@@ -54,11 +54,54 @@ const Code2 = (props) => (
   </Icon>
 );
 
+const Github = (props) => (
+  <Icon {...props}>
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+  </Icon>
+);
+
+const Mail = (props) => (
+  <Icon {...props}>
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+    <polyline points="22,6 12,13 2,6" />
+  </Icon>
+);
+
+const Globe = (props) => (
+  <Icon {...props}>
+    <circle cx="12" cy="12" r="10" />
+    <line x1="2" y1="12" x2="22" y2="12" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </Icon>
+);
+
+const Terminal = (props) => (
+  <Icon {...props}>
+    <polyline points="4 17 10 11 4 5" />
+    <line x1="12" y1="19" x2="20" y2="19" />
+  </Icon>
+);
+
+const Network = (props) => (
+  <Icon {...props}>
+    <rect x="9" y="2" width="6" height="6" rx="1" />
+    <rect x="2" y="16" width="6" height="6" rx="1" />
+    <rect x="16" y="16" width="6" height="6" rx="1" />
+    <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
+    <path d="M12 8v4" />
+  </Icon>
+);
+
 window.Sun = Sun;
 window.Moon = Moon;
 window.ArrowRight = ArrowRight;
 window.ArrowUpRight = ArrowUpRight;
 window.Check = Check;
 window.Code2 = Code2;
+window.Github = Github;
+window.Mail = Mail;
+window.Globe = Globe;
+window.Terminal = Terminal;
+window.Network = Network;
 
 

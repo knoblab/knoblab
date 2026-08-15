@@ -3,7 +3,7 @@ const { useState } = React;
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
-  const { Sun, Moon, ArrowRight, Check, Overview, Projects, Specs, Contact } = window;
+  const { Sun, Moon, ArrowRight, Check, Overview, Projects, Specs, Credit } = window;
   const SunIcon = Sun || (() => null);
   const MoonIcon = Moon || (() => null);
   const ArrowRightIcon = ArrowRight || (() => null);
@@ -11,7 +11,7 @@ function App() {
   const OverviewComp = Overview || (() => null);
   const ProjectsComp = Projects || (() => null);
   const SpecsComp = Specs || (() => null);
-  const ContactComp = Contact || (() => null);
+  const CreditComp = Credit || (() => null);
 
 
   const palette = {
@@ -54,7 +54,7 @@ function App() {
               <a href="#overview" className="hover:opacity-70 transition-opacity">Overview</a>
               <a href="#projects" className="hover:opacity-70 transition-opacity">Projects</a>
               <a href="#specifications" className="hover:opacity-70 transition-opacity">Specs</a>
-              <a href="#contact" className="hover:opacity-70 transition-opacity">Contact</a>
+              <a href="#credit" className="hover:opacity-70 transition-opacity">Credit</a>
             </nav>
 
             <button
@@ -127,14 +127,14 @@ function App() {
                 <ArrowRightIcon size={14} />
               </a>
               <a
-                href="#contact"
+                href="#credit"
                 className="px-6 py-3 border transition-colors hover:opacity-80"
                 style={{
                   borderColor: darkMode ? palette.grey9 : palette.grey3,
                   color: darkMode ? palette.white : palette.black
                 }}
               >
-                <span>Contact Inquiry</span>
+                <span>View Credits</span>
               </a>
             </div>
           </div>
@@ -147,63 +147,11 @@ function App() {
       {/* 02. PROJECTS */}
       <ProjectsComp darkMode={darkMode} palette={palette} />
 
-      {/* 03. SPECS */}
+      {/* 03. SPECS & CRAFTSMANSHIP */}
       <SpecsComp darkMode={darkMode} palette={palette} />
 
-      {/* HIGHLIGHT CARD & PRINCIPLES */}
-      <section className="relative z-20 py-20" style={{ backgroundColor: darkMode ? palette.black : palette.white }}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            <div
-              className="lg:col-span-5 p-8 md:p-10 flex flex-col justify-between text-white selection:bg-[#F7F6F2] selection:text-[#556042]"
-              style={{ backgroundColor: palette.highlight }}
-            >
-              <div>
-                <span className="text-xs font-mono-custom block mb-2 opacity-80">ACCENT COLOR</span>
-                <h3 className="text-2xl sm:text-3xl font-light tracking-tight mb-4">knoblab Craftsmanship</h3>
-                <p className="text-xs leading-relaxed font-light opacity-90">
-                  시그니처 머그워트 그린(#556042) 포인트 컬러처럼 핵심 기능과 가치에만 정밀하게 주목하도록 구현된 개발 방법론입니다.
-                </p>
-              </div>
-              <div className="pt-8 font-mono-custom text-xs">
-                <span>MUGWORT GREEN #556042</span>
-              </div>
-            </div>
-
-            <div
-              className="lg:col-span-7 p-8 md:p-10 border flex flex-col justify-between"
-              style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}
-            >
-              <div>
-                <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>DEVELOPMENT PRINCIPLE</span>
-                <h3 className="text-xl sm:text-2xl font-light mb-6">Purity, Progress, Performance</h3>
-
-                <div className="space-y-3.5 text-xs font-light" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                  <div className="flex gap-3 items-start">
-                    <CheckIcon size={16} className="mt-0.5 shrink-0" style={{ color: palette.highlight }} />
-                    <span><strong>Pure:</strong> 시각적 소음과 무의미한 장식을 제거하고 인터랙션 본질에 집중합니다.</span>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <CheckIcon size={16} className="mt-0.5 shrink-0" style={{ color: palette.highlight }} />
-                    <span><strong>Progressive:</strong> 최신 웹 표준 기술과 반응형 성능 구조를 신속하게 도입합니다.</span>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <CheckIcon size={16} className="mt-0.5 shrink-0" style={{ color: palette.highlight }} />
-                    <span><strong>Performance:</strong> 모든 인터랙션에서 프레임 저하 없는 쾌적함을 보장합니다.</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 pt-5 border-t font-mono-custom text-xs" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1, color: palette.grey7 }}>
-                Knoblab Design Team
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 04. CONTACT */}
-      <ContactComp darkMode={darkMode} palette={palette} />
+      {/* 04. CREDIT */}
+      <CreditComp darkMode={darkMode} palette={palette} />
 
 
       {/* FOOTER */}
@@ -222,7 +170,7 @@ function App() {
                 <li><a href="#overview" className="hover:opacity-80">Overview</a></li>
                 <li><a href="#projects" className="hover:opacity-80">Projects</a></li>
                 <li><a href="#specifications" className="hover:opacity-80">Specifications</a></li>
-                <li><a href="#contact" className="hover:opacity-80">Contact</a></li>
+                <li><a href="#credit" className="hover:opacity-80">Credit</a></li>
               </ul>
             </div>
             <div>
@@ -246,9 +194,8 @@ function App() {
             <div>
               <div className="font-semibold mb-3 text-sm" style={{ color: darkMode ? palette.white : palette.black }}>Connect</div>
               <ul className="space-y-2" style={{ color: palette.grey7 }}>
-                <li><a href="#" className="hover:opacity-80">GitHub</a></li>
-                <li><a href="#" className="hover:opacity-80">LinkedIn</a></li>
-                <li><a href="#" className="hover:opacity-80">Email</a></li>
+                <li><a href="https://github.com/knoblab" target="_blank" rel="noreferrer" className="hover:opacity-80">GitHub</a></li>
+                <li><a href="mailto:contact@knoblab.dev" className="hover:opacity-80">Email</a></li>
               </ul>
             </div>
           </div>

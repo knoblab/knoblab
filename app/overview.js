@@ -1,9 +1,9 @@
 function Overview({ darkMode, palette }) {
   const ArrowRight = window.ArrowRight;
   const capabilities = [
-    { title: 'Interactive Web & Application Development', desc: 'React, TypeScript, Canvas 기반의 초정밀 웹 인터랙션 개발' },
-    { title: 'Design System & Component Architecture', desc: '미니멀리즘과 재사용성이 결합된 컴포넌트 시스템 구축' },
-    { title: 'Performance Optimization & Micro Motion', desc: '초당 60fps를 유지하는 인터랙티브 모션 및 로딩 최적화' }
+    { title: 'Web Application Development', desc: 'React, TypeScript, Canvas 기반의 웹 인터랙션 개발' },
+    { title: 'Design System & Component Architecture', desc: '재사용성과 확장성이 결합된 컴포넌트 시스템 설계' },
+    { title: 'Performance Optimization', desc: '웹 페이지 성능 최적화 및 인터랙션 구현' }
   ];
 
   return (

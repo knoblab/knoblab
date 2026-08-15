@@ -1,5 +1,5 @@
 function Projects({ darkMode, palette }) {
-  const { ArrowRight, Code2 } = window;
+  const { ArrowRight, Network } = window;
 
   return (
     <section id="projects" className="relative z-20 py-20" style={{ backgroundColor: darkMode ? palette.black : palette.white }}>
@@ -13,7 +13,7 @@ function Projects({ darkMode, palette }) {
             <h2 className="text-2xl sm:text-4xl font-normal tracking-tight">Project Spectrum</h2>
           </div>
           <p className="text-xs font-mono-custom mt-3 md:mt-0 max-w-xs" style={{ color: palette.grey7 }}>
-            제품 본질에 집중한 웹 인터랙션 및 프론트엔드 시스템 작업물입니다.
+            웹 인터랙션 및 애플리케이션 컴포넌트 작업물입니다.
           </p>
         </div>
 
@@ -30,26 +30,28 @@ function Projects({ darkMode, palette }) {
             <div>
               <div className="flex justify-between items-center text-xs font-mono-custom mb-6" style={{ color: palette.grey7 }}>
                 <span>PROJECT_01</span>
-                <span>REACT / CANVAS</span>
+                <span>PC Application</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-normal mb-3">knoblab Control System</h3>
+              <h3 className="text-xl sm:text-2xl font-normal mb-3">FreeView</h3>
               <p className="text-xs leading-relaxed font-normal mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                회전형 하드웨어 컨트롤러를 웹 상에서 초정밀 수치 및 반응형 인터랙션으로 제어하는 가상 컴포넌트 라이브러리입니다.
+                Windows 환경에서 심층 패킷 검사(DPI) 및 SNI 기반 네트워크 차단을 우회하여 네트워크 접근성과 DNS 보안을 제공하는 유저스페이스 터널링 프로그램입니다.
               </p>
             </div>
 
             <div className="my-4 p-5 border flex items-center justify-center font-mono-custom text-xs" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3 }}>
-              {Code2 && <Code2 size={24} className="mr-3" style={{ color: palette.highlight }} />}
-              <span>INTERACTIVE MODULE ARCHITECTURE</span>
+              {Network && <Network size={22} className="mr-3" style={{ color: palette.highlight }} />}
+              <span>PC Application</span>
             </div>
 
             <a
-              href="#contact"
+              href="https://github.com/knoblab/freeview-sni"
+              target="_blank"
+              rel="noreferrer"
               className="group inline-flex items-center gap-2 text-xs font-mono-custom mt-4 hover:opacity-80 transition-opacity"
               style={{ color: darkMode ? palette.white : palette.black }}
             >
               <div className="inline-flex items-center gap-2 transform group-hover:translate-x-2 transition-transform duration-300">
-                <span>Learn more</span>
+                <span>GitHub</span>
                 {ArrowRight && <ArrowRight size={14} style={{ color: palette.highlight }} />}
               </div>
             </a>
@@ -66,11 +68,11 @@ function Projects({ darkMode, palette }) {
             <div>
               <div className="flex justify-between items-center text-xs font-mono-custom mb-6" style={{ color: palette.grey7 }}>
                 <span>PROJECT_02</span>
-                <span>TYPESCRIPT / TAILWIND</span>
+                <span>Design System</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-normal mb-3">Design Token UI</h3>
+              <h3 className="text-xl sm:text-2xl font-normal mb-3">KUDS</h3>
               <p className="text-xs leading-relaxed font-normal mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                미니멀리즘과 재사용성이 결합된 컴포넌트 시스템 구축
+                Knoblab Universal Design System
               </p>
             </div>
 
@@ -84,7 +86,7 @@ function Projects({ darkMode, palette }) {
             </div>
 
             <a
-              href="#contact"
+              href="#credit"
               className="group inline-flex items-center gap-2 text-xs font-mono-custom mt-4 hover:opacity-80 transition-opacity"
               style={{ color: darkMode ? palette.white : palette.black }}
             >
