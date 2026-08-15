@@ -1,41 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
-}
-
 body {
   margin: 0;
-  /* 문서 전체 기본 폰트 강제 선언 */
   font-family: 'IBM Plex Sans', 'Pretendard', sans-serif !important;
 }
 
-/* 폼 요소(Input, Textarea, Button 등)도 기본 폰트를 상속받도록 강제 */
-input, textarea, button, select {
+input,
+textarea,
+button,
+select {
   font-family: inherit;
 }
 
-/* 
-   해결 완료: 
-   IBM Plex Mono(영문 전용) 뒤에 Pretendard(한글)를 추가하여
-   영문은 Mono 폰트로, 한글은 Pretendard로 자연스럽게 렌더링되게 만듭니다. 
-*/
-.font-mono-custom {
+*/ .font-mono-custom {
   font-family: 'IBM Plex Sans', 'Pretendard', monospace !important;
 }
 
-/* Rule lines for Polestar marking system */
 .marking-grid-bg {
   background-image: linear-gradient(to bottom, rgba(136, 135, 131, 0.15) 1px, transparent 1px);
   background-size: 100% 12px;
 }
 
-/* Text Selection Style (Default: #556042 drag background, white text) */
 ::selection {
   background-color: #556042;
   color: #F7F6F2;
 }
-
-
