@@ -68,6 +68,44 @@ function Projects({ darkMode, palette }) {
             <div>
               <div className="flex justify-between items-center text-xs font-mono-custom mb-6" style={{ color: palette.grey7 }}>
                 <span>PROJECT_02</span>
+                <span>PC Application</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-normal mb-3">qDown</h3>
+              <p className="text-xs leading-relaxed font-normal mb-8" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                yt-dlp 툴을 누구나 쉽게 사용할 수 있도록 만든 직관적인 그래픽 유저 인터페이스 프로그램입니다.
+              </p>
+            </div>
+
+            <div className="my-4 p-5 border flex items-center justify-center font-mono-custom text-xs" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3 }}>
+              {Download && <Download size={22} className="mr-3" style={{ color: palette.highlight }} />}
+              <span>Made with KDDS</span>
+            </div>
+
+            <a
+              href="https://github.com/knoblab/qdown/"
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex items-center gap-2 text-xs font-mono-custom mt-4 hover:opacity-80 transition-opacity"
+              style={{ color: darkMode ? palette.white : palette.black }}
+            >
+              <div className="inline-flex items-center gap-2 transform group-hover:translate-x-2 transition-transform duration-300">
+                <span>GitHub</span>
+                {ArrowRight && <ArrowRight size={14} style={{ color: palette.highlight }} />}
+              </div>
+            </a>
+          </div>
+
+          {/* Card 3 */}
+          <div
+            className="p-8 md:p-10 flex flex-col justify-between"
+            style={{
+              backgroundColor: darkMode ? palette.grey11 : palette.grey1,
+              border: `1px solid ${darkMode ? palette.grey9 : palette.grey3}`
+            }}
+          >
+            <div>
+              <div className="flex justify-between items-center text-xs font-mono-custom mb-6" style={{ color: palette.grey7 }}>
+                <span>PROJECT_03</span>
                 <span>Design System</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-normal mb-3">KUDS</h3>
@@ -100,7 +138,7 @@ function Projects({ darkMode, palette }) {
             </a>
           </div>
 
-          {/* Card 3 */}
+          {/* Card 4 */}
           <div
             className="p-8 md:p-10 flex flex-col justify-between"
             style={{
@@ -110,7 +148,7 @@ function Projects({ darkMode, palette }) {
           >
             <div>
               <div className="flex justify-between items-center text-xs font-mono-custom mb-6" style={{ color: palette.grey7 }}>
-                <span>PROJECT_03</span>
+                <span>PROJECT_04</span>
                 <span>Design System</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-normal mb-3">KDDS</h3>
