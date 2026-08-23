@@ -2,7 +2,7 @@
 
 > Personal development namespace and experimental laboratory for web engineering.
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/knoblab）
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/knoblab)]
 
 
 [![Made with Antigravity IDE](./assets/made-with-antigravity.svg)](https://antigravity.google)
