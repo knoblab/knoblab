@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="215" height="52" viewBox="0 0 215 52" fill="none">
+  <!-- 뱃지 배경 -->
+  <rect x="0.5" y="0.5" width="214" height="51" rx="9" fill="#131314" stroke="#3C4043" stroke-width="1"/>
+
+  <!-- Knoblab 로고 아이콘 -->
+  <g transform="translate(14, 10) scale(0.06095)">
+    <path d="M263 130.75V52C207.305 52 153.89 74.1249 114.508 113.508C75.1249 152.89 53 206.305 53 262H131.75C131.75 227.19 145.578 193.806 170.192 169.192C194.806 144.578 228.19 130.75 263 130.75Z" fill="#8FA876"/>
+    <path d="M263 262H131.75C131.75 296.81 145.578 330.194 170.192 354.808C194.806 379.422 228.19 393.25 263 393.25V262Z" fill="#8FA876"/>
+    <path d="M394.25 130.75H263V262H394.25V130.75Z" fill="#8FA876"/>
+    <path d="M263 393.25V472C318.695 472 372.11 449.875 411.492 410.492C450.875 371.11 473 317.695 473 262H394.25C394.25 296.81 380.422 330.194 355.808 354.808C331.194 379.422 297.81 393.25 263 393.25Z" fill="#8FA876"/>
+  </g>
+
+  <!-- 텍스트 영역 -->
+  <text x="56" y="20" fill="#9AA0A6" font-family="'Google Sans', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="500" letter-spacing="0.8">WEBSITE</text>
+  <text x="56" y="38" fill="#FFFFFF" font-family="'Google Sans', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14.5" font-weight="500" letter-spacing="0.2">Knoblab</text>
+</svg>
