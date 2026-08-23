@@ -5,9 +5,9 @@
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/knoblab)
 
 
-[![Made with Antigravity IDE](./assets/made-with-antigravity.svg)](https://antigravity.google)
+[![Made with Antigravity IDE](./img/made-with-antigravity.svg)](https://antigravity.google)
 <br>
-[![Knoblab](./assets/knoblab.svg)](https://knoblab.github.io/knoblab)
+[![Knoblab](./img/knoblab.svg)](https://knoblab.github.io/knoblab)
 
 ---
 
