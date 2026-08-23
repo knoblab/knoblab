@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="195" height="52" viewBox="0 0 195 52" fill="none">
+  <!-- 뱃지 배경 (Google Play / App Store 스타일 다크 카드) -->
+  <rect x="0.5" y="0.5" width="194" height="51" rx="9" fill="#131314" stroke="#3C4043" stroke-width="1"/>
+
+  <!-- asset/Antigravity.png 이미지 임베드 -->
+  <image href="./Antigravity.png" x="14" y="10" width="32" height="32" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- 텍스트 영역 (Google Sans 우선 적용 폰트 스택) -->
+  <text x="56" y="20" fill="#9AA0A6" font-family="'Google Sans', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="500" letter-spacing="0.8">MADE WITH</text>
+  <text x="56" y="38" fill="#FFFFFF" font-family="'Google Sans', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14.5" font-weight="700" letter-spacing="0.2">Antigravity IDE</text>
+</svg>
