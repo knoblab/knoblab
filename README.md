@@ -18,3 +18,4 @@
 
 ## Contact
 - GitHub: [@knoblab](https://github.com/knoblab)
+- Mail: contact@knoblab.xyz
