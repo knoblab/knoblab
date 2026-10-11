@@ -1,4 +1,4 @@
-# knoblab
+# Knoblab
 
 > Personal development namespace and experimental laboratory for web engineering.
 

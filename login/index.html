@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Knoblab — Login</title>
+<link rel="icon" type="image/svg+xml" href="../img/logo.svg" />
+<link rel="stylesheet" href="../style.css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="../app/icons.js"></script>
+<script type="text/babel" src="../app/login.js"></script>
+<script type="text/babel">
+  const palette = {
+    black: '#2B2B2E',
+    white: '#F7F6F2',
+    highlight: '#556042',
+    grey11: '#3A3A3D',
+    grey9: '#535356',
+    grey7: '#888783',
+    grey3: '#C2C1BB',
+    grey1: '#E7E6E1'
+  };
+
+  function LoginApp() {
+    const LoginComponent = window.Login || (() => null);
+    return <LoginComponent darkMode={false} palette={palette} />;
+  }
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<LoginApp />);
+</script>
+</body>
+</html>

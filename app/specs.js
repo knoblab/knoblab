@@ -21,26 +21,28 @@ function Specs({ darkMode, palette }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Accent / Craftsmanship Card */}
           <div
-            className="lg:col-span-5 p-8 md:p-10 flex flex-col justify-between text-white selection:bg-[#F7F6F2] selection:text-[#556042]"
-            style={{ backgroundColor: palette.highlight }}
+            className="lg:col-span-5 p-8 md:p-10 flex flex-col justify-between text-white"
+            style={{
+              backgroundColor: palette.highlight
+            }}
           >
             <div>
               <span className="text-xs font-mono-custom block mb-2 opacity-80">ACCENT COLOUR & SPECTRUM</span>
-              <h3 className="text-2xl sm:text-3xl font-light tracking-tight mb-4">knoblab Craftsmanship</h3>
+              <h3 className="text-2xl sm:text-3xl font-light tracking-tight mb-4">Knoblab Craftsmanship</h3>
               <p className="text-xs leading-relaxed font-light opacity-90">
-                시그니처 머그워트 그린(#556042)을 기저로 7가지 헤리티지 톤 스펙트럼과 함께 핵심 기능과 가치에 집중하는 개발 방법론입니다.
+                시그니처 머그워트 그린({palette.mugwort})을 기저로 7가지 헤리티지 톤 스펙트럼과 함께 핵심 기능과 가치에 집중하는 개발 방법론입니다.
               </p>
             </div>
             <div className="pt-8 flex justify-between items-center font-mono-custom text-xs">
-              <span>MUGWORT GREEN #556042</span>
+              <span>MUGWORT GREEN {palette.mugwort}</span>
               <div className="flex gap-1.5 items-center">
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#A33A31" }}></span>
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#C65D2B" }}></span>
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#E0A93B" }}></span>
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#556042" }}></span>
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#45707A" }}></span>
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#1F3A52" }}></span>
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#5C3C58" }}></span>
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: palette.dancheong }}></span>
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: palette.persimmon }}></span>
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: palette.canola }}></span>
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: palette.mugwort }}></span>
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: palette.celadon }}></span>
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: palette.indigo }}></span>
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: palette.gromwell }}></span>
               </div>
             </div>
           </div>

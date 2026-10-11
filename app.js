@@ -8,7 +8,16 @@ function App() {
     const handleHashChange = () => {
       const currentHash = window.location.hash;
       setRoute(currentHash);
-      if (currentHash === '#design' || currentHash === '#/design' || currentHash === '' || currentHash === '#') {
+      if (
+        currentHash === '#design' ||
+        currentHash === '#/design' ||
+        currentHash === '#login' ||
+        currentHash === '#/login' ||
+        currentHash.startsWith('#/project') ||
+        currentHash.startsWith('#project') ||
+        currentHash === '' ||
+        currentHash === '#'
+      ) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
@@ -17,7 +26,7 @@ function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const { Sun, Moon, ArrowRight, Check, Overview, Projects, Specs, Credit, Design } = window;
+  const { Sun, Moon, ArrowRight, Check, Overview, Projects, Specs, Credit, Design, ProjectDetail } = window;
   const SunIcon = Sun || (() => null);
   const MoonIcon = Moon || (() => null);
   const ArrowRightIcon = ArrowRight || (() => null);
@@ -27,20 +36,23 @@ function App() {
   const SpecsComp = Specs || (() => null);
   const CreditComp = Credit || (() => null);
   const DesignComp = Design || (() => null);
+  const ProjectDetailComp = ProjectDetail || (() => null);
 
   const isDesignPage = route.startsWith('#design') || route.startsWith('#/design');
+  const isProjectPage = route.startsWith('#/project/') || route.startsWith('#project/');
+  const currentProjectId = isProjectPage ? route.replace(/^#\/?project\//, '').split('?')[0].split('#')[0] : null;
 
   const palette = {
     black: '#2B2B2E',
     white: '#F7F6F2',
-    highlight: '#556042',
-    mugwort: '#556042',
-    dancheong: '#A33A31',
-    persimmon: '#C65D2B',
-    canola: '#E0A93B',
-    celadon: '#45707A',
-    indigo: '#1F3A52',
-    gromwell: '#5C3C58',
+    highlight: darkMode ? '#717A63' : '#556042',
+    mugwort: darkMode ? '#717A63' : '#556042',
+    dancheong: darkMode ? '#A65B51' : '#A33A31',
+    persimmon: darkMode ? '#AA6240' : '#C65D2B',
+    canola: darkMode ? '#A7833B' : '#E0A93B',
+    celadon: darkMode ? '#597981' : '#45707A',
+    indigo: darkMode ? '#5E7992' : '#1F3A52',
+    gromwell: darkMode ? '#876E84' : '#5C3C58',
     grey11: '#3A3A3D',
     grey9: '#535356',
     grey7: '#888783',
@@ -50,12 +62,22 @@ function App() {
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300 selection:bg-[#556042] selection:text-[#F7F6F2] font-sans"
+      className="min-h-screen transition-colors duration-300 font-sans relative"
       style={{
         backgroundColor: darkMode ? palette.black : palette.white,
         color: darkMode ? palette.white : palette.black
       }}
     >
+      <style>{`
+        ::selection, *::selection {
+          background-color: ${palette.highlight} !important;
+          color: ${darkMode ? palette.black : palette.white} !important;
+        }
+        ::-moz-selection, *::-moz-selection {
+          background-color: ${palette.highlight} !important;
+          color: ${darkMode ? palette.black : palette.white} !important;
+        }
+      `}</style>
 
 
       {/* HEADER */}
@@ -68,14 +90,14 @@ function App() {
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <a href="#" className="flex items-center gap-3 font-semibold text-base tracking-tight">
-            <img src="img/logo.svg" alt="knoblab logo" className="w-6 h-6" />
-            <span>knoblab</span>
+            <img src="img/logo.svg" alt="Knoblab logo" className="w-6 h-6" />
+            <span>Knoblab</span>
           </a>
 
           <div className="flex items-center gap-6">
             <nav className="hidden md:flex items-center gap-8 text-xs font-mono-custom">
               <a href="#overview" className="hover:opacity-70 transition-opacity">Overview</a>
-              <a href="#projects" className="hover:opacity-70 transition-opacity">Projects</a>
+              <a href="#projects" className="hover:opacity-70 transition-opacity" style={{ color: isProjectPage ? palette.highlight : 'inherit' }}>Projects</a>
               <a href="#design" className="hover:opacity-70 transition-opacity" style={{ color: isDesignPage ? palette.highlight : 'inherit' }}>Design</a>
               <a href="#specifications" className="hover:opacity-70 transition-opacity">Specs</a>
               <a href="#credit" className="hover:opacity-70 transition-opacity">Credit</a>
@@ -96,6 +118,9 @@ function App() {
       {isDesignPage ? (
         /* DESIGN SUBPAGE */
         <DesignComp darkMode={darkMode} palette={palette} />
+      ) : isProjectPage ? (
+        /* PROJECT DETAIL SUBPAGE */
+        <ProjectDetailComp projectId={currentProjectId} darkMode={darkMode} palette={palette} />
       ) : (
         /* MAIN LANDING VIEW */
         <>
@@ -193,9 +218,9 @@ function App() {
         }}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div className="flex flex-wrap gap-12 sm:gap-20 mb-12">
             <div>
-              <div className="font-semibold mb-3 text-sm" style={{ color: darkMode ? palette.white : palette.black }}>knoblab</div>
+              <div className="font-semibold mb-3 text-sm" style={{ color: darkMode ? palette.white : palette.black }}>Knoblab</div>
               <ul className="space-y-2" style={{ color: palette.grey7 }}>
                 <li><a href="#overview" className="hover:opacity-80">Overview</a></li>
                 <li><a href="#projects" className="hover:opacity-80">Projects</a></li>
@@ -204,29 +229,25 @@ function App() {
               </ul>
             </div>
             <div>
-              <div className="font-semibold mb-3 text-sm" style={{ color: darkMode ? palette.white : palette.black }}>Tech Stack</div>
-              <ul className="space-y-2" style={{ color: palette.grey7 }}>
-                <li>React 19</li>
-                <li>TypeScript</li>
-                <li>Tailwind CSS</li>
-                <li>HTML5 Canvas</li>
-              </ul>
-            </div>
-            <div>
-              <div className="font-semibold mb-3 text-sm" style={{ color: darkMode ? palette.white : palette.black }}>Design System</div>
-              <ul className="space-y-2" style={{ color: palette.grey7 }}>
-                <li><a href="#design" className="hover:opacity-80" style={{ color: palette.highlight }}>Design Spec // KUDS</a></li>
-                <li>IBM Plex Sans</li>
-                <li>Pretendard KR</li>
-                <li>Mugwort Green (#556042)</li>
-                <li>12px Marking Grid</li>
-              </ul>
-            </div>
-            <div>
               <div className="font-semibold mb-3 text-sm" style={{ color: darkMode ? palette.white : palette.black }}>Connect</div>
               <ul className="space-y-2" style={{ color: palette.grey7 }}>
                 <li><a href="https://github.com/knoblab" target="_blank" rel="noreferrer" className="hover:opacity-80">GitHub</a></li>
-                <li><a href="mailto:contact@knoblab.dev" className="hover:opacity-80">Email</a></li>
+                <li><a href="mailto:contact@knoblab.xyz" className="hover:opacity-80">Email</a></li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-semibold mb-3 text-sm" style={{ color: darkMode ? palette.white : palette.black }}>Legal</div>
+              <ul className="space-y-2" style={{ color: palette.grey7 }}>
+                <li>
+                  <a
+                    href="https://privacy-policy.knoblab.xyz/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:opacity-80"
+                  >
+                    개인정보처리방침
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -239,8 +260,8 @@ function App() {
             }}
           >
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2" style={{ backgroundColor: palette.highlight }}></span>
-              <span>knoblab © 2026.</span>
+              <img src="img/logo.svg" alt="Knoblab logo" className="w-4 h-4" />
+              <span>Knoblab © 2026.</span>
             </div>
             <div>Seoul, Korea</div>
           </div>

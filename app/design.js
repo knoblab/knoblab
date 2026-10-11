@@ -18,56 +18,73 @@ function Design({ darkMode, palette }) {
     {
       name: 'Dancheong Red',
       koreanName: '단청 레드',
-      hex: '#A33A31',
+      lightHex: '#A33A31',
+      darkHex: '#A65B51',
       desc: '목조 건축과 인장의 깊고 고풍스러운 붉은색',
+      darkDesc: '고건축 인장의 묵직한 붉은빛을 어두운 배경에 맞춰 차분하게 가라앉힌 테라코타 벽돌색',
       isBase: false
     },
     {
       name: 'Ripe Persimmon',
       koreanName: '홍시 오렌지',
-      hex: '#C65D2B',
+      lightHex: '#C65D2B',
+      darkHex: '#AA6240',
       desc: '늦가을 볕에 알맞게 익은 감의 묵직하고 따스한 주황색',
+      darkDesc: '늦가을 감의 온기를 유지하되 눈부심을 덜어내고 배경과 어우러지게 정돈한 감빛 주황',
       isBase: false
     },
     {
       name: 'Canola Yellow',
       koreanName: '유채꽃 옐로우',
-      hex: '#E0A93B',
+      lightHex: '#E0A93B',
+      darkHex: '#A7833B',
       desc: '봄날의 생기를 머금되 전체 톤에 맞춰 차분하게 정돈한 노란색',
+      darkDesc: '형광기를 걷어내고 앤틱 황동처럼 은은하고 차분하게 가라앉힌 유채꽃 황금색',
       isBase: false
     },
     {
       name: 'Mugwort Green',
       koreanName: '머그워트 그린 (Base Anchor)',
-      hex: '#556042',
+      lightHex: '#556042',
+      darkHex: '#717A63',
       desc: '들풀의 생명력과 흙내음이 밴 절제된 녹색',
+      darkDesc: '마른 들풀과 쑥의 절제된 톤으로 어두운 표면 위에 자연스럽게 스며드는 세이지 그린',
       isBase: true
     },
     {
       name: 'Celadon Blue',
       koreanName: '청자 블루',
-      hex: '#45707A',
+      lightHex: '#45707A',
+      darkHex: '#597981',
       desc: '맑은 고려비색 도자기와 깊은 계곡물에서 느껴지는 옥빛 파란색',
+      darkDesc: '도자기 유약의 차분한 옥빛과 깊은 계곡 바위의 물빛이 감도는 뮤트 셀라돈',
       isBase: false
     },
     {
       name: 'Indigo Blue',
       koreanName: '인디고 블루',
-      hex: '#1F3A52',
+      lightHex: '#1F3A52',
+      darkHex: '#5E7992',
       desc: '천연 쪽으로 여러 번 정성껏 물들인 단정하고 깊은 남색',
+      darkDesc: '어둠 속에서 튀지 않고 단정하고 고요하게 스며드는 슬레이트 쪽빛',
       isBase: false
     },
     {
       name: 'Gromwell Violet',
       koreanName: '자초 바이올렛',
-      hex: '#5C3C58',
+      lightHex: '#5C3C58',
+      darkHex: '#876E84',
       desc: '전통 지치 뿌리로 염색한 그윽하고 우아한 보라색',
+      darkDesc: '지치 뿌리의 깊은 보랏빛을 마른 꽃잎처럼 우아하고 차분하게 정돈한 뮤트 바이올렛',
       isBase: false
     },
   ];
 
-  // Default to Mugwort Green (#556042)
-  const [selectedColor, setSelectedColor] = React.useState(heritageAccents[3]);
+  // Default to Mugwort Green (#556042 / #717A63)
+  const [selectedIdx, setSelectedIdx] = React.useState(3);
+  const selectedColor = heritageAccents[selectedIdx] || heritageAccents[3];
+  const activeHex = darkMode ? selectedColor.darkHex : selectedColor.lightHex;
+  const activeDesc = darkMode ? selectedColor.darkDesc : selectedColor.desc;
 
   const surfaceGreys = [
     { name: 'Base White', hex: '#F7F6F2', role: 'Light Surface' },
@@ -81,6 +98,16 @@ function Design({ darkMode, palette }) {
 
   return (
     <div className="py-16 md:py-24 font-sans relative">
+      <style>{`
+        ::selection, *::selection {
+          background-color: ${activeHex} !important;
+          color: #F7F6F2 !important;
+        }
+        ::-moz-selection, *::-moz-selection {
+          background-color: ${activeHex} !important;
+          color: #F7F6F2 !important;
+        }
+      `}</style>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         {/* Floating Copy Notification Toast */}
@@ -121,14 +148,11 @@ function Design({ darkMode, palette }) {
 
         {/* Hero Section */}
         <div className="max-w-3xl mb-24">
-          <span className="text-xs font-mono-custom block mb-3" style={{ color: palette.highlight }}>
-            01 // Design Specification
-          </span>
           <h1 className="text-3xl sm:text-5xl font-normal tracking-tight mb-6 leading-tight">
             Knoblab Universal Design System
           </h1>
           <p className="text-base sm:text-lg font-normal leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-            물리적 촉각성과 데이터시트의 선형 구조를 디지털 인터페이스로 구현한 knoblab의 핵심 디자인 시스템입니다.
+            물리적 촉각성과 데이터시트의 선형 구조를 디지털 인터페이스로 구현한 Knoblab의 핵심 디자인 시스템입니다.
           </p>
         </div>
 
@@ -137,9 +161,6 @@ function Design({ darkMode, palette }) {
         <section className="mb-28">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
-              <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-                01 // Colour Tokens
-              </span>
               <h2 className="text-2xl sm:text-4xl font-normal tracking-tight">Chromatic Architecture</h2>
             </div>
             <p className="text-xs font-mono-custom mt-3 md:mt-0" style={{ color: copiedInfo ? palette.highlight : palette.grey7 }}>
@@ -154,7 +175,7 @@ function Design({ darkMode, palette }) {
             <div
               className="lg:col-span-6 p-8 md:p-12 flex flex-col justify-between text-white transition-all duration-300 relative overflow-hidden"
               style={{
-                backgroundColor: selectedColor.hex,
+                backgroundColor: activeHex,
                 minHeight: '440px'
               }}
             >
@@ -172,21 +193,21 @@ function Design({ darkMode, palette }) {
                 </div>
 
                 <p className="text-base sm:text-lg font-light leading-relaxed opacity-95 max-w-lg mt-6">
-                  {selectedColor.desc}
+                  {activeDesc}
                 </p>
               </div>
 
               <div className="pt-8 border-t border-white/20 flex flex-wrap justify-between items-center gap-4 text-xs font-mono-custom">
                 <div>
                   <span className="opacity-70 block text-[10px]">COLOUR CODE</span>
-                  <span className="text-sm font-medium">{selectedColor.hex}</span>
+                  <span className="text-sm font-medium">{activeHex}</span>
                 </div>
 
                 <button
-                  onClick={() => copyHex(selectedColor.hex, selectedColor.name)}
-                  className="px-5 py-2.5 bg-white/15 hover:bg-white/25 border border-white/30 transition-colors flex items-center gap-2 text-xs"
+                  onClick={() => copyHex(activeHex, selectedColor.name)}
+                  className="px-5 py-2.5 bg-white/15 hover:bg-white/25 border border-white/30 transition-colors flex items-center gap-2 text-xs text-white"
                 >
-                  {copiedInfo?.hex === selectedColor.hex ? (
+                  {copiedInfo?.hex === activeHex ? (
                     <>
                       <CheckIcon size={14} />
                       <span>COPIED ✓</span>
@@ -203,73 +224,62 @@ function Design({ darkMode, palette }) {
 
             {/* Right: 7-Heritage Colours Selector List */}
             <div
-              className="lg:col-span-6 p-6 md:p-8 border flex flex-col justify-between"
+              className="lg:col-span-6 p-6 md:p-8 border flex flex-col justify-center"
               style={{
                 borderColor: darkMode ? palette.grey9 : palette.grey1,
                 backgroundColor: darkMode ? palette.grey11 : palette.grey1
               }}
             >
-              <div>
-                <div className="flex justify-between items-center text-xs font-mono-custom pb-3 mb-4 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3 }}>
-                  <span style={{ color: palette.highlight }}>ACCENT SPECTRUM // 7 HERITAGE TONES</span>
-                  <span style={{ color: palette.grey7 }}>SELECT TO PREVIEW</span>
-                </div>
-
-                <div className="space-y-2">
-                  {heritageAccents.map((item, idx) => {
-                    const isSelected = selectedColor.hex === item.hex;
-                    const isCopied = copiedInfo?.hex === item.hex;
-                    return (
-                      <div
-                        key={idx}
-                        onClick={() => setSelectedColor(item)}
-                        className="p-3 border flex items-center justify-between cursor-pointer transition-all hover:opacity-95 text-xs font-mono-custom"
-                        style={{
-                          borderColor: isSelected ? palette.highlight : (darkMode ? palette.grey9 : palette.grey3),
-                          backgroundColor: isSelected ? (darkMode ? '#2B3324' : '#E9F0E5') : (darkMode ? palette.black : palette.white),
-                          transform: isSelected ? 'translateX(4px)' : 'none'
-                        }}
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <span
-                            className="w-4 h-4 rounded-full shrink-0 border"
-                            style={{
-                              backgroundColor: item.hex,
-                              borderColor: darkMode ? palette.grey9 : palette.grey3
-                            }}
-                          ></span>
-                          <div className="min-w-0">
-                            <span className="font-medium truncate block" style={{ color: darkMode ? palette.white : palette.black }}>
-                              {item.name}
-                            </span>
-                            <span className="text-[11px] font-sans truncate block" style={{ color: palette.grey7 }}>
-                              {item.desc}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-3 shrink-0 ml-2">
-                          <span style={{ color: item.hex }} className="font-medium">{item.hex}</span>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              copyHex(item.hex, item.name);
-                            }}
-                            className="p-1 hover:opacity-80 transition-opacity"
-                            title="Copy HEX"
-                          >
-                            {isCopied ? <CheckIcon size={12} style={{ color: palette.highlight }} /> : <CopyIcon size={12} style={{ color: palette.grey7 }} />}
-                          </button>
+              <div className="space-y-2.5">
+                {heritageAccents.map((item, idx) => {
+                  const itemHex = darkMode ? item.darkHex : item.lightHex;
+                  const isSelected = selectedIdx === idx;
+                  const isCopied = copiedInfo?.hex === itemHex;
+                  return (
+                    <div
+                      key={idx}
+                      onClick={() => setSelectedIdx(idx)}
+                      className="p-3 border flex items-center justify-between cursor-pointer transition-all hover:opacity-95 text-xs font-mono-custom"
+                      style={{
+                        borderColor: isSelected ? palette.highlight : (darkMode ? palette.grey9 : palette.grey3),
+                        backgroundColor: isSelected ? (darkMode ? '#2B3324' : '#E9F0E5') : (darkMode ? palette.black : palette.white),
+                        transform: isSelected ? 'translateX(4px)' : 'none'
+                      }}
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <span
+                          className="w-4 h-4 rounded-full shrink-0 border"
+                          style={{
+                            backgroundColor: itemHex,
+                            borderColor: darkMode ? palette.grey9 : palette.grey3
+                          }}
+                        ></span>
+                        <div className="min-w-0">
+                          <span className="font-medium truncate block" style={{ color: darkMode ? palette.white : palette.black }}>
+                            {item.name}
+                          </span>
+                          <span className="text-[11px] font-sans truncate block" style={{ color: palette.grey7 }}>
+                            {darkMode ? item.darkDesc : item.desc}
+                          </span>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
 
-              <div className="mt-4 pt-3 border-t text-[11px] font-mono-custom flex justify-between items-center" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3, color: palette.grey7 }}>
-                <span>Base Anchor: Mugwort Green (#556042)</span>
-                <span>7 Spectrum Tokens</span>
+                      <div className="flex items-center gap-3 shrink-0 ml-2">
+                        <span style={{ color: itemHex }} className="font-medium">{itemHex}</span>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            copyHex(itemHex, item.name);
+                          }}
+                          className="p-1 hover:opacity-80 transition-opacity"
+                          title="Copy HEX"
+                        >
+                          {isCopied ? <CheckIcon size={12} style={{ color: palette.highlight }} /> : <CopyIcon size={12} style={{ color: palette.grey7 }} />}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
@@ -346,7 +356,7 @@ function Design({ darkMode, palette }) {
               </div>
               <div className="md:col-span-9">
                 <div className="text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight leading-none">
-                  knoblab
+                  Knoblab
                 </div>
               </div>
             </div>
@@ -574,7 +584,7 @@ function Design({ darkMode, palette }) {
                   </div>
                   <div className="p-3 border flex justify-between items-center" style={{ borderColor: palette.highlight, backgroundColor: darkMode ? '#262F1F' : '#EFF5EC' }}>
                     <span style={{ color: palette.highlight }}>03 // Active Focus & Hover</span>
-                    <span className="text-[11px]" style={{ color: palette.highlight }}>1px solid #556042</span>
+                    <span className="text-[11px]" style={{ color: palette.highlight }}>1px solid {palette.highlight}</span>
                   </div>
                 </div>
               </div>

@@ -27,7 +27,7 @@ function Credit({ darkMode, palette }) {
             <h2 className="text-2xl sm:text-4xl font-normal tracking-tight">Credit & Developer Info</h2>
           </div>
           <p className="text-xs font-mono-custom mt-3 md:mt-0 max-w-sm" style={{ color: palette.grey7 }}>
-            knoblab의 철학과 인터랙션을 설계·구현한 개발자 프로필
+            Knoblab의 철학과 인터랙션을 설계·구현한 개발자 프로필
           </p>
         </div>
 
@@ -137,7 +137,7 @@ function Credit({ darkMode, palette }) {
               className="mt-8 pt-5 border-t font-mono-custom text-xs flex justify-between items-center"
               style={{ borderColor: darkMode ? palette.grey9 : palette.grey3, color: palette.grey7 }}
             >
-              <span>knoblab</span>
+              <span>Knoblab</span>
               <span style={{ color: palette.highlight }}>2026</span>
             </div>
           </div>
