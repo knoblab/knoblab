@@ -18,7 +18,7 @@ $ npx wodn.js
 ## Projects
 
 [![KNDS](https://img.shields.io/badge/Design-KNDS-AD1D1D?style=for-the-badge)](https://github.com/knoblab/KNDS)
-[![Freeview](https://img.shields.io/badge/App-FreeView-007AFF?style=for-the-badge)](https://github.com/knoblab/freeview-sni)
+[![Freeview](https://img.shields.io/badge/App-FreeView-45707A?style=for-the-badge)](https://github.com/knoblab/freeview-sni)
 [![wodn.js](https://img.shields.io/badge/CLI-wodn.js-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/wodn.js)
 
 ## Contact
