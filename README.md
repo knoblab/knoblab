@@ -20,6 +20,10 @@
 [![asterisk](https://img.shields.io/badge/service-asterisk-1C1C1E?style=for-the-badge)](https://github.com/knoblab/asterisk-frontend)
 [![wodn.js](https://img.shields.io/badge/CLI-wodn.js-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/wodn.js)
 
+## Design
+
+All design concepts and fine details across projects and services are crafted manually in Figma without AI. AI is utilized exclusively for code implementation.
+
 ## Contact
 - Terminal: `npx wodn.js`
 - GitHub: [@knoblab](https://github.com/knoblab)
