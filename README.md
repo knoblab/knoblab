@@ -9,18 +9,13 @@
 ```bash
 $ npx wodn.js
 ```
-
-[![Made with Antigravity IDE](./img/made-with-antigravity.svg)](https://antigravity.google)
-[![Knoblab](./img/knoblab.svg)](https://knoblab.github.io/knoblab)
-
 ---
 
 ## Services
 
 [![asterisk](./img/asterisk.svg)](https://cnsh.life)
 [![asterisk-community](./img/asterisk-community.svg)](https://asterisk-community.knoblab.xyz)
-
----
+[![Knoblab](./img/knoblab.svg)](https://knoblab.github.io/knoblab)
 
 ## Projects
 
@@ -32,5 +27,9 @@ $ npx wodn.js
 - Terminal: `npx wodn.js`
 - GitHub: [@knoblab](https://github.com/knoblab)
 - Mail: contact@knoblab.xyz
+
+## Credits
+
+[![Made with Antigravity IDE](./img/made-with-antigravity.svg)](https://antigravity.google)
 
 ---
