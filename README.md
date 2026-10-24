@@ -1,4 +1,11 @@
-![Knoblab](./img/symbol-cad.svg)
+<div align="center">
+
+<picture>
+  <img alt="cad" src="img/symbol-cad.svg" width="500"> 
+</picture>
+</div>
+
+
 # Knoblab
 
 > Personal development namespace and experimental laboratory for web engineering.
