@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="215" height="52" viewBox="0 0 215 52" fill="none">
   <!-- 뱃지 배경 -->
-  <rect x="0.5" y="0.5" width="214" height="51" rx="9" fill="#2B2B2E" stroke="#3C4043" stroke-width="1" />
+  <rect x="0.5" y="0.5" width="214" height="51" rx="9" fill="#1c1c1e" stroke="#3C4043" stroke-width="1" />
 
   <!-- 로고 아이콘 (asterisk) -->
   <g transform="translate(15, 11.7) scale(0.375)">
