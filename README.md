@@ -25,3 +25,6 @@ $ npx wodn.js
 - Terminal: `npx wodn.js`
 - GitHub: [@knoblab](https://github.com/knoblab)
 - Mail: contact@knoblab.xyz
+
+---
+![Knoblab](./img/symbol-cad.svg)
