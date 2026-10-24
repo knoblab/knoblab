@@ -6,9 +6,6 @@
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/knoblab)
 [![npx wodn.js](https://img.shields.io/badge/npx-wodn.js-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/wodn.js)
 
-```bash
-$ npx wodn.js
-```
 ---
 
 ## Services
