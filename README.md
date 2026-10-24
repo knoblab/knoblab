@@ -1,3 +1,4 @@
+![Knoblab](./img/symbol-cad.svg)
 # Knoblab
 
 > Personal development namespace and experimental laboratory for web engineering.
@@ -10,8 +11,13 @@ $ npx wodn.js
 ```
 
 [![Made with Antigravity IDE](./img/made-with-antigravity.svg)](https://antigravity.google)
-<br>
 [![Knoblab](./img/knoblab.svg)](https://knoblab.github.io/knoblab)
+
+---
+
+## Services
+
+
 
 ---
 
@@ -27,4 +33,3 @@ $ npx wodn.js
 - Mail: contact@knoblab.xyz
 
 ---
-![Knoblab](./img/symbol-cad.svg)
