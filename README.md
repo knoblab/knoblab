@@ -17,7 +17,8 @@ $ npx wodn.js
 
 ## Services
 
-
+[![asterisk](./img/asterisk.svg)](https://cnsh.life)
+[![asterisk-community](./img/asterisk-community.svg)](https://asterisk-community.knoblab.xyz)
 
 ---
 
