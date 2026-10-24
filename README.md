@@ -24,7 +24,7 @@
 ## Projects
 
 [![Freeview](https://img.shields.io/badge/App-FreeView-45707A?style=for-the-badge)](https://github.com/knoblab/freeview-sni)
-[![asterisk](https://img.shields.io/badge/service-asterisk-1C1C1E?style=for-the-badge)](https://github.com/knoblab/asterisk-frontend)
+[![asterisk](https://img.shields.io/badge/service-asterisk-1C1C1E?style=for-the-badge)](https://github.com/knoblab/asterisk)
 [![wodn.js](https://img.shields.io/badge/CLI-wodn.js-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/wodn.js)
 
 ## Design
