@@ -27,11 +27,11 @@ function Projects({ darkMode, palette }) {
             <div>
               <div className="flex justify-between items-center text-xs font-mono-custom mb-6" style={{ color: palette.grey7 }}>
                 <span>PROJECT_01</span>
-                <span>PC Application</span>
+                <span>Windows · Android</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-normal mb-3">FreeView</h3>
               <p className="text-xs leading-relaxed font-normal" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                Windows에서 외부 서버를 거치지 않고 차단된 웹 접속을 여는 경량 프로그램입니다. 버튼 하나로 켜고 끌 수 있으며 창을 닫아도 백그라운드에서 가볍게 동작합니다.
+                Windows와 Android에서 외부 서버를 거치지 않고 차단된 웹 접속을 여는 경량 프로그램입니다. 버튼 하나로 켜고 끌 수 있으며 백그라운드에서도 가볍게 동작합니다.
               </p>
             </div>
 

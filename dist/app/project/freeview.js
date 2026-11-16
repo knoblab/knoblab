@@ -4,8 +4,8 @@
     title: 'FreeView',
     accentColor: '#45707A',
     darkAccentColor: '#597981',
-    tagline: '인터넷 속도 저하 없이 차단된 웹 접속을 여는 Windows용 경량 프로그램',
-    summary: 'VPN처럼 외부 서버로 트래픽을 돌리지 않고 내 PC 안에서만 동작합니다. 작은 창에서 버튼 하나로 켜고 끌 수 있으며, 창을 닫아도 백그라운드에서 가볍게 유지됩니다.',
+    tagline: '인터넷 속도 저하 없이 차단된 웹 접속을 여는 Windows · Android용 경량 프로그램',
+    summary: 'VPN처럼 외부 서버로 트래픽을 돌리지 않고 내 기기(PC·스마트폰) 안에서만 동작합니다. 버튼 하나로 켜고 끌 수 있으며, 창을 닫아도 백그라운드에서 가볍게 유지됩니다.',
     links: {
       github: 'https://github.com/knoblab/freeview-sni',
       download: 'https://github.com/knoblab/freeview-sni/releases',
@@ -16,37 +16,71 @@
       blocks: [
         {
           heading: '외부 서버를 거치지 않는 차단 우회',
-          body: '일반적인 VPN이나 해외 프록시는 모든 트래픽을 제3자 서버로 보냈다가 받아오기 때문에 인터넷 속도가 떨어지고, 게임이나 음성 통화 반응속도까지 같이 느려집니다. FreeView는 내 PC 내부에서만 웹 요청을 처리하므로 본래 인터넷 속도가 그대로 유지됩니다.'
+          body: '일반적인 VPN이나 해외 프록시는 모든 트래픽을 제3자 서버로 보냈다가 받아오기 때문에 인터넷 속도가 떨어지고, 게임이나 음성 통화 반응속도까지 같이 느려집니다. FreeView는 내 PC나 스마트폰 내부에서만 웹 요청을 처리하므로 본래 인터넷 속도가 그대로 유지됩니다.'
         },
         {
           heading: '설치하고 버튼 하나만 누르면 끝',
-          body: '복잡한 명령어나 설정 파일을 만질 필요가 없습니다. 프로그램을 설치한 뒤 화면의 켜기 버튼을 누르면 바로 적용되고, 창을 닫아도 백그라운드에 남아 계속 동작합니다.'
+          body: '복잡한 명령어나 설정 파일을 만질 필요가 없습니다. Windows 프로그램이나 Android 앱(APK)을 설치한 뒤 화면의 켜기 버튼을 누르면 바로 적용되고, 창을 닫아도 백그라운드에 남아 계속 동작합니다.'
         }
       ]
     },
     appOverview: {
       title: '화면 구성과 설치 과정',
-      subtitle: '꼭 필요한 조작만 남긴 작은 창(FreeView 3.3)으로 동작합니다.',
-      image: 'img/freeview-app.webp',
-      imageAlt: 'Windows 데스크톱에서 실행 중인 FreeView 3.3 화면',
-      caption: 'Windows에서 실행 중인 FreeView 3.3 실제 화면',
-      cards: [
+      tabs: [
         {
-          title: '메인 창 (FreeView 3.3)',
-          items: [
-            { label: '켜기 / 끄기', desc: '우회 기능을 켜고 끄는 단일 메인 버튼' },
-            { label: '로그 보기', desc: '현재 동작 상태와 처리 내역 확인' },
-            { label: '깃허브', desc: '소스 코드 및 릴리스 저장소 바로가기' },
-            { label: '업데이트 확인', desc: '새 버전 확인 및 업데이트' }
+          key: 'windows',
+          label: 'Windows',
+          subtitle: '꼭 필요한 조작만 남긴 작은 창(FreeView 3.3)으로 동작합니다.',
+          image: 'img/freeview-app.webp',
+          imageAlt: 'Windows 데스크톱에서 실행 중인 FreeView 3.3 화면',
+          caption: 'Windows에서 실행 중인 FreeView 3.3 실제 화면',
+          cards: [
+            {
+              title: '메인 창 (FreeView 3.3)',
+              items: [
+                { label: '켜기 / 끄기', desc: '우회 기능을 켜고 끄는 단일 메인 버튼' },
+                { label: '로그 보기', desc: '현재 동작 상태와 처리 내역 확인' },
+                { label: '깃허브', desc: '소스 코드 및 릴리스 저장소 바로가기' },
+                { label: '업데이트 확인', desc: '새 버전 확인 및 업데이트' }
+              ]
+            },
+            {
+              title: '설치 과정 (4단계)',
+              items: [
+                { label: '1. 경로 지정', desc: '설치 위치(C:\\ProgramFiles\\...) 확인 또는 변경' },
+                { label: '2. 시작 옵션', desc: '시작 시 자동 실행 · 바로가기 만들기 선택' },
+                { label: '3. 설치 진행', desc: '설치 진행 상태 확인' },
+                { label: '4. 완료', desc: '설치 완료 후 바로 실행 또는 닫기' }
+              ]
+            }
           ]
         },
         {
-          title: '설치 과정 (4단계)',
-          items: [
-            { label: '1. 경로 지정', desc: '설치 위치(C:\\ProgramFiles\\...) 확인 또는 변경' },
-            { label: '2. 시작 옵션', desc: '시작 시 자동 실행 · 바로가기 만들기 선택' },
-            { label: '3. 설치 진행', desc: '설치 진행 상태 확인' },
-            { label: '4. 완료', desc: '설치 완료 후 바로 실행 또는 닫기' }
+          key: 'android',
+          label: 'Android',
+          subtitle: 'Windows 버전과 동일한 구성의 Android 앱(FreeView 3.3)으로 동작합니다.',
+          image: 'img/freeview-android.webp',
+          imageAlt: 'Android에서 실행 중인 FreeView 3.3 화면',
+          caption: 'Android에서 실행 중인 FreeView 3.3 실제 화면',
+          cards: [
+            {
+              title: '앱 화면 (FreeView 3.3)',
+              items: [
+                { label: '켜기 / 끄기', desc: '우회 기능을 켜고 끄는 단일 메인 버튼' },
+                { label: '로그 보기', desc: '현재 동작 상태와 처리 내역 확인' },
+                { label: '깃허브', desc: '소스 코드 및 릴리스 저장소 바로가기' },
+                { label: '업데이트 확인', desc: '새 버전 확인 및 업데이트' }
+              ]
+            },
+            {
+              title: '설치 과정 (GitHub APK)',
+              items: [
+                { label: '1. APK 다운로드', desc: 'GitHub Releases에서 최신 FreeView APK 파일 다운로드' },
+                { label: '2. APK 설치', desc: '다운로드한 APK 파일을 열어 앱 설치 진행' },
+                { label: '3. 권한 허용', desc: '첫 실행 시 로컬 VPN 연결 요청 허용' },
+                { label: '4. 완료', desc: '켜기 버튼을 눌러 즉시 우회 시작' }
+              ]
+            }
           ]
         }
       ]

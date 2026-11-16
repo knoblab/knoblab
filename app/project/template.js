@@ -233,6 +233,12 @@ function ProjectDetail({ projectId, darkMode, palette }) {
   const projectsList = window.projectsList || [];
   const project = projectsMap[projectId] || projectsList.find(p => p.id === projectId) || projectsList[0];
 
+  const [overviewTabIdx, setOverviewTabIdx] = React.useState(0);
+
+  React.useEffect(() => {
+    setOverviewTabIdx(0);
+  }, [projectId]);
+
   if (!project) {
     return (
       <div className="py-24 max-w-7xl mx-auto px-6 md:px-12 text-center font-mono-custom">
@@ -402,103 +408,133 @@ function ProjectDetail({ projectId, darkMode, palette }) {
         )}
 
         {/* 2.6 APP OVERVIEW & INSTALL FLOW */}
-        {project.appOverview && (
-          <section className="mb-20">
-            <div className="mb-8">
-              <h2 className="text-2xl sm:text-3xl font-normal tracking-tight mb-2">
-                {project.appOverview.title}
-              </h2>
-              {project.appOverview.subtitle && (
-                <p className="text-xs sm:text-sm leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                  {project.appOverview.subtitle}
-                </p>
-              )}
-            </div>
+        {project.appOverview && (() => {
+          const tabs = project.appOverview.tabs || null;
+          const activeOverview = tabs ? (tabs[overviewTabIdx] || tabs[0]) : project.appOverview;
 
-            {project.appOverview.image ? (
-              <div>
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                  <div
-                    className="lg:col-span-6 border overflow-hidden"
-                    style={{
-                      borderColor: darkMode ? palette.grey9 : palette.grey3,
-                      backgroundColor: darkMode ? palette.black : palette.white
-                    }}
-                  >
-                    <img
-                      src={project.appOverview.image}
-                      alt={project.appOverview.imageAlt || project.appOverview.title}
-                      className="w-full h-full object-cover block"
-                    />
-                  </div>
-
-                  <div className="lg:col-span-6 flex flex-col justify-between gap-4">
-                    {project.appOverview.cards.map((card, idx) => (
-                      <div
-                        key={idx}
-                        className="p-5 md:p-6 border"
-                        style={{
-                          borderColor: darkMode ? palette.grey9 : palette.grey3,
-                          backgroundColor: darkMode ? palette.black : palette.white
-                        }}
-                      >
-                        <h3 className="text-sm sm:text-base font-medium mb-3.5 pb-2.5 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
-                          {card.title}
-                        </h3>
-                        <div className="space-y-2.5">
-                          {card.items.map((item, iIdx) => (
-                            <div key={iIdx} className="grid grid-cols-12 gap-3 text-xs items-baseline">
-                              <div className="col-span-4 font-medium" style={{ color: projectAccent }}>
-                                {item.label}
-                              </div>
-                              <div className="col-span-8 leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                                {item.desc}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+          return (
+            <section className="mb-20">
+              <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                  <h2 className="text-2xl sm:text-3xl font-normal tracking-tight mb-2">
+                    {project.appOverview.title}
+                  </h2>
+                  {activeOverview.subtitle && (
+                    <p className="text-xs sm:text-sm leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                      {activeOverview.subtitle}
+                    </p>
+                  )}
                 </div>
-                {project.appOverview.caption && (
-                  <div className="mt-2.5 text-[11px] font-mono-custom" style={{ color: palette.grey7 }}>
-                    {project.appOverview.caption}
+
+                {tabs && tabs.length > 1 && (
+                  <div className="inline-flex self-start sm:self-auto border font-mono-custom text-xs" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3 }}>
+                    {tabs.map((tab, tIdx) => {
+                      const isActive = tIdx === overviewTabIdx;
+                      return (
+                        <button
+                          key={tab.key || tIdx}
+                          type="button"
+                          onClick={() => setOverviewTabIdx(tIdx)}
+                          className="px-4 py-2 transition-colors"
+                          style={{
+                            backgroundColor: isActive ? projectAccent : (darkMode ? palette.black : palette.white),
+                            color: isActive ? '#F7F6F2' : (darkMode ? palette.grey3 : palette.grey9),
+                            borderLeft: tIdx > 0 ? `1px solid ${darkMode ? palette.grey9 : palette.grey3}` : 'none'
+                          }}
+                        >
+                          {tab.label}
+                        </button>
+                      );
+                    })}
                   </div>
                 )}
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {project.appOverview.cards.map((card, idx) => (
-                  <div
-                    key={idx}
-                    className="p-6 md:p-8 border"
-                    style={{
-                      borderColor: darkMode ? palette.grey9 : palette.grey3,
-                      backgroundColor: darkMode ? palette.black : palette.white
-                    }}
-                  >
-                    <h3 className="text-base sm:text-lg font-medium mb-5 pb-3 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
-                      {card.title}
-                    </h3>
-                    <div className="space-y-3.5">
-                      {card.items.map((item, iIdx) => (
-                        <div key={iIdx} className="grid grid-cols-12 gap-3 text-xs sm:text-sm items-baseline">
-                          <div className="col-span-4 font-medium" style={{ color: projectAccent }}>
-                            {item.label}
-                          </div>
-                          <div className="col-span-8 leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                            {item.desc}
+
+              {activeOverview.image ? (
+                <div>
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                    <div
+                      className="lg:col-span-6 border overflow-hidden"
+                      style={{
+                        borderColor: darkMode ? palette.grey9 : palette.grey3,
+                        backgroundColor: darkMode ? palette.black : palette.white
+                      }}
+                    >
+                      <img
+                        src={activeOverview.image}
+                        alt={activeOverview.imageAlt || project.appOverview.title}
+                        className="w-full h-full object-cover block"
+                      />
+                    </div>
+
+                    <div className="lg:col-span-6 flex flex-col justify-between gap-4">
+                      {activeOverview.cards.map((card, idx) => (
+                        <div
+                          key={idx}
+                          className="p-5 md:p-6 border"
+                          style={{
+                            borderColor: darkMode ? palette.grey9 : palette.grey3,
+                            backgroundColor: darkMode ? palette.black : palette.white
+                          }}
+                        >
+                          <h3 className="text-sm sm:text-base font-medium mb-3.5 pb-2.5 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
+                            {card.title}
+                          </h3>
+                          <div className="space-y-2.5">
+                            {card.items.map((item, iIdx) => (
+                              <div key={iIdx} className="grid grid-cols-12 gap-3 text-xs items-baseline">
+                                <div className="col-span-4 font-medium" style={{ color: projectAccent }}>
+                                  {item.label}
+                                </div>
+                                <div className="col-span-8 leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                                  {item.desc}
+                                </div>
+                              </div>
+                            ))}
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
-          </section>
-        )}
+                  {activeOverview.caption && (
+                    <div className="mt-2.5 text-[11px] font-mono-custom" style={{ color: palette.grey7 }}>
+                      {activeOverview.caption}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {activeOverview.cards.map((card, idx) => (
+                    <div
+                      key={idx}
+                      className="p-6 md:p-8 border"
+                      style={{
+                        borderColor: darkMode ? palette.grey9 : palette.grey3,
+                        backgroundColor: darkMode ? palette.black : palette.white
+                      }}
+                    >
+                      <h3 className="text-base sm:text-lg font-medium mb-5 pb-3 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
+                        {card.title}
+                      </h3>
+                      <div className="space-y-3.5">
+                        {card.items.map((item, iIdx) => (
+                          <div key={iIdx} className="grid grid-cols-12 gap-3 text-xs sm:text-sm items-baseline">
+                            <div className="col-span-4 font-medium" style={{ color: projectAccent }}>
+                              {item.label}
+                            </div>
+                            <div className="col-span-8 leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                              {item.desc}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          );
+        })()}
 
         {/* 3. BACKGROUND & CHALLENGE VS SOLUTION */}
         {(project.problem || project.solution) && (
