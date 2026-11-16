@@ -191,6 +191,43 @@ function Projects({ darkMode, palette }) {
             </div>
           </div>
 
+          {/* Card 4 */}
+          <div
+            className="p-8 md:p-10 flex flex-col justify-between"
+            style={{
+              backgroundColor: darkMode ? palette.grey11 : palette.grey1,
+              border: `1px solid ${darkMode ? palette.grey9 : palette.grey3}`
+            }}
+          >
+            <div>
+              <div className="flex justify-between items-center text-xs font-mono-custom mb-6" style={{ color: palette.grey7 }}>
+                <span>PROJECT_05</span>
+                <span>Service</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-normal mb-3">asterisk*</h3>
+              <p className="text-xs leading-relaxed font-normal" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                asterisk*는 충남과학고등학교 학생들의 24시간 학교생활을 지원하기 위해 설계된 디지털 생태계 브랜드입니다.
+              </p>
+            </div>
+
+            <div className="mt-8 flex items-center justify-start">
+              <a
+                href="https://asterisk.knoblab.xyz"
+                className="px-5 py-3 border inline-flex items-center gap-2 font-mono-custom text-xs group hover:opacity-80 transition-all font-medium"
+                style={{
+                  borderColor: darkMode ? palette.grey9 : palette.grey3,
+                  color: palette.highlight,
+                  backgroundColor: darkMode ? palette.black : palette.white
+                }}
+              >
+                <div className="inline-flex items-center gap-2 transform group-hover:translate-x-1.5 transition-transform duration-300">
+                  <span>자세히 보기</span>
+                  {ArrowRight && <ArrowRight size={14} style={{ color: palette.highlight }} />}
+                </div>
+              </a>
+            </div>
+          </div>
+
         </div>
 
       </div>
