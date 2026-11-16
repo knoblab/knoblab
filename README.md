@@ -1,3 +1,11 @@
+<div align="center">
+
+<picture>
+  <img alt="cad" src="img/symbol-cad.svg" width="500"> 
+</picture>
+</div>
+
+
 # Knoblab
 
 > Personal development namespace and experimental laboratory for web engineering.
@@ -5,23 +13,31 @@
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/knoblab)
 [![npx wodn.js](https://img.shields.io/badge/npx-wodn.js-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/wodn.js)
 
-```bash
-$ npx wodn.js
-```
-
-[![Made with Antigravity IDE](./img/made-with-antigravity.svg)](https://antigravity.google)
-<br>
-[![Knoblab](./img/knoblab.svg)](https://knoblab.github.io/knoblab)
-
 ---
+
+## Services
+
+[![asterisk](./img/asterisk.svg)](https://cnsh.life)
+[![asterisk-community](./img/asterisk-community.svg)](https://asterisk-community.knoblab.xyz)
+[![Knoblab](./img/knoblab.svg)](https://knoblab.github.io/knoblab)
 
 ## Projects
 
-[![KNDS](https://img.shields.io/badge/Design-KNDS-AD1D1D?style=for-the-badge)](https://github.com/knoblab/KNDS)
 [![Freeview](https://img.shields.io/badge/App-FreeView-45707A?style=for-the-badge)](https://github.com/knoblab/freeview-sni)
+[![asterisk](https://img.shields.io/badge/service-asterisk-1C1C1E?style=for-the-badge)](https://github.com/knoblab/asterisk)
 [![wodn.js](https://img.shields.io/badge/CLI-wodn.js-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/wodn.js)
+
+## Design
+
+All design concepts and fine details across projects and services are crafted manually in Figma without AI. AI is utilized exclusively for code implementation.
 
 ## Contact
 - Terminal: `npx wodn.js`
 - GitHub: [@knoblab](https://github.com/knoblab)
 - Mail: contact@knoblab.xyz
+
+## Credits
+
+[![Made with Antigravity IDE](./img/made-with-antigravity.svg)](https://antigravity.google)
+
+---
