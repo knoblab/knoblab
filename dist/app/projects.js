@@ -31,7 +31,7 @@ function Projects({ darkMode, palette }) {
               </div>
               <h3 className="text-xl sm:text-2xl font-normal mb-3">FreeView</h3>
               <p className="text-xs leading-relaxed font-normal" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                Windows 환경에서 Tauri(Rust) 기반 로컬 프록시(127.0.0.1:8080)와 내부 DNS 캐시를 통해 백그라운드에서도 컴퓨터 자원을 거의 쓰지 않고 DPI 차단을 우회하는 경량 유틸리티입니다.
+                Windows에서 외부 서버를 거치지 않고 차단된 웹 접속을 여는 경량 프로그램입니다. 버튼 하나로 켜고 끌 수 있으며 창을 닫아도 백그라운드에서 가볍게 동작합니다.
               </p>
             </div>
 
