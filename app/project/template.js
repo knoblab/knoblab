@@ -5,6 +5,7 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
   const reductionRef = React.useRef(null);
   const targetRef = React.useRef(0);
   const displayRef = React.useRef(0);
+  const reachedEndTimeRef = React.useRef(0);
   const isLockedRef = React.useRef(false);
   const lastTouchYRef = React.useRef(null);
   const rafRef = React.useRef(null);
@@ -34,15 +35,16 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
     };
 
     const applyVisual = (p) => {
-      const exactVal = data.fromValue + (data.toValue - data.fromValue) * p;
+      const clampedP = Math.max(0, Math.min(1, p));
+      const exactVal = data.fromValue + (data.toValue - data.fromValue) * clampedP;
       const roundedVal = Math.round(exactVal);
       const reductionVal = Math.max(0, data.fromValue - roundedVal);
       if (barRef.current) {
         barRef.current.style.transform = `scaleX(${Math.max(0, exactVal / 100).toFixed(5)})`;
       }
       if (valueRef.current) {
-        valueRef.current.textContent = `${roundedVal}${data.unit}`;
-        valueRef.current.style.color = p >= 0.99 ? accentRef.current : textColorRef.current;
+        valueRef.current.textContent = `${reductionVal}${data.unit}`;
+        valueRef.current.style.color = clampedP >= 0.99 ? accentRef.current : textColorRef.current;
       }
       if (reductionRef.current) {
         reductionRef.current.textContent = `${reductionVal}${data.unit}`;
@@ -64,9 +66,10 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
       const dt = Math.min(0.05, Math.max(0.001, (now - lastTimeRef.current) / 1000));
       lastTimeRef.current = now;
 
-      const diff = targetRef.current - displayRef.current;
+      const visualTarget = Math.min(1, targetRef.current / 0.78);
+      const diff = visualTarget - displayRef.current;
       if (Math.abs(diff) < 0.001) {
-        displayRef.current = targetRef.current;
+        displayRef.current = visualTarget;
         applyVisual(displayRef.current);
         rafRef.current = null;
         lastTimeRef.current = null;
@@ -86,21 +89,34 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
       }
     };
 
+    const minHoldMs = 520;
+
     const setTarget = (next, immediate = false) => {
-      const clamped = Math.max(0, Math.min(1, next));
+      let clamped = Math.max(0, Math.min(1, next));
+      const prev = targetRef.current;
+      if (prev < 0.78 && clamped >= 0.78) {
+        reachedEndTimeRef.current = performance.now();
+      }
+      if (clamped >= 1 && !immediate) {
+        const elapsed = performance.now() - reachedEndTimeRef.current;
+        if (elapsed < minHoldMs) {
+          clamped = 0.96;
+        }
+      }
       targetRef.current = clamped;
       if (clamped <= 0 || clamped >= 1) {
         unlockScroll();
       }
       if (immediate) {
-        displayRef.current = clamped;
-        applyVisual(clamped);
+        const vis = Math.min(1, clamped / 0.78);
+        displayRef.current = vis;
+        applyVisual(vis);
       } else {
         startAnimation();
       }
     };
 
-    const scrubSpanPx = 780;
+    const scrubSpanPx = 980;
 
     const handleDelta = (deltaY, event) => {
       const el = containerRef.current;
@@ -212,15 +228,20 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
         <div className="text-xs font-mono-custom" style={{ color: palette.grey7 }}>
           {data.baselineLabel}
         </div>
-        <div
-          ref={valueRef}
-          className="text-2xl sm:text-3xl font-medium font-mono-custom tracking-tight"
-          style={{
-            color: darkMode ? palette.white : palette.black,
-            fontVariantNumeric: 'tabular-nums'
-          }}
-        >
-          {data.fromValue}{data.unit}
+        <div className="flex items-baseline gap-1.5">
+          <span
+            ref={valueRef}
+            className="text-2xl sm:text-3xl font-medium font-mono-custom tracking-tight"
+            style={{
+              color: darkMode ? palette.white : palette.black,
+              fontVariantNumeric: 'tabular-nums'
+            }}
+          >
+            0{data.unit}
+          </span>
+          <span className="text-xs font-normal" style={{ color: palette.grey7 }}>
+            감소
+          </span>
         </div>
       </div>
 
