@@ -183,6 +183,81 @@
         }
       ],
       footnote: '※ Cloudflare Speedtest(서울 서버) 기준 총 40회 교차 측정한 결과입니다. 첫 도메인 조회 시 약 5 ms가 소요되며, 이후에는 내부 DNS 캐시(최대 2,048개)가 적용됩니다.'
+    },
+    licenseInfo: {
+      title: '오픈소스 및 라이선스 규정',
+      subtitle: 'FreeView는 소스 코드가 투명하게 공개된 오픈소스 프로젝트로, MIT 라이선스 및 각 서드파티 구성 요소의 라이선스 규정을 준수합니다.',
+      mit: {
+        badge: 'MIT License',
+        copyright: 'Copyright (c) 2026 Knoblab',
+        summary: '누구나 무상으로 본 소프트웨어를 사용·복제·수정·병합·게시·배포할 수 있으나, 다음 핵심 규정을 준수해야 합니다.',
+        rules: [
+          {
+            label: '저작권 및 허가 고지 의무',
+            desc: '소프트웨어의 모든 복제본 또는 중요한 부분에 원저작권 표시(Copyright (c) 2026 Knoblab)와 본 허가 고지문을 반드시 포함해야 합니다.'
+          },
+          {
+            label: '무보증 및 면책 조항 (AS IS)',
+            desc: '소프트웨어는 상품성, 특정 목적 적합성 및 비침해성에 대한 보증 없이 "있는 그대로" 제공되며, 저작권자는 소프트웨어 사용으로 인한 어떠한 청구·손해·책임도 지지 않습니다.'
+          }
+        ],
+        fullText: `MIT License
+
+Copyright (c) 2026 Knoblab
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.`
+      },
+      thirdPartyRules: {
+        title: '서드파티 구성 요소별 라이선스 규정',
+        items: [
+          {
+            label: '번들 폰트 (SIL OFL-1.1)',
+            desc: 'IBM Plex Sans KR(Copyright 2018 IBM Corp.)은 SIL Open Font License 1.1이 적용됩니다. 소프트웨어와 함께 번들·재배포가 허용되나 폰트 파일 자체를 단독으로 유료 판매할 수 없으며, 수정 시 예약 폰트명(IBM Plex)을 사용할 수 없습니다.'
+          },
+          {
+            label: '재배포 바이너리 (Microsoft WebView2)',
+            desc: 'Windows 빌드에 포함되는 WebView2Loader.dll은 Microsoft Corporation의 저작물로, 본 저장소의 MIT 라이선스가 아닌 Microsoft WebView2 SDK 재배포 라이선스 약관이 별도 적용됩니다.'
+          },
+          {
+            label: 'MPL-2.0 전이 의존성 라이브러리',
+            desc: 'cssparser, selectors, dtoa-short, option-ext 등 MPL-2.0 라이선스 크레이트는 원본 소스 수정 없이 순수 라이브러리 의존성으로만 링크되어 파일 단위 카피레프트 규정을 준수합니다.'
+          },
+          {
+            label: '기타 허용형 오픈소스 (MIT · Apache-2.0 · ISC · BSD)',
+            desc: 'Tauri, Tokio, Hickory DNS, React 등 핵심 런타임 및 크레이트는 각 저작권 고지 및 라이선스 사본 보존 조건 하에 사용됩니다.'
+          }
+        ]
+      },
+      packages: [
+        { name: 'tauri / @tauri-apps/api', category: 'App Framework (Win · Android)', license: 'Apache-2.0 OR MIT', link: 'https://github.com/tauri-apps/tauri' },
+        { name: 'tokio / futures', category: 'Async Runtime', license: 'MIT / MIT OR Apache-2.0', link: 'https://github.com/tokio-rs/tokio' },
+        { name: 'hickory-resolver', category: 'Async DNS Resolver', license: 'MIT OR Apache-2.0', link: 'https://github.com/hickory-dns/hickory-dns' },
+        { name: 'serde / serde_json', category: 'Serialization', license: 'MIT OR Apache-2.0', link: 'https://github.com/serde-rs/serde' },
+        { name: 'windows-sys / windows-core / winreg', category: 'Windows Native API', license: 'MIT / MIT OR Apache-2.0', link: 'https://github.com/microsoft/windows-rs' },
+        { name: 'webview2-com / winresource', category: 'Windows WebView2 & Resource', license: 'MIT', link: 'https://github.com/wravery/webview2-rs' },
+        { name: 'netstack-smoltcp / jni / libc', category: 'Android VPN & JNI Bridge', license: 'MIT OR Apache-2.0 / GPL-3.0-or-later OR Apache-2.0', link: 'https://github.com/eycorsican/netstack-smoltcp' },
+        { name: 'react / react-dom', category: 'UI Library', license: 'MIT', link: 'https://github.com/facebook/react' },
+        { name: 'lucide-react', category: 'UI Icons', license: 'ISC', link: 'https://github.com/lucide-icons/lucide' },
+        { name: '@fontsource/ibm-plex-sans-kr', category: 'Bundled Font', license: 'OFL-1.1', link: 'https://github.com/fontsource/font-files' },
+        { name: 'cssparser / selectors / dtoa-short / option-ext', category: 'Transitive Crates (Unmodified)', license: 'MPL-2.0', link: 'https://github.com/servo/rust-cssparser' },
+        { name: 'WebView2Loader.dll', category: 'Redistributable Binary', license: 'Microsoft WebView2 SDK License', link: 'https://learn.microsoft.com/en-us/microsoft-edge/webview2/' }
+      ]
     }
   });
 })();

@@ -1502,6 +1502,190 @@ function ProjectDetail({ projectId, darkMode, palette }) {
           </section>
         )}
 
+        {/* 7. OPEN SOURCE & THIRD-PARTY LICENSES */}
+        {project.licenseInfo && (
+          <section className="mb-20">
+            <div className="mb-8">
+              <h2 className="text-2xl sm:text-3xl font-normal tracking-tight mb-2">
+                {project.licenseInfo.title}
+              </h2>
+              {project.licenseInfo.subtitle && (
+                <p className="text-xs sm:text-sm leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                  {project.licenseInfo.subtitle}
+                </p>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch mb-6">
+              {project.licenseInfo.mit && (
+                <div
+                  className="lg:col-span-6 p-6 md:p-8 border flex flex-col justify-between gap-6"
+                  style={{
+                    borderColor: darkMode ? palette.grey9 : palette.grey3,
+                    backgroundColor: darkMode ? palette.black : palette.white
+                  }}
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="text-xs font-mono-custom font-medium" style={{ color: projectAccent }}>
+                        {project.licenseInfo.mit.badge}
+                      </span>
+                      <span className="text-xs font-mono-custom" style={{ color: palette.grey7 }}>
+                        {project.licenseInfo.mit.copyright}
+                      </span>
+                    </div>
+                    <h3 className="text-base sm:text-lg font-medium mb-3">
+                      오픈소스 공개 및 MIT 라이선스 규정
+                    </h3>
+                    <p className="text-xs sm:text-sm leading-relaxed mb-5" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                      {project.licenseInfo.mit.summary}
+                    </p>
+
+                    <div className="space-y-3">
+                      {project.licenseInfo.mit.rules.map((rule, rIdx) => (
+                        <div
+                          key={rIdx}
+                          className="p-4 border"
+                          style={{
+                            borderColor: darkMode ? palette.grey9 : palette.grey3,
+                            backgroundColor: darkMode ? palette.grey11 : palette.grey1
+                          }}
+                        >
+                          <div className="text-xs font-medium mb-1" style={{ color: projectAccent }}>
+                            {rule.label}
+                          </div>
+                          <div className="text-xs leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                            {rule.desc}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {project.licenseInfo.mit.fullText && (
+                    <details
+                      className="border p-3.5 text-xs"
+                      style={{
+                        borderColor: darkMode ? palette.grey9 : palette.grey3,
+                        backgroundColor: darkMode ? palette.grey11 : palette.grey1
+                      }}
+                    >
+                      <summary className="cursor-pointer font-mono-custom select-none" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                        MIT License 전문 보기
+                      </summary>
+                      <pre
+                        className="mt-3 pt-3 border-t text-[11px] font-mono-custom whitespace-pre-wrap leading-relaxed overflow-x-auto"
+                        style={{
+                          borderColor: darkMode ? palette.grey9 : palette.grey3,
+                          color: palette.grey7
+                        }}
+                      >
+                        {project.licenseInfo.mit.fullText}
+                      </pre>
+                    </details>
+                  )}
+                </div>
+              )}
+
+              {project.licenseInfo.thirdPartyRules && (
+                <div
+                  className="lg:col-span-6 p-6 md:p-8 border flex flex-col justify-between"
+                  style={{
+                    borderColor: darkMode ? palette.grey9 : palette.grey3,
+                    backgroundColor: darkMode ? palette.grey11 : palette.grey1
+                  }}
+                >
+                  <div>
+                    <div className="text-xs font-mono-custom mb-3" style={{ color: projectAccent }}>
+                      Third-Party Compliance
+                    </div>
+                    <h3 className="text-base sm:text-lg font-medium mb-5">
+                      {project.licenseInfo.thirdPartyRules.title}
+                    </h3>
+                    <div className="space-y-3">
+                      {project.licenseInfo.thirdPartyRules.items.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="p-4 border"
+                          style={{
+                            borderColor: darkMode ? palette.grey9 : palette.grey3,
+                            backgroundColor: darkMode ? palette.black : palette.white
+                          }}
+                        >
+                          <div className="text-xs font-medium mb-1" style={{ color: darkMode ? palette.white : palette.black }}>
+                            {item.label}
+                          </div>
+                          <div className="text-xs leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                            {item.desc}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {project.licenseInfo.packages && project.licenseInfo.packages.length > 0 && (
+              <div
+                className="border overflow-x-auto"
+                style={{
+                  borderColor: darkMode ? palette.grey9 : palette.grey3,
+                  backgroundColor: darkMode ? palette.black : palette.white
+                }}
+              >
+                <table className="w-full text-left border-collapse min-w-[540px]">
+                  <thead>
+                    <tr
+                      className="text-xs font-mono-custom border-b"
+                      style={{
+                        borderColor: darkMode ? palette.grey9 : palette.grey3,
+                        backgroundColor: darkMode ? palette.grey11 : palette.grey1,
+                        color: darkMode ? palette.grey3 : palette.grey9
+                      }}
+                    >
+                      <th className="py-3.5 px-5 font-medium">구성 요소 / 패키지</th>
+                      <th className="py-3.5 px-5 font-medium">역할</th>
+                      <th className="py-3.5 px-5 font-medium">라이선스</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-xs">
+                    {project.licenseInfo.packages.map((pkg, idx) => (
+                      <tr
+                        key={idx}
+                        className="border-t"
+                        style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}
+                      >
+                        <td className="py-3.5 px-5 font-mono-custom font-medium whitespace-nowrap">
+                          {pkg.link ? (
+                            <a
+                              href={pkg.link}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="hover:underline"
+                              style={{ color: darkMode ? palette.white : palette.black }}
+                            >
+                              {pkg.name} ↗
+                            </a>
+                          ) : (
+                            <span>{pkg.name}</span>
+                          )}
+                        </td>
+                        <td className="py-3.5 px-5" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                          {pkg.category}
+                        </td>
+                        <td className="py-3.5 px-5 font-mono-custom whitespace-nowrap" style={{ color: projectAccent }}>
+                          {pkg.license}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+        )}
+
       </div>
     </div>
   );
