@@ -33,12 +33,13 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
     };
 
     const applyVisual = (p) => {
-      const val = Math.round(data.fromValue + (data.toValue - data.fromValue) * p);
+      const exactVal = data.fromValue + (data.toValue - data.fromValue) * p;
+      const roundedVal = Math.round(exactVal);
       if (barRef.current) {
-        barRef.current.style.width = `${val}%`;
+        barRef.current.style.transform = `scaleX(${Math.max(0, exactVal / 100).toFixed(5)})`;
       }
       if (valueRef.current) {
-        valueRef.current.textContent = `${val}${data.unit}`;
+        valueRef.current.textContent = `${roundedVal}${data.unit}`;
         valueRef.current.style.color = p >= 0.99 ? accentRef.current : textColorRef.current;
       }
     };
@@ -67,7 +68,7 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
         return;
       }
 
-      const factor = 1 - Math.exp(-dt * 14);
+      const factor = 1 - Math.exp(-dt * 8.5);
       displayRef.current += diff * factor;
       applyVisual(displayRef.current);
       rafRef.current = window.requestAnimationFrame(tick);
@@ -94,7 +95,7 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
       }
     };
 
-    const scrubSpanPx = 480;
+    const scrubSpanPx = 780;
 
     const handleDelta = (deltaY, event) => {
       const el = containerRef.current;
@@ -202,11 +203,12 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
       >
         <div
           ref={barRef}
-          className="h-full"
+          className="w-full h-full"
           style={{
-            width: `${data.fromValue}%`,
             backgroundColor: projectAccent,
-            willChange: 'width'
+            transformOrigin: 'left center',
+            transform: `scaleX(${data.fromValue / 100})`,
+            willChange: 'transform'
           }}
         />
       </div>
@@ -216,12 +218,15 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
 
 function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
   const sectionRef = React.useRef(null);
-  const trackRef = React.useRef(null);
+  const bar0Ref = React.useRef(null);
+  const bar1Ref = React.useRef(null);
   const mainBarRef = React.useRef(null);
   const mainValRef = React.useRef(null);
   const titleValRef = React.useRef(null);
   const subValRef = React.useRef(null);
   const waveRef = React.useRef(null);
+  const gridPatternRef = React.useRef(null);
+  const gridLineRef = React.useRef(null);
 
   const progressRef = React.useRef(0);
   const snappedRef = React.useRef(false);
@@ -229,15 +234,19 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
   const lastTouchYRef = React.useRef(null);
   const rafRef = React.useRef(null);
   const lastTimeRef = React.useRef(null);
-  const currentHRef = React.useRef(null);
-  const velocityHRef = React.useRef(0);
+
+  const currentVal3Ref = React.useRef(0);
+  const springPosRef = React.useRef(0);
+  const springVelRef = React.useRef(0);
+  const snapTimeRef = React.useRef(0);
 
   React.useEffect(() => {
-    const threshold = 0.88;
-    const scrubSpanPx = 1200;
-    const baseTrackH = 208;
-    const baseH = 24;
-    const finalH = 164;
+    const threshold = 0.72;
+    const scrubSpanPx = 1500;
+    const minHoldMs = 650;
+    const maxBarH = 160;
+    const dotUnitH = 2.2;
+    const settledUnitH = 26;
 
     const lockScroll = () => {
       if (isLockedRef.current) return;
@@ -256,28 +265,46 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
       isLockedRef.current = false;
     };
 
-    const getMaxScreenH = () => {
-      const vh = window.innerHeight || document.documentElement.clientHeight || 800;
-      return Math.max(460, Math.min(vh * 0.72, 680));
-    };
-
     const formatMultiple = (valNum) => {
-      if (valNum <= 1.04) return '1';
       if (valNum >= 171.55) return '171.6';
       return valNum.toFixed(1);
     };
 
-    const applyVisual = (heightPx, valNum, waveOpacity, waveScaleY) => {
-      const clampedBarH = Math.max(6, heightPx);
-      const nextTrackH = Math.max(baseTrackH, Math.round(clampedBarH + 44));
-      const formatted = formatMultiple(valNum);
+    const applyVisual = (val3, springRatio) => {
+      const clampedV3 = Math.max(0, Math.min(171.6, val3));
+      const scaleMax = Math.max(1.39, clampedV3);
 
-      if (trackRef.current) {
-        trackRef.current.style.height = `${nextTrackH}px`;
+      // 1 unit (1.0x) height in pixels before scale-break snap
+      const linearUnitH = Math.max(dotUnitH, (1.0 / scaleMax) * maxBarH);
+      // Blend from squashed dot unit height to settled scale-break unit height (26px per 1x)
+      const unitH = Math.max(2, linearUnitH + (settledUnitH - linearUnitH) * springRatio);
+
+      const h0 = unitH * 1.0;
+      const h1 = unitH * 1.39;
+      const linearH2 = Math.max(2, (clampedV3 / scaleMax) * maxBarH);
+      const snapDip = snappedRef.current ? (springRatio - 1) * 14 : 0;
+      const h2 = Math.max(2, Math.min(maxBarH + 12, linearH2 - snapDip));
+
+      if (bar0Ref.current) {
+        bar0Ref.current.style.height = `${h0.toFixed(2)}px`;
+      }
+      if (bar1Ref.current) {
+        bar1Ref.current.style.height = `${h1.toFixed(2)}px`;
       }
       if (mainBarRef.current) {
-        mainBarRef.current.style.height = `${Math.round(clampedBarH)}px`;
+        mainBarRef.current.style.height = `${h2.toFixed(2)}px`;
       }
+
+      // Update 1x-interval grid lines (anchored from bottom baseline, matching h0 = 1.0x exactly)
+      const gridStepPx = Math.max(2.6, h0);
+      if (gridPatternRef.current && gridLineRef.current) {
+        const stepStr = gridStepPx.toFixed(2);
+        gridPatternRef.current.setAttribute('height', stepStr);
+        gridLineRef.current.setAttribute('y1', stepStr);
+        gridLineRef.current.setAttribute('y2', stepStr);
+      }
+
+      const formatted = formatMultiple(clampedV3);
       if (mainValRef.current) {
         mainValRef.current.textContent = `${formatted}x`;
       }
@@ -287,9 +314,12 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
       if (subValRef.current) {
         subValRef.current.textContent = formatted;
       }
+
       if (waveRef.current) {
+        const waveOpacity = Math.max(0, Math.min(1, springRatio * 1.15));
+        const waveScale = Math.max(0.2, 0.2 + 0.8 * springRatio);
         waveRef.current.style.opacity = `${waveOpacity}`;
-        waveRef.current.style.transform = `scaleY(${waveScaleY})`;
+        waveRef.current.style.transform = `scaleY(${waveScale})`;
       }
     };
 
@@ -297,15 +327,13 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
     if (mediaQuery && mediaQuery.matches) {
       snappedRef.current = true;
       progressRef.current = 1;
-      currentHRef.current = finalH;
-      applyVisual(finalH, 171.6, 1, 1);
+      currentVal3Ref.current = 171.6;
+      springPosRef.current = 1;
+      applyVisual(171.6, 1);
       return;
     }
 
-    if (currentHRef.current === null) {
-      currentHRef.current = baseH;
-      applyVisual(baseH, 1.0, 0, 0.2);
-    }
+    applyVisual(currentVal3Ref.current, springPosRef.current);
 
     const tick = (now) => {
       if (lastTimeRef.current === null) {
@@ -314,30 +342,23 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
       const dt = Math.min(0.032, Math.max(0.001, (now - lastTimeRef.current) / 1000));
       lastTimeRef.current = now;
 
-      const maxScreenH = getMaxScreenH();
-
       if (snappedRef.current) {
-        // Underdamped spring physics snapping the stretched card & bar back to finalH
-        const stiffness = 280;
-        const damping = 13;
-        const displacement = currentHRef.current - finalH;
-        const springForce = -stiffness * displacement;
-        const dampingForce = -damping * velocityHRef.current;
-        const accel = springForce + dampingForce;
+        currentVal3Ref.current = 171.6;
+        // Underdamped spring driving 2.0 & 2.1 from dots (0) back up to abbreviated heights (1)
+        const stiffness = 260;
+        const damping = 12;
+        const displacement = springPosRef.current - 1;
+        const accel = -stiffness * displacement - damping * springVelRef.current;
 
-        velocityHRef.current += accel * dt;
-        currentHRef.current += velocityHRef.current * dt;
+        springVelRef.current += accel * dt;
+        springPosRef.current += springVelRef.current * dt;
 
-        const settleRatio = Math.max(0, Math.min(1, 1 - Math.max(0, currentHRef.current - finalH) / Math.max(1, maxScreenH - finalH)));
-        const waveOpacity = Math.min(1, Math.pow(settleRatio, 1.4) * 1.3);
-        const waveScale = 0.3 + 0.7 * Math.min(1, settleRatio * 1.15);
+        applyVisual(171.6, springPosRef.current);
 
-        applyVisual(currentHRef.current, 171.6, waveOpacity, waveScale);
-
-        if (Math.abs(displacement) < 0.4 && Math.abs(velocityHRef.current) < 2) {
-          currentHRef.current = finalH;
-          velocityHRef.current = 0;
-          applyVisual(finalH, 171.6, 1, 1);
+        if (Math.abs(displacement) < 0.004 && Math.abs(springVelRef.current) < 0.02) {
+          springPosRef.current = 1;
+          springVelRef.current = 0;
+          applyVisual(171.6, 1);
           rafRef.current = null;
           lastTimeRef.current = null;
           return;
@@ -346,22 +367,22 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
         rafRef.current = window.requestAnimationFrame(tick);
       } else {
         const normP = Math.max(0, Math.min(1, progressRef.current / threshold));
-        const easedP = Math.pow(normP, 1.25);
-        const targetH = baseH + (maxScreenH - baseH) * easedP;
-        const diff = targetH - currentHRef.current;
+        // First 22% of scroll climbs 0.0 -> 1.39 so user sees 3.3 catch up to 2.1, then 1.39 -> 171.6 crushes 2.0 & 2.1 into dots
+        const targetVal3 = normP <= 0.22
+          ? (normP / 0.22) * 1.39
+          : 1.39 + Math.pow((normP - 0.22) / 0.78, 1.8) * (171.6 - 1.39);
 
-        const factor = 1 - Math.exp(-dt * 10);
-        currentHRef.current += diff * factor;
-        velocityHRef.current = diff * 8;
+        const diff = targetVal3 - currentVal3Ref.current;
+        const factor = 1 - Math.exp(-dt * 11);
+        currentVal3Ref.current += diff * factor;
+        springPosRef.current = 0;
+        springVelRef.current = 0;
 
-        const displayRatio = Math.max(0, Math.min(1, (currentHRef.current - baseH) / Math.max(1, maxScreenH - baseH)));
-        const valNum = 1 + 170.6 * displayRatio;
+        applyVisual(currentVal3Ref.current, 0);
 
-        applyVisual(currentHRef.current, valNum, 0, 0.2);
-
-        if (Math.abs(diff) < 0.5) {
-          currentHRef.current = targetH;
-          applyVisual(targetH, 1 + 170.6 * easedP, 0, 0.2);
+        if (Math.abs(diff) < 0.02) {
+          currentVal3Ref.current = targetVal3;
+          applyVisual(targetVal3, 0);
           rafRef.current = null;
           lastTimeRef.current = null;
           return;
@@ -384,18 +405,30 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
 
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || document.documentElement.clientHeight;
+      const centerY = rect.top + rect.height / 2;
 
-      if (deltaY > 0 && !snappedRef.current && (isLockedRef.current || (rect.top <= vh * 0.62 && rect.bottom >= vh * 0.25))) {
+      if (deltaY > 0 && progressRef.current < 1 && (isLockedRef.current || (!snappedRef.current && centerY <= vh * 0.52 && centerY >= vh * 0.18))) {
         if (event.cancelable) event.preventDefault();
         if (event.stopImmediatePropagation) event.stopImmediatePropagation();
         lockScroll();
         const nextP = Math.max(0, Math.min(1, progressRef.current + deltaY / scrubSpanPx));
         progressRef.current = nextP;
 
-        if (nextP >= threshold) {
+        if (!snappedRef.current && nextP >= threshold) {
           snappedRef.current = true;
-          velocityHRef.current = -460;
-          unlockScroll();
+          snapTimeRef.current = performance.now();
+          currentVal3Ref.current = 171.6;
+          springPosRef.current = 0;
+          springVelRef.current = 3.2;
+        }
+
+        if (snappedRef.current && nextP >= 1) {
+          const elapsed = performance.now() - snapTimeRef.current;
+          if (elapsed >= minHoldMs) {
+            unlockScroll();
+          } else {
+            progressRef.current = 0.96;
+          }
         }
         startAnimation();
         return;
@@ -437,20 +470,22 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || document.documentElement.clientHeight;
-      if (rect.top >= vh * 0.65) {
+      if (rect.top >= vh * 0.78) {
         if (snappedRef.current || progressRef.current > 0) {
           snappedRef.current = false;
           progressRef.current = 0;
-          velocityHRef.current = 0;
-          currentHRef.current = baseH;
-          applyVisual(baseH, 1.0, 0, 0.2);
+          currentVal3Ref.current = 0;
+          springPosRef.current = 0;
+          springVelRef.current = 0;
+          applyVisual(0, 0);
         }
       } else if (rect.bottom <= 0 && !snappedRef.current) {
         snappedRef.current = true;
         progressRef.current = 1;
-        velocityHRef.current = 0;
-        currentHRef.current = finalH;
-        applyVisual(finalH, 171.6, 1, 1);
+        currentVal3Ref.current = 171.6;
+        springPosRef.current = 1;
+        springVelRef.current = 0;
+        applyVisual(171.6, 1);
       }
     };
 
@@ -477,7 +512,7 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
     return (
       <>
         {parts[0]}
-        <span ref={refObj} style={{ fontVariantNumeric: 'tabular-nums' }}>1</span>
+        <span ref={refObj} style={{ fontVariantNumeric: 'tabular-nums' }}>0.0</span>
         {parts.slice(1).join('171.6')}
       </>
     );
@@ -506,20 +541,42 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
             }}
           >
             <div
-              ref={trackRef}
-              className="grid grid-cols-3 gap-3 sm:gap-6 items-end pt-6 px-4 border-b relative overflow-hidden"
+              className="grid grid-cols-3 gap-3 sm:gap-6 items-end h-52 pt-6 px-4 border-b relative overflow-hidden"
               style={{
-                height: '208px',
                 borderColor: darkMode ? palette.grey9 : palette.grey3,
-                gridTemplateColumns: `repeat(${data.bars.length}, minmax(0, 1fr))`,
-                willChange: 'height'
+                gridTemplateColumns: `repeat(${data.bars.length}, minmax(0, 1fr))`
               }}
             >
-              <div className="absolute inset-x-0 top-1/3 border-t border-dashed pointer-events-none" style={{ borderColor: darkMode ? `${palette.grey9}80` : `${palette.grey3}90` }} />
-              <div className="absolute inset-x-0 top-2/3 border-t border-dashed pointer-events-none" style={{ borderColor: darkMode ? `${palette.grey9}80` : `${palette.grey3}90` }} />
+              <svg
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                style={{ transform: 'scaleY(-1)' }}
+              >
+                <defs>
+                  <pattern
+                    ref={gridPatternRef}
+                    id="rust-unit-grid"
+                    width="8"
+                    height="115.11"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <line
+                      ref={gridLineRef}
+                      x1="0"
+                      y1="115.11"
+                      x2="8"
+                      y2="115.11"
+                      stroke={darkMode ? `${palette.grey9}90` : `${palette.grey3}B0`}
+                      strokeWidth="1"
+                      strokeDasharray="4 4"
+                    />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#rust-unit-grid)" />
+              </svg>
               {data.bars.map((bar, idx) => {
                 const isAnimatedBar = Boolean(bar.scaleBreak);
-                const staticHeightPx = Math.max(8, Math.round(bar.heightPct * 1.7));
+                const barRefToUse = idx === 0 ? bar0Ref : idx === 1 ? bar1Ref : mainBarRef;
+                const initHeightPx = idx === 0 ? 115 : idx === 1 ? 160 : 2;
                 return (
                   <div key={idx} className="flex flex-col justify-end items-center relative z-10">
                     <span
@@ -530,16 +587,16 @@ function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
                         fontVariantNumeric: 'tabular-nums'
                       }}
                     >
-                      {isAnimatedBar ? '1x' : bar.valueText}
+                      {isAnimatedBar ? '0.0x' : bar.valueText}
                     </span>
                     <div
-                      ref={isAnimatedBar ? mainBarRef : null}
+                      ref={barRefToUse}
                       className="w-full max-w-[56px] sm:max-w-[64px] relative shrink-0"
                       style={{
-                        height: isAnimatedBar ? '24px' : `${staticHeightPx}px`,
-                        minHeight: '6px',
+                        height: `${initHeightPx}px`,
+                        minHeight: '2px',
                         backgroundColor: bar.accent ? projectAccent : palette.grey7,
-                        willChange: isAnimatedBar ? 'height' : 'auto'
+                        willChange: 'height'
                       }}
                     >
                       {bar.scaleBreak && (
