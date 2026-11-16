@@ -42,6 +42,49 @@ function App() {
   const isProjectPage = route.startsWith('#/project/') || route.startsWith('#project/');
   const currentProjectId = isProjectPage ? route.replace(/^#\/?project\//, '').split('?')[0].split('#')[0] : null;
 
+  useEffect(() => {
+    const defaultTitle = 'Knoblab — Tuning the Web to Your Frequency | Creative UI';
+    const defaultDesc = 'Refined interactive web experiences, tactile design systems, and user-centric web applications by Knoblab.';
+    const defaultImage = 'https://knoblab.github.io/knoblab/img/og.webp';
+
+    let nextTitle = defaultTitle;
+    let nextDesc = defaultDesc;
+    let nextImage = defaultImage;
+
+    if (isDesignPage) {
+      nextTitle = 'KUDS — Knoblab Universal Design System | Knoblab';
+      nextDesc = '한국 전통 색채와 절제된 하드웨어 감성을 결합한 Knoblab의 통합 디자인 시스템(KUDS)입니다.';
+    } else if (isProjectPage && currentProjectId) {
+      const projectsMap = window.projectsMap || {};
+      const projectsList = window.projectsList || [];
+      const proj = projectsMap[currentProjectId] || projectsList.find(p => p.id === currentProjectId);
+      if (proj) {
+        nextTitle = `${proj.title} — ${proj.tagline || 'Knoblab Project'}`;
+        nextDesc = proj.summary || proj.tagline || defaultDesc;
+        const overviewImg = proj.appOverview?.tabs?.[0]?.image || proj.appOverview?.image;
+        if (overviewImg) {
+          nextImage = `https://knoblab.github.io/knoblab/${overviewImg.replace(/^\.?\//, '')}`;
+        }
+      }
+    }
+
+    document.title = nextTitle;
+
+    const setMeta = (selector, attr, val) => {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute(attr, val);
+    };
+
+    setMeta('meta[name="description"]', 'content', nextDesc);
+    setMeta('meta[property="og:title"]', 'content', nextTitle);
+    setMeta('meta[property="og:description"]', 'content', nextDesc);
+    setMeta('meta[property="og:image"]', 'content', nextImage);
+    setMeta('meta[property="og:image:secure_url"]', 'content', nextImage);
+    setMeta('meta[name="twitter:title"]', 'content', nextTitle);
+    setMeta('meta[name="twitter:description"]', 'content', nextDesc);
+    setMeta('meta[name="twitter:image"]', 'content', nextImage);
+  }, [route, isDesignPage, isProjectPage, currentProjectId]);
+
   const palette = {
     black: '#2B2B2E',
     white: '#F7F6F2',

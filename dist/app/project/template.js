@@ -214,6 +214,442 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
   );
 }
 
+function ScrollRustPerformance({ data, darkMode, palette, projectAccent }) {
+  const sectionRef = React.useRef(null);
+  const trackRef = React.useRef(null);
+  const mainBarRef = React.useRef(null);
+  const mainValRef = React.useRef(null);
+  const titleValRef = React.useRef(null);
+  const subValRef = React.useRef(null);
+  const waveRef = React.useRef(null);
+
+  const progressRef = React.useRef(0);
+  const snappedRef = React.useRef(false);
+  const isLockedRef = React.useRef(false);
+  const lastTouchYRef = React.useRef(null);
+  const rafRef = React.useRef(null);
+  const lastTimeRef = React.useRef(null);
+  const currentHRef = React.useRef(null);
+  const velocityHRef = React.useRef(0);
+
+  React.useEffect(() => {
+    const threshold = 0.88;
+    const scrubSpanPx = 1200;
+    const baseTrackH = 208;
+    const baseH = 24;
+    const finalH = 164;
+
+    const lockScroll = () => {
+      if (isLockedRef.current) return;
+      const sbWidth = window.innerWidth - document.documentElement.clientWidth;
+      if (sbWidth > 0) {
+        document.documentElement.style.paddingRight = `${sbWidth}px`;
+      }
+      document.documentElement.style.overflow = 'hidden';
+      isLockedRef.current = true;
+    };
+
+    const unlockScroll = () => {
+      if (!isLockedRef.current) return;
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.paddingRight = '';
+      isLockedRef.current = false;
+    };
+
+    const getMaxScreenH = () => {
+      const vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      return Math.max(460, Math.min(vh * 0.72, 680));
+    };
+
+    const formatMultiple = (valNum) => {
+      if (valNum <= 1.04) return '1';
+      if (valNum >= 171.55) return '171.6';
+      return valNum.toFixed(1);
+    };
+
+    const applyVisual = (heightPx, valNum, waveOpacity, waveScaleY) => {
+      const clampedBarH = Math.max(6, heightPx);
+      const nextTrackH = Math.max(baseTrackH, Math.round(clampedBarH + 44));
+      const formatted = formatMultiple(valNum);
+
+      if (trackRef.current) {
+        trackRef.current.style.height = `${nextTrackH}px`;
+      }
+      if (mainBarRef.current) {
+        mainBarRef.current.style.height = `${Math.round(clampedBarH)}px`;
+      }
+      if (mainValRef.current) {
+        mainValRef.current.textContent = `${formatted}x`;
+      }
+      if (titleValRef.current) {
+        titleValRef.current.textContent = formatted;
+      }
+      if (subValRef.current) {
+        subValRef.current.textContent = formatted;
+      }
+      if (waveRef.current) {
+        waveRef.current.style.opacity = `${waveOpacity}`;
+        waveRef.current.style.transform = `scaleY(${waveScaleY})`;
+      }
+    };
+
+    const mediaQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaQuery && mediaQuery.matches) {
+      snappedRef.current = true;
+      progressRef.current = 1;
+      currentHRef.current = finalH;
+      applyVisual(finalH, 171.6, 1, 1);
+      return;
+    }
+
+    if (currentHRef.current === null) {
+      currentHRef.current = baseH;
+      applyVisual(baseH, 1.0, 0, 0.2);
+    }
+
+    const tick = (now) => {
+      if (lastTimeRef.current === null) {
+        lastTimeRef.current = now;
+      }
+      const dt = Math.min(0.032, Math.max(0.001, (now - lastTimeRef.current) / 1000));
+      lastTimeRef.current = now;
+
+      const maxScreenH = getMaxScreenH();
+
+      if (snappedRef.current) {
+        // Underdamped spring physics snapping the stretched card & bar back to finalH
+        const stiffness = 280;
+        const damping = 13;
+        const displacement = currentHRef.current - finalH;
+        const springForce = -stiffness * displacement;
+        const dampingForce = -damping * velocityHRef.current;
+        const accel = springForce + dampingForce;
+
+        velocityHRef.current += accel * dt;
+        currentHRef.current += velocityHRef.current * dt;
+
+        const settleRatio = Math.max(0, Math.min(1, 1 - Math.max(0, currentHRef.current - finalH) / Math.max(1, maxScreenH - finalH)));
+        const waveOpacity = Math.min(1, Math.pow(settleRatio, 1.4) * 1.3);
+        const waveScale = 0.3 + 0.7 * Math.min(1, settleRatio * 1.15);
+
+        applyVisual(currentHRef.current, 171.6, waveOpacity, waveScale);
+
+        if (Math.abs(displacement) < 0.4 && Math.abs(velocityHRef.current) < 2) {
+          currentHRef.current = finalH;
+          velocityHRef.current = 0;
+          applyVisual(finalH, 171.6, 1, 1);
+          rafRef.current = null;
+          lastTimeRef.current = null;
+          return;
+        }
+
+        rafRef.current = window.requestAnimationFrame(tick);
+      } else {
+        const normP = Math.max(0, Math.min(1, progressRef.current / threshold));
+        const easedP = Math.pow(normP, 1.25);
+        const targetH = baseH + (maxScreenH - baseH) * easedP;
+        const diff = targetH - currentHRef.current;
+
+        const factor = 1 - Math.exp(-dt * 10);
+        currentHRef.current += diff * factor;
+        velocityHRef.current = diff * 8;
+
+        const displayRatio = Math.max(0, Math.min(1, (currentHRef.current - baseH) / Math.max(1, maxScreenH - baseH)));
+        const valNum = 1 + 170.6 * displayRatio;
+
+        applyVisual(currentHRef.current, valNum, 0, 0.2);
+
+        if (Math.abs(diff) < 0.5) {
+          currentHRef.current = targetH;
+          applyVisual(targetH, 1 + 170.6 * easedP, 0, 0.2);
+          rafRef.current = null;
+          lastTimeRef.current = null;
+          return;
+        }
+
+        rafRef.current = window.requestAnimationFrame(tick);
+      }
+    };
+
+    const startAnimation = () => {
+      if (rafRef.current === null) {
+        lastTimeRef.current = null;
+        rafRef.current = window.requestAnimationFrame(tick);
+      }
+    };
+
+    const handleDelta = (deltaY, event) => {
+      const el = sectionRef.current;
+      if (!el) return;
+
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+
+      if (deltaY > 0 && !snappedRef.current && (isLockedRef.current || (rect.top <= vh * 0.62 && rect.bottom >= vh * 0.25))) {
+        if (event.cancelable) event.preventDefault();
+        if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+        lockScroll();
+        const nextP = Math.max(0, Math.min(1, progressRef.current + deltaY / scrubSpanPx));
+        progressRef.current = nextP;
+
+        if (nextP >= threshold) {
+          snappedRef.current = true;
+          velocityHRef.current = -460;
+          unlockScroll();
+        }
+        startAnimation();
+        return;
+      }
+
+      if (deltaY < 0 && !snappedRef.current && progressRef.current > 0 && isLockedRef.current) {
+        if (event.cancelable) event.preventDefault();
+        if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+        const nextP = Math.max(0, progressRef.current + deltaY / scrubSpanPx);
+        progressRef.current = nextP;
+        if (nextP <= 0) {
+          unlockScroll();
+        }
+        startAnimation();
+      }
+    };
+
+    const onWheel = (e) => {
+      handleDelta(e.deltaY, e);
+    };
+
+    const onTouchStart = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        lastTouchYRef.current = e.touches[0].clientY;
+      }
+    };
+
+    const onTouchMove = (e) => {
+      if (!e.touches || e.touches.length === 0 || lastTouchYRef.current === null) return;
+      const currentY = e.touches[0].clientY;
+      const deltaY = lastTouchYRef.current - currentY;
+      lastTouchYRef.current = currentY;
+      handleDelta(deltaY, e);
+    };
+
+    const onScroll = () => {
+      if (isLockedRef.current) return;
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      if (rect.top >= vh * 0.65) {
+        if (snappedRef.current || progressRef.current > 0) {
+          snappedRef.current = false;
+          progressRef.current = 0;
+          velocityHRef.current = 0;
+          currentHRef.current = baseH;
+          applyVisual(baseH, 1.0, 0, 0.2);
+        }
+      } else if (rect.bottom <= 0 && !snappedRef.current) {
+        snappedRef.current = true;
+        progressRef.current = 1;
+        velocityHRef.current = 0;
+        currentHRef.current = finalH;
+        applyVisual(finalH, 171.6, 1, 1);
+      }
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false, capture: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true, capture: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false, capture: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      unlockScroll();
+      window.removeEventListener('wheel', onWheel, { capture: true });
+      window.removeEventListener('touchstart', onTouchStart, { capture: true });
+      window.removeEventListener('touchmove', onTouchMove, { capture: true });
+      window.removeEventListener('scroll', onScroll);
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
+
+  const renderAnimatedText = (text, refObj) => {
+    if (!text || !text.includes('171.6')) return text;
+    const parts = text.split('171.6');
+    return (
+      <>
+        {parts[0]}
+        <span ref={refObj} style={{ fontVariantNumeric: 'tabular-nums' }}>1</span>
+        {parts.slice(1).join('171.6')}
+      </>
+    );
+  };
+
+  return (
+    <section ref={sectionRef} className="mb-20 relative">
+      <div className="mb-8">
+        <h2 className="text-2xl sm:text-3xl font-normal tracking-tight mb-2">
+          {renderAnimatedText(data.title, titleValRef)}
+        </h2>
+        {data.subtitle && (
+          <p className="text-xs sm:text-sm leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+            {renderAnimatedText(data.subtitle, subValRef)}
+          </p>
+        )}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div className="lg:col-span-5">
+          <div
+            className="p-5 md:p-6 border h-full flex flex-col justify-between"
+            style={{
+              borderColor: darkMode ? palette.grey9 : palette.grey3,
+              backgroundColor: darkMode ? palette.grey11 : palette.grey1
+            }}
+          >
+            <div
+              ref={trackRef}
+              className="grid grid-cols-3 gap-3 sm:gap-6 items-end pt-6 px-4 border-b relative overflow-hidden"
+              style={{
+                height: '208px',
+                borderColor: darkMode ? palette.grey9 : palette.grey3,
+                gridTemplateColumns: `repeat(${data.bars.length}, minmax(0, 1fr))`,
+                willChange: 'height'
+              }}
+            >
+              <div className="absolute inset-x-0 top-1/3 border-t border-dashed pointer-events-none" style={{ borderColor: darkMode ? `${palette.grey9}80` : `${palette.grey3}90` }} />
+              <div className="absolute inset-x-0 top-2/3 border-t border-dashed pointer-events-none" style={{ borderColor: darkMode ? `${palette.grey9}80` : `${palette.grey3}90` }} />
+              {data.bars.map((bar, idx) => {
+                const isAnimatedBar = Boolean(bar.scaleBreak);
+                const staticHeightPx = Math.max(8, Math.round(bar.heightPct * 1.7));
+                return (
+                  <div key={idx} className="flex flex-col justify-end items-center relative z-10">
+                    <span
+                      ref={isAnimatedBar ? mainValRef : null}
+                      className="text-xs sm:text-sm font-mono-custom font-medium mb-2 whitespace-nowrap"
+                      style={{
+                        color: bar.accent ? projectAccent : palette.grey7,
+                        fontVariantNumeric: 'tabular-nums'
+                      }}
+                    >
+                      {isAnimatedBar ? '1x' : bar.valueText}
+                    </span>
+                    <div
+                      ref={isAnimatedBar ? mainBarRef : null}
+                      className="w-full max-w-[56px] sm:max-w-[64px] relative shrink-0"
+                      style={{
+                        height: isAnimatedBar ? '24px' : `${staticHeightPx}px`,
+                        minHeight: '6px',
+                        backgroundColor: bar.accent ? projectAccent : palette.grey7,
+                        willChange: isAnimatedBar ? 'height' : 'auto'
+                      }}
+                    >
+                      {bar.scaleBreak && (
+                        <svg
+                          ref={waveRef}
+                          viewBox="0 0 100 22"
+                          preserveAspectRatio="none"
+                          className="absolute left-[-4%] w-[108%] h-[18px] pointer-events-none"
+                          style={{
+                            top: '42%',
+                            opacity: 0,
+                            transform: 'scaleY(0.2)',
+                            transformOrigin: 'center center'
+                          }}
+                        >
+                          <path
+                            d="M -4 7 C 16 1, 34 13, 50 7 C 66 1, 84 13, 104 7 L 104 15 C 84 21, 66 9, 50 15 C 34 21, 16 9, -4 15 Z"
+                            fill={darkMode ? palette.grey11 : palette.grey1}
+                          />
+                          <path
+                            d="M -2 7 C 16 1, 34 13, 50 7 C 66 1, 84 13, 102 7"
+                            fill="none"
+                            stroke={bar.accent ? projectAccent : palette.grey7}
+                            strokeWidth="1.5"
+                            vectorEffect="non-scaling-stroke"
+                          />
+                          <path
+                            d="M -2 15 C 16 9, 34 21, 50 15 C 66 9, 84 21, 102 15"
+                            fill="none"
+                            stroke={bar.accent ? projectAccent : palette.grey7}
+                            strokeWidth="1.5"
+                            vectorEffect="non-scaling-stroke"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div
+              className="grid grid-cols-3 gap-3 sm:gap-6 px-4 pt-3 text-center text-xs font-mono-custom"
+              style={{
+                gridTemplateColumns: `repeat(${data.bars.length}, minmax(0, 1fr))`
+              }}
+            >
+              {data.bars.map((bar, idx) => (
+                <span
+                  key={idx}
+                  className={bar.accent ? 'font-medium' : ''}
+                  style={{ color: bar.accent ? (darkMode ? palette.white : palette.black) : palette.grey7 }}
+                >
+                  {bar.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="lg:col-span-7 p-6 md:p-8 border flex flex-col justify-between gap-6"
+          style={{
+            borderColor: darkMode ? palette.grey9 : palette.grey3,
+            backgroundColor: darkMode ? palette.black : palette.white
+          }}
+        >
+          <div>
+            {data.cardTitle && (
+              <h3 className="text-base sm:text-lg font-medium mb-3">
+                {data.cardTitle}
+              </h3>
+            )}
+            <p className="text-xs sm:text-sm leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+              {data.desc}
+            </p>
+          </div>
+
+          {data.highlights && data.highlights.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
+              {data.highlights.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-4 border"
+                  style={{
+                    borderColor: darkMode ? palette.grey9 : palette.grey3,
+                    backgroundColor: darkMode ? palette.grey11 : palette.grey1
+                  }}
+                >
+                  <div className="text-[11px] font-mono-custom mb-1" style={{ color: projectAccent }}>
+                    {item.label}
+                  </div>
+                  <div className="text-xs sm:text-sm font-medium">
+                    {item.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {data.footnote && (
+        <p className="mt-2.5 text-[11px] leading-relaxed" style={{ color: palette.grey7 }}>
+          {data.footnote}
+        </p>
+      )}
+    </section>
+  );
+}
+
 function ProjectDetail({ projectId, darkMode, palette }) {
   const {
     ArrowLeft,
@@ -595,150 +1031,12 @@ function ProjectDetail({ projectId, darkMode, palette }) {
 
         {/* 3.45 RUST PERFORMANCE (VERTICAL BAR CHART) */}
         {project.rustPerformance && (
-          <section className="mb-20">
-            <div className="mb-8">
-              <h2 className="text-2xl sm:text-3xl font-normal tracking-tight mb-2">
-                {project.rustPerformance.title}
-              </h2>
-              {project.rustPerformance.subtitle && (
-                <p className="text-xs sm:text-sm leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                  {project.rustPerformance.subtitle}
-                </p>
-              )}
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-              <div className="lg:col-span-5">
-                <div
-                  className="p-5 md:p-6 border h-full flex flex-col justify-between"
-                  style={{
-                    borderColor: darkMode ? palette.grey9 : palette.grey3,
-                    backgroundColor: darkMode ? palette.grey11 : palette.grey1
-                  }}
-                >
-                  <div
-                    className="grid grid-cols-3 gap-3 sm:gap-6 items-end h-52 pt-6 px-4 border-b relative"
-                    style={{
-                      borderColor: darkMode ? palette.grey9 : palette.grey3,
-                      gridTemplateColumns: `repeat(${project.rustPerformance.bars.length}, minmax(0, 1fr))`
-                    }}
-                  >
-                    <div className="absolute inset-x-0 top-1/3 border-t border-dashed pointer-events-none" style={{ borderColor: darkMode ? `${palette.grey9}80` : `${palette.grey3}90` }} />
-                    <div className="absolute inset-x-0 top-2/3 border-t border-dashed pointer-events-none" style={{ borderColor: darkMode ? `${palette.grey9}80` : `${palette.grey3}90` }} />
-                    {project.rustPerformance.bars.map((bar, idx) => (
-                      <div key={idx} className="h-full flex flex-col justify-end items-center relative z-10">
-                        <span
-                          className="text-xs sm:text-sm font-mono-custom font-medium mb-2 whitespace-nowrap"
-                          style={{ color: bar.accent ? projectAccent : palette.grey7 }}
-                        >
-                          {bar.valueText}
-                        </span>
-                        <div
-                          className="w-full max-w-[56px] sm:max-w-[64px] relative shrink-0"
-                          style={{
-                            height: `${Math.round(bar.heightPct * 0.82)}%`,
-                            minHeight: '6px',
-                            backgroundColor: bar.accent ? projectAccent : palette.grey7
-                          }}
-                        >
-                          {bar.scaleBreak && (
-                            <svg
-                              viewBox="0 0 100 22"
-                              preserveAspectRatio="none"
-                              className="absolute left-[-4%] w-[108%] h-[18px] pointer-events-none"
-                              style={{ top: '42%' }}
-                            >
-                              <path
-                                d="M -4 7 C 16 1, 34 13, 50 7 C 66 1, 84 13, 104 7 L 104 15 C 84 21, 66 9, 50 15 C 34 21, 16 9, -4 15 Z"
-                                fill={darkMode ? palette.grey11 : palette.grey1}
-                              />
-                              <path
-                                d="M -2 7 C 16 1, 34 13, 50 7 C 66 1, 84 13, 102 7"
-                                fill="none"
-                                stroke={bar.accent ? projectAccent : palette.grey7}
-                                strokeWidth="1.5"
-                                vectorEffect="non-scaling-stroke"
-                              />
-                              <path
-                                d="M -2 15 C 16 9, 34 21, 50 15 C 66 9, 84 21, 102 15"
-                                fill="none"
-                                stroke={bar.accent ? projectAccent : palette.grey7}
-                                strokeWidth="1.5"
-                                vectorEffect="non-scaling-stroke"
-                              />
-                            </svg>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div
-                    className="grid grid-cols-3 gap-3 sm:gap-6 px-4 pt-3 text-center text-xs font-mono-custom"
-                    style={{
-                      gridTemplateColumns: `repeat(${project.rustPerformance.bars.length}, minmax(0, 1fr))`
-                    }}
-                  >
-                    {project.rustPerformance.bars.map((bar, idx) => (
-                      <span
-                        key={idx}
-                        className={bar.accent ? 'font-medium' : ''}
-                        style={{ color: bar.accent ? (darkMode ? palette.white : palette.black) : palette.grey7 }}
-                      >
-                        {bar.label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="lg:col-span-7 p-6 md:p-8 border flex flex-col justify-between gap-6"
-                style={{
-                  borderColor: darkMode ? palette.grey9 : palette.grey3,
-                  backgroundColor: darkMode ? palette.black : palette.white
-                }}
-              >
-                <div>
-                  {project.rustPerformance.cardTitle && (
-                    <h3 className="text-base sm:text-lg font-medium mb-3">
-                      {project.rustPerformance.cardTitle}
-                    </h3>
-                  )}
-                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                    {project.rustPerformance.desc}
-                  </p>
-                </div>
-
-                {project.rustPerformance.highlights && project.rustPerformance.highlights.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
-                    {project.rustPerformance.highlights.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="p-4 border"
-                        style={{
-                          borderColor: darkMode ? palette.grey9 : palette.grey3,
-                          backgroundColor: darkMode ? palette.grey11 : palette.grey1
-                        }}
-                      >
-                        <div className="text-[11px] font-mono-custom mb-1" style={{ color: projectAccent }}>
-                          {item.label}
-                        </div>
-                        <div className="text-xs sm:text-sm font-medium">
-                          {item.value}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {project.rustPerformance.footnote && (
-              <p className="mt-2.5 text-[11px] leading-relaxed" style={{ color: palette.grey7 }}>
-                {project.rustPerformance.footnote}
-              </p>
-            )}
-          </section>
+          <ScrollRustPerformance
+            data={project.rustPerformance}
+            darkMode={darkMode}
+            palette={palette}
+            projectAccent={projectAccent}
+          />
         )}
 
         {/* 3.5 RESOURCE COMPARISON & BACKGROUND FOOTPRINT (UNIFIED FLOW) */}
