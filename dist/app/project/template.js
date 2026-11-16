@@ -2,6 +2,7 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
   const containerRef = React.useRef(null);
   const barRef = React.useRef(null);
   const valueRef = React.useRef(null);
+  const reductionRef = React.useRef(null);
   const targetRef = React.useRef(0);
   const displayRef = React.useRef(0);
   const isLockedRef = React.useRef(false);
@@ -35,12 +36,16 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
     const applyVisual = (p) => {
       const exactVal = data.fromValue + (data.toValue - data.fromValue) * p;
       const roundedVal = Math.round(exactVal);
+      const reductionVal = Math.max(0, data.fromValue - roundedVal);
       if (barRef.current) {
         barRef.current.style.transform = `scaleX(${Math.max(0, exactVal / 100).toFixed(5)})`;
       }
       if (valueRef.current) {
         valueRef.current.textContent = `${roundedVal}${data.unit}`;
         valueRef.current.style.color = p >= 0.99 ? accentRef.current : textColorRef.current;
+      }
+      if (reductionRef.current) {
+        reductionRef.current.textContent = `${reductionVal}${data.unit}`;
       }
     };
 
@@ -169,15 +174,40 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
     };
   }, [data.fromValue, data.toValue, data.unit]);
 
+  const targetReductionStr = `${data.fromValue - data.toValue}${data.unit}`;
+  const renderSubtitle = (text) => {
+    if (!text || !text.includes(targetReductionStr)) return text;
+    const parts = text.split(targetReductionStr);
+    return (
+      <>
+        {parts[0]}
+        <span ref={reductionRef} style={{ fontVariantNumeric: 'tabular-nums' }}>0{data.unit}</span>
+        {parts.slice(1).join(targetReductionStr)}
+      </>
+    );
+  };
+
   return (
-    <div
-      ref={containerRef}
-      className="p-5 md:p-6 border"
-      style={{
-        borderColor: darkMode ? palette.grey9 : palette.grey3,
-        backgroundColor: darkMode ? palette.black : palette.white
-      }}
-    >
+    <div>
+      <div className="mb-8">
+        <h2 className="text-2xl sm:text-3xl font-normal tracking-tight mb-2">
+          {data.title}
+        </h2>
+        {data.subtitle && (
+          <p className="text-xs sm:text-sm leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+            {renderSubtitle(data.subtitle)}
+          </p>
+        )}
+      </div>
+
+      <div
+        ref={containerRef}
+        className="p-5 md:p-6 border"
+        style={{
+          borderColor: darkMode ? palette.grey9 : palette.grey3,
+          backgroundColor: darkMode ? palette.black : palette.white
+        }}
+      >
       <div className="flex flex-wrap items-baseline justify-between gap-3 mb-3">
         <div className="text-xs font-mono-custom" style={{ color: palette.grey7 }}>
           {data.baselineLabel}
@@ -211,6 +241,7 @@ function ScrollResourceDiff({ data, darkMode, palette, projectAccent }) {
             willChange: 'transform'
           }}
         />
+      </div>
       </div>
     </div>
   );
@@ -1099,19 +1130,6 @@ function ProjectDetail({ projectId, darkMode, palette }) {
         {/* 3.5 RESOURCE COMPARISON & BACKGROUND FOOTPRINT (UNIFIED FLOW) */}
         {(project.resourceComparison || project.resourceFootprint) && (
           <section className="mb-20">
-            {project.resourceComparison && (
-              <div className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-normal tracking-tight mb-2">
-                  {project.resourceComparison.title}
-                </h2>
-                {project.resourceComparison.subtitle && (
-                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                    {project.resourceComparison.subtitle}
-                  </p>
-                )}
-              </div>
-            )}
-
             <div className="space-y-6">
               {project.resourceComparison && (
                 <ScrollResourceDiff
