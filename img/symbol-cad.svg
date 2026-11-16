@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap');
+      .dim-text {
+        font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+        font-size: 22px;
+        font-weight: 500;
+        fill: #2B2B2E;
+      }
+      .dim-line {
+        stroke: #888783;
+        stroke-width: 1.6;
+        fill: none;
+      }
+      .axis-line {
+        stroke: #C2C1BB;
+        stroke-width: 1.5;
+        stroke-dasharray: 8 6;
+      }
+      .bound-line {
+        stroke: #DCD9D2;
+        stroke-width: 1.2;
+        stroke-dasharray: 4 4;
+        fill: none;
+      }
+      .geo-shape {
+        fill: none;
+        stroke: #2B2B2E;
+        stroke-width: 3.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .arrowhead {
+        fill: #888783;
+      }
+    </style>
+
+    <!-- Arrowhead markers -->
+    <marker id="arrow-start" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 10 1.5 L 0 5 L 10 8.5 z" class="arrowhead" />
+    </marker>
+    <marker id="arrow-end" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" class="arrowhead" />
+    </marker>
+  </defs>
+
+  <!-- Background: Base White (#F7F6F2) -->
+  <rect width="100%" height="100%" fill="#F7F6F2" />
+
+  <!-- Outer 320x320 Bounding Box (Scaled x2 = 640x640) -->
+  <rect x="180" y="180" width="640" height="640" class="bound-line" />
+
+  <!-- Center Coordinate Axes -->
+  <line x1="80" y1="500" x2="920" y2="500" class="axis-line" />
+  <line x1="500" y1="80" x2="500" y2="920" class="axis-line" />
+
+  <!-- Geometry Outlines (Knoblab Geometric Symbol) -->
+  <g>
+    <!-- 1. Top-Left Ring Quadrant (Inner R100=200, Outer R160=320, Thickness 60=120) -->
+    <path d="M 500 300 L 500 180 A 320 320 0 0 0 180 500 L 300 500 A 200 200 0 0 1 500 300 Z" class="geo-shape" />
+
+    <!-- 2. Bottom-Left Solid Quarter Circle (R100=200) -->
+    <path d="M 500 500 L 300 500 A 200 200 0 0 0 500 700 Z" class="geo-shape" />
+
+    <!-- 3. Top-Right Solid Square (100x100 = 200x200) -->
+    <rect x="500" y="300" width="200" height="200" class="geo-shape" />
+
+    <!-- 4. Bottom-Right Ring Quadrant (Inner R100=200, Outer R160=320, Thickness 60=120) -->
+    <path d="M 500 700 L 500 820 A 320 320 0 0 0 820 500 L 700 500 A 200 200 0 0 1 500 700 Z" class="geo-shape" />
+  </g>
+
+  <!-- Center Crosshair Origin (+) -->
+  <line x1="485" y1="500" x2="515" y2="500" stroke="#2B2B2E" stroke-width="3" />
+  <line x1="500" y1="485" x2="500" y2="515" stroke="#2B2B2E" stroke-width="3" />
+
+  <!-- Technical Dimensions & Annotations -->
+  <g>
+    <!-- R160 Dimension Leader (Top-Left 135 deg) -->
+    <line x1="500" y1="500" x2="274" y2="274" class="dim-line" marker-end="url(#arrow-end)" />
+    <text x="215" y="260" class="dim-text">R160</text>
+
+    <!-- R100 Dimension Leader (Bottom-Left 225 deg) -->
+    <line x1="500" y1="500" x2="359" y2="641" class="dim-line" marker-end="url(#arrow-end)" />
+    <text x="310" y="685" class="dim-text">R100</text>
+
+    <!-- Square Width 100 Dimension Line (Top) -->
+    <line x1="500" y1="290" x2="500" y2="238" class="dim-line" />
+    <line x1="700" y1="290" x2="700" y2="238" class="dim-line" />
+    <line x1="500" y1="250" x2="700" y2="250" class="dim-line" marker-start="url(#arrow-start)" marker-end="url(#arrow-end)" />
+    <text x="600" y="240" class="dim-text" text-anchor="middle">100</text>
+
+    <!-- Square Height 100 Dimension Line (Right) -->
+    <line x1="710" y1="300" x2="762" y2="300" class="dim-line" />
+    <line x1="710" y1="500" x2="762" y2="500" class="dim-line" />
+    <line x1="750" y1="300" x2="750" y2="500" class="dim-line" marker-start="url(#arrow-start)" marker-end="url(#arrow-end)" />
+    <text x="772" y="408" class="dim-text">100</text>
+
+    <!-- Overall Width 320 Dimension Line (Bottom) -->
+    <line x1="180" y1="830" x2="180" y2="905" class="dim-line" />
+    <line x1="820" y1="830" x2="820" y2="905" class="dim-line" />
+    <line x1="180" y1="885" x2="820" y2="885" class="dim-line" marker-start="url(#arrow-start)" marker-end="url(#arrow-end)" />
+    <text x="500" y="922" class="dim-text" text-anchor="middle">320</text>
+
+    <!-- 90 deg Angle Dimension Indicator (Center Quadrant) -->
+    <path d="M 550 500 A 50 50 0 0 0 500 450" fill="none" stroke="#888783" stroke-width="1.5" stroke-dasharray="3 3" />
+    <text x="540" y="468" font-family="'IBM Plex Sans', sans-serif" font-size="18" font-weight="500" fill="#2B2B2E">90°</text>
+  </g>
+</svg>
