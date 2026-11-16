@@ -9,10 +9,6 @@ function Overview({ darkMode, palette }) {
   return (
     <section id="overview" className="relative z-20 py-16 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="text-xs font-mono-custom mb-6" style={{ color: palette.highlight }}>
-          01 // Key Capabilities
-        </div>
-
         <div className="divide-y" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
           {capabilities.map((item, index) => (
             <a

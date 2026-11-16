@@ -213,7 +213,265 @@ function ProjectDetail({ projectId, darkMode, palette }) {
           </section>
         )}
 
-        {/* 4. KEY ENGINEERING FEATURES */}
+        {/* 4. BENCHMARK & PERFORMANCE COMPARISON */}
+        {project.benchmark && (
+          <section className="mb-20">
+            <div className="mb-8">
+              <div className="text-xs font-mono-custom mb-2" style={{ color: projectAccent }}>
+                [ PERFORMANCE BENCHMARK ]
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-normal tracking-tight mb-3">
+                {project.benchmark.title}
+              </h2>
+              {project.benchmark.subtitle && (
+                <p className="text-xs sm:text-sm leading-relaxed max-w-3xl" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                  {project.benchmark.subtitle}
+                </p>
+              )}
+            </div>
+
+            {/* 4.1 Test Overview */}
+            {project.benchmark.overview && project.benchmark.overview.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                {project.benchmark.overview.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 border"
+                    style={{
+                      borderColor: darkMode ? palette.grey9 : palette.grey3,
+                      backgroundColor: darkMode ? palette.grey11 : palette.grey1
+                    }}
+                  >
+                    <div className="text-[11px] font-mono-custom mb-1.5" style={{ color: projectAccent }}>
+                      {item.label}
+                    </div>
+                    <div className="text-xs sm:text-sm font-medium leading-relaxed mb-1">
+                      {item.value}
+                    </div>
+                    {item.meta && (
+                      <div className="text-[11px] font-mono-custom" style={{ color: palette.grey7 }}>
+                        {item.meta}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* 4.2 Highlight KPIs */}
+            {project.benchmark.highlights && project.benchmark.highlights.length > 0 && (
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                {project.benchmark.highlights.map((kpi, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 border"
+                    style={{
+                      borderColor: darkMode ? palette.grey9 : palette.grey3,
+                      backgroundColor: darkMode ? palette.black : palette.white
+                    }}
+                  >
+                    <div className="text-[11px] font-mono-custom mb-2" style={{ color: palette.grey7 }}>
+                      {kpi.label}
+                    </div>
+                    <div className="text-xl sm:text-2xl font-medium tracking-tight mb-1.5" style={{ color: projectAccent }}>
+                      {kpi.value}
+                    </div>
+                    <div className="text-[11px] leading-snug" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                      {kpi.note}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* 4.3 Core Comparison Table */}
+            {project.benchmark.rows && project.benchmark.rows.length > 0 && (
+              <div
+                className="border overflow-x-auto"
+                style={{
+                  borderColor: darkMode ? palette.grey9 : palette.grey3,
+                  backgroundColor: darkMode ? palette.black : palette.white
+                }}
+              >
+                <table className="w-full text-left border-collapse min-w-[760px]">
+                  <thead>
+                    <tr
+                      className="text-[11px] font-mono-custom border-b"
+                      style={{
+                        borderColor: darkMode ? palette.grey9 : palette.grey3,
+                        backgroundColor: darkMode ? palette.grey11 : palette.grey1,
+                        color: darkMode ? palette.grey3 : palette.grey9
+                      }}
+                    >
+                      <th className="py-3.5 px-4 font-medium">항목</th>
+                      <th className="py-3.5 px-4 font-medium">평가 기준</th>
+                      <th className="py-3.5 px-4 font-medium">미사용 (Direct)</th>
+                      <th className="py-3.5 px-4 font-medium">FreeView 사용 지수</th>
+                      <th className="py-3.5 px-4 font-medium">95% 신뢰구간</th>
+                      <th className="py-3.5 px-4 font-medium">체감 평가</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-xs">
+                    {project.benchmark.rows.map((row, idx) => (
+                      <tr
+                        key={idx}
+                        className="border-t transition-colors"
+                        style={{
+                          borderColor: darkMode ? palette.grey9 : palette.grey1,
+                          backgroundColor: row.tone === 'note'
+                            ? (darkMode ? `${palette.grey11}80` : `${palette.grey1}80`)
+                            : 'transparent'
+                        }}
+                      >
+                        <td className="py-3.5 px-4 font-medium whitespace-nowrap">
+                          <span>{row.metric}</span>
+                          {row.noteRef && (
+                            <span
+                              className="ml-2 px-1.5 py-0.5 text-[10px] font-mono-custom border"
+                              style={{
+                                borderColor: darkMode ? palette.grey9 : palette.grey3,
+                                color: projectAccent
+                              }}
+                            >
+                              {row.noteRef}
+                            </span>
+                          )}
+                        </td>
+                        <td className="py-3.5 px-4 font-mono-custom whitespace-nowrap" style={{ color: palette.grey7 }}>
+                          {row.direction}
+                        </td>
+                        <td className="py-3.5 px-4 font-mono-custom whitespace-nowrap" style={{ color: palette.grey7 }}>
+                          {row.direct}
+                        </td>
+                        <td
+                          className="py-3.5 px-4 font-mono-custom font-medium whitespace-nowrap"
+                          style={{
+                            color: row.tone === 'positive'
+                              ? projectAccent
+                              : (darkMode ? palette.white : palette.black)
+                          }}
+                        >
+                          {row.index}
+                        </td>
+                        <td className="py-3.5 px-4 font-mono-custom whitespace-nowrap" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                          {row.ci}
+                        </td>
+                        <td className="py-3.5 px-4" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                          {row.assessment}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {/* 4.4 Anomaly Interpretation Notes */}
+            {project.benchmark.notes && project.benchmark.notes.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                {project.benchmark.notes.map((note, idx) => (
+                  <div
+                    key={idx}
+                    className="p-6 border"
+                    style={{
+                      borderColor: darkMode ? palette.grey9 : palette.grey3,
+                      backgroundColor: darkMode ? palette.grey11 : palette.grey1
+                    }}
+                  >
+                    {note.tag && (
+                      <div className="text-[11px] font-mono-custom mb-2" style={{ color: projectAccent }}>
+                        {note.tag}
+                      </div>
+                    )}
+                    <h3 className="text-sm sm:text-base font-medium leading-snug mb-3">
+                      {note.title}
+                    </h3>
+                    <ul className="space-y-2 text-xs leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                      {note.points.map((pt, pIdx) => (
+                        <li key={pIdx} className="flex gap-2 items-start">
+                          <span className="font-mono-custom shrink-0" style={{ color: projectAccent }}>·</span>
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* 4.5 SYSTEM RESOURCE FOOTPRINT */}
+        {project.resourceFootprint && (
+          <section className="mb-20">
+            <div
+              className="p-6 md:p-8 border grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+              style={{
+                borderColor: darkMode ? palette.grey9 : palette.grey3,
+                backgroundColor: darkMode ? palette.grey11 : palette.grey1
+              }}
+            >
+              <div className="lg:col-span-6">
+                {project.resourceFootprint.tag && (
+                  <div className="text-[11px] font-mono-custom mb-2" style={{ color: projectAccent }}>
+                    {project.resourceFootprint.tag}
+                  </div>
+                )}
+                <h3 className="text-xl sm:text-2xl font-normal tracking-tight mb-3">
+                  {project.resourceFootprint.title}
+                </h3>
+                <p className="text-xs sm:text-sm leading-relaxed mb-6" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
+                  {project.resourceFootprint.desc}
+                </p>
+
+                {project.resourceFootprint.metrics && project.resourceFootprint.metrics.length > 0 && (
+                  <div className="grid grid-cols-3 gap-3">
+                    {project.resourceFootprint.metrics.map((m, idx) => (
+                      <div
+                        key={idx}
+                        className="p-4 border"
+                        style={{
+                          borderColor: darkMode ? palette.grey9 : palette.grey3,
+                          backgroundColor: darkMode ? palette.black : palette.white
+                        }}
+                      >
+                        <div className="text-[11px] font-mono-custom mb-1" style={{ color: palette.grey7 }}>
+                          {m.label}
+                        </div>
+                        <div className="text-lg sm:text-xl font-medium font-mono-custom" style={{ color: projectAccent }}>
+                          {m.value}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="lg:col-span-6">
+                <div
+                  className="border overflow-hidden"
+                  style={{
+                    borderColor: darkMode ? palette.grey9 : palette.grey3,
+                    backgroundColor: darkMode ? palette.black : palette.white
+                  }}
+                >
+                  <img
+                    src={project.resourceFootprint.image}
+                    alt={project.resourceFootprint.imageAlt || project.resourceFootprint.title}
+                    className="w-full h-auto block"
+                  />
+                </div>
+                {project.resourceFootprint.caption && (
+                  <div className="mt-2.5 text-[11px] font-mono-custom" style={{ color: palette.grey7 }}>
+                    {project.resourceFootprint.caption}
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 5. KEY ENGINEERING FEATURES */}
         {project.features && project.features.length > 0 && (
           <section className="mb-20">
             <h2 className="text-2xl sm:text-3xl font-normal tracking-tight mb-8">
@@ -246,7 +504,7 @@ function ProjectDetail({ projectId, darkMode, palette }) {
           </section>
         )}
 
-        {/* 5. TECHNICAL ARCHITECTURE PIPELINE */}
+        {/* 6. TECHNICAL ARCHITECTURE PIPELINE */}
         {project.architecture && project.architecture.length > 0 && (
           <section className="mb-20">
             <h2 className="text-2xl sm:text-3xl font-normal tracking-tight mb-8">

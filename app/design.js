@@ -140,8 +140,6 @@ function Design({ darkMode, palette }) {
           </a>
 
           <div className="flex items-center gap-2" style={{ color: palette.grey7 }}>
-            <span>SPEC-01</span>
-            <span>//</span>
             <span>KUDS DESIGN SYSTEM</span>
           </div>
         </div>
@@ -337,13 +335,10 @@ function Design({ darkMode, palette }) {
         <section className="mb-28">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
-              <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-                02 // Typography System
-              </span>
               <h2 className="text-2xl sm:text-4xl font-normal tracking-tight">Unified Type Architecture</h2>
             </div>
             <p className="text-xs font-mono-custom mt-3 md:mt-0" style={{ color: palette.grey7 }}>
-              Specimen // IBM Plex Sans & Pretendard
+              IBM Plex Sans & Pretendard
             </p>
           </div>
 
@@ -389,7 +384,7 @@ function Design({ darkMode, palette }) {
                 {/* Korean */}
                 <div>
                   <div className="text-xs font-mono-custom mb-1" style={{ color: palette.highlight }}>
-                    KOREAN // 한국어
+                    한국어
                   </div>
                   <div className="text-xl sm:text-2xl font-normal tracking-tight mb-1">
                     가나다라마바사아자차카타파하
@@ -405,7 +400,7 @@ function Design({ darkMode, palette }) {
                 {/* Japanese */}
                 <div className="pt-6 border-t" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
                   <div className="text-xs font-mono-custom mb-1" style={{ color: palette.highlight }}>
-                    JAPANESE // 日本語 (Hiragana, Katakana & Kanji)
+                    日本語 (Hiragana, Katakana & Kanji)
                   </div>
                   <div className="text-xl sm:text-2xl font-normal tracking-tight mb-1">
                     あいうえおかきくけこ アイウエオカキクケコ
@@ -421,7 +416,7 @@ function Design({ darkMode, palette }) {
                 {/* Extended Latin & Diacritics */}
                 <div className="pt-6 border-t" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
                   <div className="text-xs font-mono-custom mb-1" style={{ color: palette.highlight }}>
-                    EXTENDED LATIN // Diacritics & Accents
+                    Extended Latin (Diacritics & Accents)
                   </div>
                   <div className="text-base sm:text-lg font-normal tracking-tight leading-relaxed break-all" style={{ color: darkMode ? palette.white : palette.black }}>
                     ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïñòóôõöøùúûüýÿ
@@ -441,7 +436,7 @@ function Design({ darkMode, palette }) {
               <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div>
                   <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-                    HEADINGS & DISPLAY // IBM PLEX SANS
+                    IBM PLEX SANS
                   </span>
                   <p className="text-xs font-sans leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
                     단정하고 기계적인 조형미를 지닌 산세리프 글꼴로, 자간과 행간을 정밀하게 제어하여 헤드라인과 디스플레이 텍스트에 뛰어난 시각적 통일감을 제공합니다.
@@ -453,10 +448,10 @@ function Design({ darkMode, palette }) {
 
                 <div>
                   <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-                    BODY & TELEMETRY LABELS // MULTILINGUAL SANS
+                    MULTILINGUAL SANS
                   </span>
                   <p className="text-xs font-sans leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                    라벨과 메타데이터(`01 //`), 기술 파라미터부터 다국어 본문 단락까지 일관된 폰트 패밀리를 적용하여 전 세계 언어 환경에서 조화로운 판독성을 완성합니다.
+                    라벨과 메타데이터, 기술 파라미터부터 다국어 본문 단락까지 일관된 폰트 패밀리를 적용하여 전 세계 언어 환경에서 조화로운 판독성을 완성합니다.
                   </p>
                   <div className="mt-3 text-xs font-mono-custom" style={{ color: palette.grey7 }}>
                     Weight: 400 / 500
@@ -472,21 +467,21 @@ function Design({ darkMode, palette }) {
               </div>
               <div className="md:col-span-9 space-y-5">
                 <div>
-                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.highlight }}>300 Light // Display Subtitle</span>
+                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.highlight }}>300 Light · Display Subtitle</span>
                   <div className="text-xl sm:text-2xl font-light tracking-tight">Tuning the Web to Your Frequency.</div>
                 </div>
                 <div>
-                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.highlight }}>400 Regular // Body Paragraph</span>
+                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.highlight }}>400 Regular · Body Paragraph</span>
                   <div className="text-base sm:text-lg font-normal leading-relaxed" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
                     노브를 섬세하게 돌리듯 사용자의 환경에 최적화된 웹 인터랙션을 제공합니다.
                   </div>
                 </div>
                 <div>
-                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.highlight }}>500 Medium // Section Headings</span>
+                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.highlight }}>500 Medium · Section Headings</span>
                   <div className="text-xl sm:text-2xl font-medium tracking-tight">Design System & Component Architecture</div>
                 </div>
                 <div>
-                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.highlight }}>600 SemiBold // Key Emphasis</span>
+                  <span className="text-[11px] font-mono-custom block mb-1" style={{ color: palette.highlight }}>600 SemiBold · Key Emphasis</span>
                   <div className="text-xl sm:text-2xl font-semibold tracking-tight">Purity, Progress, Performance</div>
                 </div>
               </div>
@@ -500,9 +495,6 @@ function Design({ darkMode, palette }) {
         <section className="mb-28">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
-              <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-                03 // Structure & Primitives
-              </span>
               <h2 className="text-2xl sm:text-4xl font-normal tracking-tight">Hairline & Marking Grid</h2>
             </div>
             <p className="text-xs font-mono-custom mt-3 md:mt-0 max-w-xs" style={{ color: palette.grey7 }}>
@@ -520,8 +512,6 @@ function Design({ darkMode, palette }) {
           >
             <div className="max-w-3xl">
               <div className="flex items-center gap-3 text-xs font-mono-custom mb-4" style={{ color: palette.highlight }}>
-                <span>SURFACE SYSTEM // 01</span>
-                <span>//</span>
                 <span>12PX CONTINUOUS HAIRLINE GRID</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-normal tracking-tight mb-4">
@@ -565,9 +555,6 @@ function Design({ darkMode, palette }) {
               }}
             >
               <div>
-                <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-                  BORDER HIERARCHY // 02
-                </span>
                 <h3 className="text-xl sm:text-2xl font-normal mb-3">1px Hairline Boundary</h3>
                 <p className="text-xs leading-relaxed mb-6" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
                   인위적인 드롭 섀도우(Drop Shadow)를 일체 사용하지 않고, 오직 1px의 명확한 테두리와 분할선으로 모든 공간과 데이터의 위계를 구분합니다.
@@ -575,15 +562,15 @@ function Design({ darkMode, palette }) {
 
                 <div className="space-y-3 font-mono-custom text-xs">
                   <div className="p-3 border flex justify-between items-center" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3, backgroundColor: darkMode ? palette.black : palette.white }}>
-                    <span>01 // Outer Container Boundary</span>
+                    <span>01. Outer Container Boundary</span>
                     <span className="text-[11px]" style={{ color: palette.grey7 }}>1px solid (grey1 / grey9)</span>
                   </div>
                   <div className="p-3 border flex justify-between items-center" style={{ borderColor: darkMode ? palette.grey9 : palette.grey3, backgroundColor: darkMode ? palette.black : palette.white }}>
-                    <span>02 // Internal Divide Line</span>
+                    <span>02. Internal Divide Line</span>
                     <span className="text-[11px]" style={{ color: palette.grey7 }}>divide-y (grey1 / grey9)</span>
                   </div>
                   <div className="p-3 border flex justify-between items-center" style={{ borderColor: palette.highlight, backgroundColor: darkMode ? '#262F1F' : '#EFF5EC' }}>
-                    <span style={{ color: palette.highlight }}>03 // Active Focus & Hover</span>
+                    <span style={{ color: palette.highlight }}>03. Active Focus & Hover</span>
                     <span className="text-[11px]" style={{ color: palette.highlight }}>1px solid {palette.highlight}</span>
                   </div>
                 </div>
@@ -604,9 +591,6 @@ function Design({ darkMode, palette }) {
               }}
             >
               <div>
-                <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-                  CONTROL PRIMITIVES // 03
-                </span>
                 <h3 className="text-xl sm:text-2xl font-normal mb-3">Tactile Control Triggers</h3>
                 <p className="text-xs leading-relaxed mb-6" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
                   아날로그 물리 스위치를 누르는 듯한 즉각적이고 명확한 피드백을 전달하는 핵심 컴포넌트 프리미티브입니다.
@@ -680,9 +664,6 @@ function Design({ darkMode, palette }) {
           >
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
               <div>
-                <span className="text-xs font-mono-custom block mb-1" style={{ color: palette.highlight }}>
-                  MODULAR CONTAINER SPECIFICATION // 04
-                </span>
                 <h3 className="text-xl sm:text-2xl font-normal">Datasheet Module Architecture</h3>
               </div>
               <p className="text-xs max-w-md font-sans" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
@@ -699,8 +680,8 @@ function Design({ darkMode, palette }) {
               }}
             >
               <div className="flex justify-between items-center text-xs font-mono-custom pb-3 mb-5 border-b" style={{ borderColor: darkMode ? palette.grey9 : palette.grey1 }}>
-                <span className="font-semibold" style={{ color: palette.highlight }}>MODULE // 04_SPEC_ARCHITECTURE</span>
-                <span style={{ color: palette.grey7 }}>EN-ISO-2026 // STANDARDISED</span>
+                <span className="font-semibold" style={{ color: palette.highlight }}>04_SPEC_ARCHITECTURE</span>
+                <span style={{ color: palette.grey7 }}>EN-ISO-2026</span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">

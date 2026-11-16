@@ -31,7 +31,7 @@ function Projects({ darkMode, palette }) {
               </div>
               <h3 className="text-xl sm:text-2xl font-normal mb-3">FreeView</h3>
               <p className="text-xs leading-relaxed font-normal" style={{ color: darkMode ? palette.grey3 : palette.grey9 }}>
-                Windows 환경에서 심층 패킷 검사(DPI) 및 SNI 기반 네트워크 차단을 우회하여 네트워크 접근성과 DNS 보안을 제공하는 유저스페이스 터널링 프로그램입니다.
+                Windows 환경에서 Tauri(Rust) 기반 로컬 프록시(127.0.0.1:8080)와 내부 DNS 캐시를 통해 백그라운드에서도 컴퓨터 자원을 거의 쓰지 않고 DPI 차단을 우회하는 경량 유틸리티입니다.
               </p>
             </div>
 

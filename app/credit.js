@@ -21,9 +21,6 @@ function Credit({ darkMode, palette }) {
 
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-              04 // Developer & Credits
-            </span>
             <h2 className="text-2xl sm:text-4xl font-normal tracking-tight">Credit & Developer Info</h2>
           </div>
           <p className="text-xs font-mono-custom mt-3 md:mt-0 max-w-sm" style={{ color: palette.grey7 }}>

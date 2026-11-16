@@ -12,9 +12,6 @@ function Specs({ darkMode, palette }) {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="mb-10">
-          <span className="text-xs font-mono-custom block mb-2" style={{ color: palette.highlight }}>
-            03 // Craftsmanship & Principles
-          </span>
           <h2 className="text-2xl sm:text-3xl font-normal tracking-tight">Engineering Philosophy</h2>
         </div>
 
